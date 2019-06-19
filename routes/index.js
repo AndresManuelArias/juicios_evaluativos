@@ -37,7 +37,7 @@ router.get('/ejemplo2/sesion',  function(req, res, next) {
 
 })
 
-// provicional
+// provisional
 router.get('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
   juiciosEvaluativos.vistaSeleccionarInstructor(req, res);
 })
