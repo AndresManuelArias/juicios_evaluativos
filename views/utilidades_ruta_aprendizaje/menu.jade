@@ -1,0 +1,12 @@
+extends ../layout.jade
+block contenido
+    script(src="/javascripts/logic/logic_gestion_ruta/logica_gestion_ruta.js")
+    h1 #{tituloMenu}
+
+    ul(class="nav nav-pills nav-fill nav nav-tabs")
+        //- li( class="nav-item " )   
+        //-     a( class="nav-link #{menu}" href="/gestion_de_competencia/menu?id_programa_formacion=#{id_programa_formacion}") Home
+        li(class="nav-item ")
+            a(class="nav-link #{edicion}" href="#{dirreccionEdicion}") Edicion
+        li(class="nav-item ")
+            a(class="nav-link #{crear}" href="#{dirreccionCrear}") Crear

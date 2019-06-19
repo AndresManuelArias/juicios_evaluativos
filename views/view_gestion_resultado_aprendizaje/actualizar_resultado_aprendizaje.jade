@@ -1,0 +1,14 @@
+- var menu="", crear="",edicion="active";
+- var onload = true;
+script() function myFunction(){  var nombre = "#{resultado.nombre}";document.getElementById('nombre_resultadoAprendizaje').onkeyup  = (e)=>{  console.log(e);if(document.getElementById('nombre_resultadoAprendizaje').value === nombre){ document.getElementById("mySubmit").disabled = true;}else{document.getElementById("mySubmit").disabled = false;}}}
+- var direccionProgramaFormacion =  id_programa_formacion?"id_programa_formacion="+id_programa_formacion:""
+
+include ./menu.jade
+    - var readonlyCodigo = true
+    - var readonlyNombre = false
+   - var disabledSubmit = true
+   - var titulo ="Actualizar resultado de aprendizaje"
+   - var action = `/gestion_de_resultado_aprendizaje/${id_gestion_de_competencia}?accion=Actualizar&${direccionProgramaFormacion}`
+   - var nombreAccion = "Actualizar"
+   - var metodo = "POST"
+include ./formulario_resultado_aprendizaje.jade

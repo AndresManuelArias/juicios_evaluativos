@@ -1,0 +1,12 @@
+- var menu="", crear="",edicion="active";
+
+include ./menu.jade
+    - var readonlyCodigo = true
+    - var readonlyNombre = true
+   - var disabledSubmit = false
+   - var titulo ="Eliminar programa de formacion"
+   - var action = "/gestion_de_programas_de_formacion?accion=Eliminar"
+   - var nombreAccion = "Eliminar"
+   - var metodo = "POST"
+
+include ./formulario_programa_de_formacion.jade

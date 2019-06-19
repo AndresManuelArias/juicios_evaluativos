@@ -1,0 +1,12 @@
+- var menu="", crear="active",edicion="";
+
+include ./menu.jade
+    - var readonlyCodigo = false
+    - var readonlyNombre = false
+   - var disabledSubmit = true
+   - var titulo ="Insertar programa de formacion"
+   - var action = "/gestion_de_programas_de_formacion?accion=Crear"
+   - var nombreAccion = "registrar programa de formacion"
+   - var metodo = "POST"
+
+include ./formulario_programa_de_formacion.jade

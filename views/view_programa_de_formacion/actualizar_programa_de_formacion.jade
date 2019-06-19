@@ -1,0 +1,13 @@
+- var menu="", crear="",edicion="active";
+- var onload = true;
+script() function myFunction(){  var nombre = "#{resultado.nombre}";document.getElementById('nombre_programa_de_formacion').onkeyup  = (e)=>{  console.log(e);if(document.getElementById('nombre_programa_de_formacion').value === nombre){ document.getElementById("mySubmit").disabled = true;}else{document.getElementById("mySubmit").disabled = false;}}}
+
+include ./menu.jade
+    - var readonlyCodigo = true
+    - var readonlyNombre = false
+   - var disabledSubmit = true
+   - var titulo ="Actualizar programa de formacion"
+   - var action = "/gestion_de_programas_de_formacion?accion=Actualizar"
+   - var nombreAccion = "Actualizar"
+   - var metodo = "POST"
+include ./formulario_programa_de_formacion.jade

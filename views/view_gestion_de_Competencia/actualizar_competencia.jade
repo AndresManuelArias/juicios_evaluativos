@@ -1,0 +1,13 @@
+- var menu="", crear="",edicion="active";
+- var onload = true;
+script() function myFunction(){  var nombre = "#{resultado.nombre}";document.getElementById('nombre_competencia').onkeyup  = (e)=>{  console.log(e);if(document.getElementById('nombre_competencia').value === nombre){ document.getElementById("mySubmit").disabled = true;}else{document.getElementById("mySubmit").disabled = false;}}}
+- var edicionAction = id_programa_formacion !== undefined?"&id_programa_formacion="+id_programa_formacion:""
+include ./menu.jade
+    - var readonlyCodigo = true
+    - var readonlyNombre = false
+   - var disabledSubmit = true
+   - var titulo ="Actualizar competencia"
+   - var action = "/gestion_de_competencia?accion=Actualizar"+edicionAction
+   - var nombreAccion = "Actualizar"
+   - var metodo = "POST"
+include ./formulario_competencia.jade

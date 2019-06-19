@@ -1,0 +1,21 @@
+extends ../layout.jade
+block contenido
+    h1= title
+    a( class="badge badge-secondary" href="/gestion_de_ruta_de_aprendizaje") Volver
+    form(method="POST" class="container-fluid" action="/gestion_de_ruta_de_aprendizaje/edit?accion=Crear")
+        div( class="form-group" )
+            label() <b>Programa de formacion:</b>#{programaFormacion.nombre_programa_formacion}
+        div( class="form-group" )
+            label(for="") Codigo del programa del formacion
+            input(class="form-control" name="id_programa_formacion" type="text"  value='#{programaFormacion.id_programa_formacion}' readonly required)
+        div( class="form-group" )
+               
+            label(for="") Competencia: 
+            select(class="nav-item form-control" , name="id_gestion_de_competencia" required)
+                option( value="" selected) Selecione una competencia            
+                each competencia in competencias
+                    option(value=competencia.id_gestion_de_competencia)= competencia.nombre_competencia 
+            
+        input( class="btn btn-primary  btn-lg btn-block" id="mySubmit" type="submit" name="accion" value="Crear" )
+        
+            

@@ -1,0 +1,9 @@
+- var tituloMenu = "Gestion de resultados de aprendizaje"
+- var direccionProgramaFormacion = id_programa_formacion !== undefined?"id_programa_formacion="+id_programa_formacion:""
+
+- var dirreccionEdicion= `/gestion_de_resultado_aprendizaje/all/${id_gestion_de_competencia}?${direccionProgramaFormacion}`
+- var dirreccionCrear= `/gestion_de_resultado_aprendizaje/${id_gestion_de_competencia}?accion=Crear&${direccionProgramaFormacion}`
+include ../utilidades_ruta_aprendizaje/menu.jade
+a(href="/gestion_de_competencia/edicion_competencias?"+direccionProgramaFormacion  class="btn btn-outline-secondary")  < Editar competencias
+p Codigo de la competenia: #{id_gestion_de_competencia}
+p Nombre de competencia: #{competencia}

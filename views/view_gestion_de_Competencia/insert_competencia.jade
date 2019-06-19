@@ -1,0 +1,12 @@
+- var menu="", crear="active",edicion="",agregarARuta=(id_programa_formacion==undefined?"":'&id_programa_formacion='+id_programa_formacion)
+
+include ./menu.jade
+   - var readonlyCodigo = false
+   - var readonlyNombre = false
+   - var disabledSubmit = true
+   - var titulo ="Insertar competencia"
+   - var action = "/gestion_de_competencia?accion=Crear"+agregarARuta
+   - var nombreAccion = "registrar competencia"
+   - var metodo = "POST"
+
+include ./formulario_competencia.jade

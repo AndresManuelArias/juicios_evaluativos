@@ -1,0 +1,23 @@
+extends ../layout.jade
+block contenido
+    h1= title
+    form(method="POST" class="container-fluid" action="/gestion_de_ruta_de_aprendizaje")
+        div( class="form-group")
+            label() Programa de formacion: 
+
+            select(class="form-control" name="id_programa_formacion" required)
+                option( value="" selected) Selecione un programa de formacion
+                each programa in programaDeFormacion
+                    option(value=programa.id_programa_formacion)= programa.nombre_programa_formacion
+            
+        div( class="form-group")
+        
+            label(for="") Seleccione una accion
+            select(class="form-control",class="nav-item " , name="accion" required)
+                option( value="" selected) Selecione una accion
+                option(class="nav-link" href="#{dirreccionEdicion}" value='crear') Crear competencia para programa de formacion
+                option(class="nav-link" href="#{dirreccionEdicion}" value='agregar') Agregar competencia para programa de formacion
+                option(class="nav-link" href="#{dirreccionEdicion}" value='eliminar') Eliminar competencia para programa de formacion
+        input( class="btn btn-primary  btn-lg btn-block" id="mySubmit" type="submit"  value="Accion" )
+        
+            

@@ -1,0 +1,22 @@
+- var menu="", crear="",edicion="active";
+
+include ./menu.jade
+input(class="form-control" id="myInput" type="text" placeholder="Search..")
+
+table(class="table" )
+    thead
+        tr
+            th(scope="col") # 
+            th(scope="col") Programa de formación
+            th(scope="col") Accion
+    tbody(id="myTable")
+        each programa_de_formacion in programas_de_formacion          
+            tr
+                td=programa_de_formacion.id_programa_formacion
+                td=programa_de_formacion.nombre_programa_formacion
+                td                          
+                    a( class="btn btn-outline-danger" href="/gestion_de_programas_de_formacion?codigo=#{programa_de_formacion.id_programa_formacion}&accion=Eliminar") Eliminar
+                    a( class="btn btn-outline-warning" href="/gestion_de_programas_de_formacion?codigo=#{programa_de_formacion.id_programa_formacion}&accion=Actualizar") Actualizar
+                    a( class="btn btn-outline-success" href="/gestion_de_competencia?accion=Crear&id_programa_formacion=#{programa_de_formacion.id_programa_formacion}" title="Crear Competencias para el programa de formacion") Crear Competencias
+
+//- para agregar competencias a programa de formacion se debe hacer con el enlace correspondiente

@@ -1,0 +1,11 @@
+- var menu="", crear="",edicion="active";
+include ./menu.jade
+    - var readonlyCodigo = true
+    - var readonlyNombre = true
+   - var disabledSubmit = false
+   - var titulo ="Eliminar resultado de aprendizaje"
+   - var action = `/gestion_de_resultado_aprendizaje/${id_gestion_de_competencia}?accion=Eliminar&${direccionProgramaFormacion}`
+   - var nombreAccion = "Eliminar"
+   - var metodo = "post"
+
+include ./formulario_resultado_aprendizaje.jade

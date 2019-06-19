@@ -1,0 +1,16 @@
+extends ../layout.jade
+block contenido
+
+    h1 Formacion que recibe ficha
+    form(action="/gestion_de_la_formacion_instructor_ficha" method="POST")
+        div(class="form-group")   
+            label Ficha:
+            select(class="form-control" name="Id_GestionDeFichas" required)
+                option( value="" selected) Selecione ficha           
+                each ficha in gestion_de_fichas
+                    option(value=ficha.Id_GestionDeFichas)= ficha.Numero_de_ficha 
+        
+        input(class="btn btn-primary btn-lg btn-block" type="submit" value="Editar formacion") 
+                
+
+

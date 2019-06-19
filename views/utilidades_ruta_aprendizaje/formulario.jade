@@ -1,0 +1,28 @@
+div( class="container")
+    div( class="row")
+        div( class="col")
+        div( class="col-12")
+            h1(class="text-center") #{titulo}
+            form( method="#{metodo}" class="container-fluid" action="#{action}")
+                div( class="form-group") 
+                    label Codigo #{informacionLabel}
+                    input( pattern="^[0-9]{1,15}$"  type="text"  class="form-control" id="codigo_#{nombreDelName}" name="codigo_#{nombreDelName}" value="#{resultado.codigo}" readonly=readonlyCodigo   onchange="validarNumeroCompetencia(this.value)" onkeyup="consultarExistenciaCodigo(codigo_#{nombreDelName}.value,'#{urlExistenciaCodigo}').then((res)=>{ if(!res){activarBoton(codigo_#{nombreDelName}.value,nombre_#{nombreDelName}.value)};})" require)                             
+                    div(id="consultaCodigo")
+                    div(id="validarCodigo")
+                        if resultado.errorCodigo
+                            div( class="alert alert-danger alert-dismissible fade show" role="alert") El codigo no tiene un formato valido, este debe ser solo numeros
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span( aria-hidden="true") &times;
+                    label Nombre #{informacionLabel} 
+                    input( pattern='^[A-ZÑÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ\s\W .,]{1,300}\\.$'  class="form-control" type="text" id="nombre_#{nombreDelName}"  name="nombre_#{nombreDelName}" value="#{resultado.nombre}"  onchange="validarNombreCompetencia(this.value)" onkeyup="consultarExistenciaCodigo(codigo_#{nombreDelName}.value,'#{urlExistenciaCodigo}').then((res)=>{ if(!res){activarBoton(codigo_#{nombreDelName}.value,nombre_#{nombreDelName}.value)};})" require readonly=readonlyNombre)         
+                    div(id="validarNombre")
+                        if resultado.errorNombre
+                            div( class="alert alert-danger alert-dismissible fade show" role="alert") El nombre no tiene un formato valido, este debe comenzar con mayúsculas y terminar con punto. 
+                                button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+                                    span( aria-hidden="true") &times;                                                
+                input( class="btn btn-primary  btn-lg btn-block" id="mySubmit" type="submit" name="accion" value="#{nombreAccion}" disabled=disabledSubmit)
+                input(class="btn btn-light  btn-lg btn-block" type="reset")
+            if resultado                
+                - var estilo = resultado.estado=='error'?'alert alert-danger':resultado.estado=='success'?'alert alert-primary':""
+                div(class="#{estilo}")=resultado.text
+        div( class="col")
