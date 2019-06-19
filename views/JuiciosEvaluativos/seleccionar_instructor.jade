@@ -1,0 +1,8 @@
+extends ../layout.jade
+block contenido
+    form(action="/juicios_evaluativos/seleccionar_instructor", method="post")
+        h1 Selecione un instructor
+        select(name="id_administrar_perfil")
+            each instructor in intructores  
+                option(value="#{instructor.id_administrar_perfil}")  #{instructor.numero_de_identificacion} #{instructor.nombre_usuario}
+        input(type="submit", value="seleccionar intructor")

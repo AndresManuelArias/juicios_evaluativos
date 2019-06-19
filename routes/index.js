@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Ejemplo = require('./ejemploRoutes/Ejemplo.js')
 var ejemplo = new Ejemplo();
+var JuiciosEvaluativos = require('./juiciosEvaluativos')
+var juiciosEvaluativos = new JuiciosEvaluativos();
 
 
 var RutaAprendizaje = require('./routes_gestion_ruta_aprendizaje/RutaAprendizaje.js')
@@ -45,7 +47,23 @@ router.get('/ejemplo2/sesion',  function(req, res, next) {
 
 })
 
+// provisional
+router.get('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
+  juiciosEvaluativos.vistaSeleccionarInstructor(req, res);
+})
+router.post('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
+  juiciosEvaluativos.seleccionarInstructor(req, res);
+})
 
+router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.seleccionarAprendiz(req, res);
+})
+router.get('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.vistaSeleccionarAprendiz(req, res);
+})
+router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.seleccionarAprendiz(req, res);
+})
 /* aqui inicia la logica de negocio */
 // competencias
 router.get('/gestion_de_competencia/edicion_competencias',  function(req, res, next) {
@@ -93,12 +111,35 @@ router.post('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia',  fun
 
 });
 
+
+// juicios evaluativos
+router.get('/juicios_evaluativos',  function(req, res, next) {
+  juiciosEvaluativos.viewfichasDeInstructor(req, res);
+})
+router.post('/juicios_evaluativos',  function(req, res, next) {
+  juiciosEvaluativos.rediredPrendicesDentroFicha(req, res);
+})
+router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha',  function(req, res, next) {
+  juiciosEvaluativos.verAprendicesDeFichaInstructor(req, res);
+})
+router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha',  function(req, res, next) {
+  juiciosEvaluativos.rediredAsignarJuicio(req, res);
+})
+router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.viewAsignarJuicioEvaluativo(req, res);
+})
+router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.asignarJuicioEvaluativo(req, res);
+})
+// router.get('/juicios_evaluativos/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+//   juiciosEvaluativos.viewAsignar(req, res);
+// })
+
 // programas_de_formacion
 router.get('/gestion_de_programas_de_formacion/edicion_programas_de_formacion',  function(req, res, next) {
     console.log('/gestion_de_programas_de_formacion/edicion_programas_de_formacion')
     gestion_programa_de_formacion.edicionProgramaDeFormacion(req, res);
 });
-
 router.post('/gestion_de_programas_de_formacion',  function(req, res, next) {
     gestion_programa_de_formacion.ejecutar(req.query,req, res);
 });
