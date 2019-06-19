@@ -1,0 +1,9 @@
+// primer repositorio
+git init
+
+// ver el estado de los archivos
+git status
+
+// agregar para llevar el control de versiones
+
+git add
