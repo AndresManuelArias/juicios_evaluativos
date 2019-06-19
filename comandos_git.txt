@@ -11,6 +11,7 @@ git status
 // agregar para llevar el control de versiones
 
 git add nombre_archivo
+git add --all // agregar todo
 
 // para quitar del control de cambios
 
@@ -19,3 +20,21 @@ git rm --cached nombre_archivo
 // para hacer el commit
 
 git commit -m "texto"
+
+// para ver los cambios
+git log
+
+// resetear lo que se agrego
+git reset 
+git reset nombre_archivo
+
+// crear una nueva rama
+
+git branch nombre_rama
+
+// para cambiar de rama
+
+git checkout nombre_rama
+
+// ver la rama donde se estado
+ git log --oneline --decorate --all --graph
