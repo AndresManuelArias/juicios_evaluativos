@@ -1,0 +1,8 @@
+extends ../layout.jade
+block contenido
+    form(action="/juicios_evaluativos/seleccionar_aprendiz", method="post")
+        h1 Selecione un Aprendiz
+        select(name="id_administrar_perfil")
+            each aprendiz in aprendices
+                option(value="#{aprendiz.id_administrar_perfil}")  #{aprendiz.numero_de_identificacion} #{aprendiz.nombre_usuario}
+        input(type="submit", value="seleccionar aprendiz")

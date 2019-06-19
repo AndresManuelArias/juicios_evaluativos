@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Ejemplo = require('./ejemploRoutes/Ejemplo.js')
 var ejemplo = new Ejemplo();
+var JuiciosEvaluativos = require('./juiciosEvaluativos')
+var juiciosEvaluativos = new JuiciosEvaluativos();
 
 
 
@@ -35,9 +37,45 @@ router.get('/ejemplo2/sesion',  function(req, res, next) {
 
 })
 
+// provicional
+router.get('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
+  juiciosEvaluativos.vistaSeleccionarInstructor(req, res);
+})
+router.post('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
+  juiciosEvaluativos.seleccionarInstructor(req, res);
+})
 
+router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.seleccionarAprendiz(req, res);
+})
+router.get('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.vistaSeleccionarAprendiz(req, res);
+})
+router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.seleccionarAprendiz(req, res);
+})
 /* aqui inicia la logica de negocio */
-
+router.get('/juicios_evaluativos',  function(req, res, next) {
+  juiciosEvaluativos.viewfichasDeInstructor(req, res);
+})
+router.post('/juicios_evaluativos',  function(req, res, next) {
+  juiciosEvaluativos.rediredPrendicesDentroFicha(req, res);
+})
+router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha',  function(req, res, next) {
+  juiciosEvaluativos.verAprendicesDeFichaInstructor(req, res);
+})
+router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha',  function(req, res, next) {
+  juiciosEvaluativos.rediredAsignarJuicio(req, res);
+})
+router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.viewAsignarJuicioEvaluativo(req, res);
+})
+router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.asignarJuicioEvaluativo(req, res);
+})
+// router.get('/juicios_evaluativos/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+//   juiciosEvaluativos.viewAsignar(req, res);
+// })
 
 
 module.exports = router;
