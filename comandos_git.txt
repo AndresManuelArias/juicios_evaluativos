@@ -1,3 +1,7 @@
+// agregar identidad
+git config --global user.name "usuario"
+git config --global user.email "corre@corre.com"
+git config --global -l
 // primer repositorio
 git init
 
@@ -6,4 +10,12 @@ git status
 
 // agregar para llevar el control de versiones
 
-git add
+git add nombre_archivo
+
+// para quitar del control de cambios
+
+git rm --cached nombre_archivo
+
+// para hacer el commit
+
+git commit -m "texto"
