@@ -1,40 +1,60 @@
-// agregar identidad
+# agregar identidad
 git config --global user.name "usuario"
 git config --global user.email "corre@corre.com"
 git config --global -l
-// primer repositorio
+# primer repositorio
 git init
 
-// ver el estado de los archivos
+# ver el estado de los archivos
 git status
 
-// agregar para llevar el control de versiones
+# agregar para llevar el control de versiones
 
 git add nombre_archivo
-git add --all // agregar todo
+git add --all # agregar todo
 
-// para quitar del control de cambios
+# para quitar del control de cambios
 
 git rm --cached nombre_archivo
 
-// para hacer el commit
+# para hacer el commit
 
 git commit -m "texto"
 
-// para ver los cambios
+# para ver los cambios
 git log
 
-// resetear lo que se agrego
+# resetear lo que se agrego
 git reset 
 git reset nombre_archivo
 
-// crear una nueva rama
+# crear una nueva rama
 
 git branch nombre_rama
 
-// para cambiar de rama
+# para cambiar de rama
 
 git checkout nombre_rama
 
-// ver la rama donde se estado
+# para crear y dirigirme a la rama
+
+git checkout -b nombre_rama
+
+# ver la rama donde estoy parado estado
  git log --oneline --decorate --all --graph
+
+# para ver las ramas creadas
+
+git branch
+
+# fucionar ramas
+# nos dirigimos a la rama principal
+# escribimos la rama que queremos unir
+
+git merge nombre_rama
+
+# si queremos eliminar la rama
+git branch -d nombre_rama
+
+
+
