@@ -77,4 +77,7 @@ git push -u origin nombre_rama
 # esto es para actualizar localmente lo que esta en githup
 git pull
 
+# esto es para actualizar una rama
+git pull nombre de rama
+
 
