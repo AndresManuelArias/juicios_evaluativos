@@ -55,6 +55,26 @@ git merge nombre_rama
 
 # si queremos eliminar la rama
 git branch -d nombre_rama
+git branch -D nombre_rama
 
+# cuando existe conflicto con un archivo de otra rama,en el momento en que hacemos el merge, procedemos a ver los conflictos de esa rama endonde estamos parados y modificamos como nos guste y despues hacemos un commit
+
+# para hacer Versionado
+
+git tag v0.0.0
+# clonar codigo desde la pagina
+git clone https://github.com/AndresManuelArias/juicios_evaluativos.git
+
+# trabajar con su rama respectiva
+
+# subir a github
+
+git remote add origin https://github.com/AndresManuelArias/juicios_evaluativos.git
+# me va a pedir el usuario y contraseña para utilizar los siguiente comandos
+# esto es para subir el archivo
+git push -u origin nombre_rama
+
+# esto es para actualizar localmente lo que esta en githup
+git pull
 
 
