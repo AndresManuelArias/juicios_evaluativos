@@ -70,7 +70,7 @@ git clone https://github.com/AndresManuelArias/juicios_evaluativos.git
 # subir a github
 
 git remote add origin https://github.com/AndresManuelArias/juicios_evaluativos.git
-# me va a pedir el usuario y contraseña despues de eso solo utilizo
+# me va a pedir el usuario y contraseña para utilizar los siguiente comandos
 # esto es para subir el archivo
 git push -u origin nombre_rama
 
