@@ -62,6 +62,10 @@ git branch -D nombre_rama
 # para hacer Versionado
 
 git tag v0.0.0
+# clonar codigo desde la pagina
+git clone https://github.com/AndresManuelArias/juicios_evaluativos.git
+
+# trabajar con su rama respectiva
 
 # subir a github
 
