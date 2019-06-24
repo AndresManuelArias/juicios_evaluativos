@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: control_de_acceso.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: control_de_acceso.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ *@name comprobar_correo
+ * @method comprobar_correo
+ * @type funcion
+ * @param {object} req-resive la peticion 
+ * @param {object} res-ennvia la respuesta
+ * @description aca comprobamos el correo por 
+ * medio de peticiones ajax para ingresar al aplicativo
+ * 
+ */
+function comprobar_correo(){
+    fetch ('/comprobar_correo?correo='+document.getElementsByName('correo_sena')[0].value).then(function(response) {
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+        if(myJson.length>0){
+           // alert('el correo ya existe')
+        document.getElementById('respuesta_correo').innerHTML=`&lt;div style='color:red' class="alert alert-warning alert-dismissible fade show" role="alert">
+        &lt;strong>&lt;a href="/control_de_acceso">El correo ya existe logueate&lt;/strong> 
+        &lt;button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          &lt;span aria-hidden="true">&amp;times;&lt;/span>
+        &lt;/button>
+      &lt;/div>`;
+        }
+      });
+}
+/**
+ *@name comprobar correo
+ * @method comprobar_correo_de_logeo
+ * @type funcion
+ * @param {object} req-resive la peticion 
+ * @param {object} res-ennvia la respuesta
+ * @description aca comprobamos el correo por medio de peticiones ajax para logearse
+ */
+
+function comprobar_correo_de_logueo(){
+  fetch('/comprobar_correo_de_logeo?correo='+document.getElementsByName('correo_sena')[1].value)
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(myJson){
+    console.log(myJson);
+    if (myJson.length==0) {
+      document.getElementById('respuesta_de_correo_de_logueo').innerHTML=`&lt;div style='color:red' class="alert alert-warning alert-dismissible fade show" role="alert">
+      &lt;strong>&lt;a href="/control_de_acceso">el correo no existe registrate&lt;/a>&lt;/strong> 
+        &lt;button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        &lt;span aria-hidden="true">&amp;times;&lt;/span>
+        &lt;/button>
+         &lt;/div>`;
+    } 
+      
+  });
+}
+
+//comprovaR EN LA BASE DE DATOS EL NUMERO
+
+/**
+ *@name comprobar_identificacion
+ * @method comprobar_identificacion
+ * @type funcion
+ * @param {object} req-resive la peticion 
+ * @param {object} res-ennvia la respuesta
+ * @returns mensaje de numero invalido o nada
+ * @description aca comprobamos el el numero de identificacion a la hora de logearse
+ */
+
+
+
+function comprobar_identificacion(numero_de_identificacion){
+  console.log(numero_de_identificacion)
+fetch ('/comprobar_cedula?numero_de_identificacion='+numero_de_identificacion)
+.then(function(response){
+  return response.json();
+})
+.then(function(myJson){
+  console.log(myJson);
+  if(myJson.length>0){
+    //document.getElementById('respuesta_identificacion').alert("kkk")
+     document.getElementById('respuesta_identificacion').innerHTML=`&lt;div style='color:red' class="alert alert-warning alert-dismissible fade show" role="alert">
+         &lt;strong>numero ya existe&lt;/strong> 
+           &lt;button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           &lt;span aria-hidden="true">&amp;times;&lt;/span>
+           &lt;/button>
+            &lt;/div>`;
+  }
+});
+}
+ //pasar el correo
+
+/**
+ * @name comprobar_parametros_de_correo
+ * @method parametros_por_eferencia
+ * @type funcion
+ * @param {object} req-resive la peticion 
+ * @param {object} res-ennvia la respuesta
+ * @returns mensaje de numero invalido o nada
+ * @description en este espacon lo que se verifica es que 
+ * los parametros del correo sean del sena
+ */
+
+
+ function validarEmail(correo) {
+  console.log('correo',correo);
+  if (/^[A-Z,0-9,a-z]{1,8}@(misena.edu.co|sena.edu.co)$/g.test(correo)){
+   
+  } else {
+    document.getElementById('correo_correcto').innerHTML=`&lt;div style='color:red' class="alert alert-warning alert-dismissible fade show" role="alert">
+    &lt;strong>correo erroneo&lt;/strong> 
+      &lt;button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      &lt;span aria-hidden="true">&amp;times;&lt;/span>
+      &lt;/button>
+       &lt;/div>`;
+  }
+}
+/**
+ * @name comprobar_correo_para_logearse
+ * @method parametros_por_eferencia
+ * @type funcion
+ * @param {object} req-resive la peticion 
+ * @param {object} res-ennvia la respuesta
+ * @returns mensaje de numero invalido o nada
+ * @description en este espacon lo que se verifica es que 
+ * los parametros del correo sean del sena
+ */
+
+
+
+function validarEmail1(correo) {
+  console.log('correo',correo);
+  if (/^[A-Z,0-9,a-z]{1,8}@(misena.edu.co|sena.edu.co)$/g.test(correo)){
+   
+  } else {
+    document.getElementById('correo_correcto1').innerHTML=`&lt;div style='color:red' class="alert alert-warning alert-dismissible fade show" role="alert">
+    &lt;strong>correo erroneo&lt;/strong> 
+      &lt;button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      &lt;span aria-hidden="true">&amp;times;&lt;/span>
+      &lt;/button>
+       &lt;/div>`;
+  }
+}
+//  pasar la cedula
+/**
+ * @name comprobar_cedula
+ * @method parametros_por_eferencia
+ * @type funcion
+ * @param {object} req-resive la peticion 
+ * @param {object} res-ennvia la respuesta
+ * @returns mensaje de numero invalido o nada
+ * @description en este espacon lo que se verifica es que 
+ * los parametros del correo sean del sena
+ */
+
+
+
+
+function validardedula(cedula){
+   console.log('cedula',cedula);
+   if(/^\d{8,12}$/g.test(cedula)){
+
+   }else{
+    document.getElementById('cedula_correcta').innerHTML=`&lt;div style='color:red' class="alert alert-warning alert-dismissible fade show" role="alert">
+    &lt;strong>el dumero no es valido&lt;/strong> 
+      &lt;button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      &lt;span aria-hidden="true">&amp;times;&lt;/span>
+      &lt;/button>
+       &lt;/div>`;
+   }
+ }
+/**
+ * @name comprobar_cedula_para_logeo
+ * @method parametros_por_eferencia
+ * @type funcion
+ * @param {object} req-resive la peticion 
+ * @param {object} res-ennvia la respuesta
+ * @returns mensaje de numero invalido o nada
+ * @description en este espacon lo que se verifica es que 
+ * los parametros del correo sean del sena
+ */
+ 
+
+ function validardedula1(cedula){
+  console.log('cedula',cedula);
+  if(/^\d{8,12}$/g.test(cedula)){
+
+  }else{
+   document.getElementById('cedula_correcta1').innerHTML=`&lt;div style='color:red' class="alert alert-warning alert-dismissible fade show" role="alert">
+   &lt;strong>el dumero no es valido&lt;/strong> 
+     &lt;button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     &lt;span aria-hidden="true">&amp;times;&lt;/span>
+     &lt;/button>
+      &lt;/div>`;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function verificar_correo(){
+//   document.getElementById('email').addEventListener('input', function() {
+//     campo = event.target;
+//     valido = document.getElementById('emailOK');
+      
+//     emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+//    // Se muestra un texto a modo de ejemplo, luego va a ser un icono
+//     if (emailRegex.test(campo.value)) {
+//       valido.innerText = "válido";
+//     } else {
+//       valido.innerText = "incorrecto";
+//     }
+//   });
+
+// }
+
+
+//   /* &lt;p>
+//     Email:
+//     &lt;input id="email">
+//     &lt;span id="emailOK">&lt;/span>
+// &lt;/p> */</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#comprobar_correo">comprobar_correo</a></li><li><a href="global.html#comprobar_correo_de_logeo">comprobar_correo_de_logeo</a></li><li><a href="global.html#comprobar_identificacion">comprobar_identificacion</a></li><li><a href="global.html#parametros_por_eferencia">parametros_por_eferencia</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 19:10:39 GMT-0500 (Hora est. Pacífico, Sudamérica)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
