@@ -1,9 +1,5 @@
 var mysql = require('../../dataBase/conexion.js');
-const nodemailer = require("nodemailer");
-const expressSession = require("express-session");
-var Control_de_acceso = require("../control_de_acceso/control_de_acceso.js");
-const control_de_acceso = new Control_de_acceso();
-var sessionExpres = new expressSession();
+
 class GestionUsuarios {
   //     constructor(
   //         session,
