@@ -21,7 +21,10 @@ var mysql = require('../dataBase/conexion.js');
  * aca solo llamaos las direcciones y las funciones que se crearon en 
  * la clase control_de_acceso 
  */
-/* aqui inicia la logica de negocio */
+
+
+
+/* aqui inicia la logica de negocio de esteban */
 router.get("/control_de_acceso", function (req, res) {
     control_de_acceso.inisio_de_secion(req, res);
 });
@@ -30,7 +33,6 @@ router.post("/envio_de_datos", function (req, res) {
 
     control_de_acceso.guardar_datos(req, res);
 });
-// var session;
 router.post("/buscar_datos", function (req, res) {
 
     control_de_acceso.buscar_datos(req, res);
@@ -81,4 +83,6 @@ router.post("/pureba1",function(req,res){
    let texto= req.body.titre
     document.write(texto)
 })
+
+//aqui termina la logica de negocio de esteban
 module.exports = router;
