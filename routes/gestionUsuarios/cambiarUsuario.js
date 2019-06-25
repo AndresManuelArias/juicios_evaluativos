@@ -45,7 +45,7 @@ class GestionUsuarios {
       sessionId: req.session.id,
       tipoUsuario: req.session.rol
     }
-
+    req.session.id_administrar_perfil = administrarPerfil[0].id_administrar_perfil// esto es para que funcione el modulo de juicios evaluativos
     if (administrarPerfil[0].tipo_rol == "administrador") {
       res.render("gestionUsuarios/administrador.jade",
         {
