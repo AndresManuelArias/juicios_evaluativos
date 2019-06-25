@@ -65,6 +65,9 @@ git tag v0.0.0
 # clonar codigo desde la pagina
 git clone https://github.com/AndresManuelArias/juicios_evaluativos.git
 
+# clonar una rama 
+git clone -b <branch> <remote_repo>
+
 # trabajar con su rama respectiva
 
 # subir a github
@@ -76,5 +79,8 @@ git push -u origin nombre_rama
 
 # esto es para actualizar localmente lo que esta en githup
 git pull
+
+# esto es para actualizar una rama
+git pull nombre de rama
 
 
