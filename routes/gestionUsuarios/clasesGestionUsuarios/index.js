@@ -14,13 +14,15 @@ function darPermisosAlUsuario(arrayPerfilesEntran, perfilIngresado) {
   return arrayPerfilesEntran.some((dato)=> dato== perfilIngresado)
 }
 
-function permitirAccesoWeb(req, res, arrayPerfilesEntran, ejecutarFuncion) {
+function permitirAccesoWeb(  arrayPerfilesEntran) {
 
-  if (darPermisosAlUsuario(arrayPerfilesEntran, req.session.rol)) {
-    ejecutarFuncion(req, res)
-  }
-  else {
-    res.send("usted no puede ingresar abrase");
+  return (req, res,next)=>{
+    if (darPermisosAlUsuario(arrayPerfilesEntran, req.session.rol)) {
+      next();
+    }
+    else {
+      res.send("usted no puede ingresar abrase");
+    }
   }
 
 }
