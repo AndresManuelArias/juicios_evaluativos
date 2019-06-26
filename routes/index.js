@@ -118,36 +118,36 @@ router.get('/ejemplo1/sesion',  function(req, res, next) {
 
 /* aqui inicia la logica de negocio */
 // competencias
-router.get('/gestion_de_competencia/edicion_competencias',  function(req, res, next) {
+router.get('/gestion_de_competencia/edicion_competencias',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     gestion_de_Competencia.edicionCompetencias(req, res);
 });
 
-router.post('/gestion_de_competencia',  function(req, res, next) {
+router.post('/gestion_de_competencia',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     gestion_de_Competencia.ejecutar(req.query,req, res);
 });
-router.get('/gestion_de_competencia',  function(req, res, next) {
+router.get('/gestion_de_competencia',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     gestion_de_Competencia.ejecutaView(req.query,req, res);
 });
-router.get('/gestion_de_competencia/consultar_existencia',  function(req, res, next) {
+router.get('/gestion_de_competencia/consultar_existencia',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('consultado')
     gestion_de_Competencia.consultarExistenciaCompetencias(req, res);
 });
 // resultado de aprendizaje
-router.get('/gestion_de_resultado_aprendizaje/all/:id_gestion_de_competencia',  function(req, res, next) {
+router.get('/gestion_de_resultado_aprendizaje/all/:id_gestion_de_competencia',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('/gestion_de_resultado_aprendizaje/all')
     resultadoAprendizaje.consultarResultadosAprendizaje(req, res);
 });
 
-router.get('/gestion_de_resultado_aprendizaje/existencia/:id_gestion_de_competencia',  function(req, res, next) {
+router.get('/gestion_de_resultado_aprendizaje/existencia/:id_gestion_de_competencia', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     console.log('/gestion_de_resultado_aprendizaje/existencia')
     resultadoAprendizaje.consultarExistencia(req, res);
 });
-router.get('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia',  function(req, res, next) {
+router.get('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     console.log('get/gestion_de_resultado_aprendizaje')
     resultadoAprendizaje.ejecutaView(req.query,req, res);
 });
 
-router.post('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia',  function(req, res, next) {
+router.post('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
    console.log(req.body)
    resultadoAprendizaje.ejecutar(req.query,req, res)
 //     switch (req.body.accion) {
@@ -182,22 +182,22 @@ router.get('/juicios_evaluativos/seleccionar_instructor',  function(req, res, ne
   router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
     juiciosEvaluativos.seleccionarAprendiz(req, res);
   })
-router.get('/juicios_evaluativos',  function(req, res, next) {
+router.get('/juicios_evaluativos',clasesGestionUsuarios.permitirAccesoWeb(['instructor']),  function(req, res, next) {
   juiciosEvaluativos.viewfichasDeInstructor(req, res);
 })
-router.post('/juicios_evaluativos',  function(req, res, next) {
+router.post('/juicios_evaluativos',clasesGestionUsuarios.permitirAccesoWeb(['instructor']),  function(req, res, next) {
   juiciosEvaluativos.rediredPrendicesDentroFicha(req, res);
 })
-router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha',  function(req, res, next) {
+router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha', clasesGestionUsuarios.permitirAccesoWeb(['instructor']), function(req, res, next) {
   juiciosEvaluativos.verAprendicesDeFichaInstructor(req, res);
 })
-router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha',  function(req, res, next) {
+router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha',clasesGestionUsuarios.permitirAccesoWeb(['instructor']),  function(req, res, next) {
   juiciosEvaluativos.rediredAsignarJuicio(req, res);
 })
-router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',clasesGestionUsuarios.permitirAccesoWeb(['instructor']),  function(req, res, next) {
   juiciosEvaluativos.viewAsignarJuicioEvaluativo(req, res);
 })
-router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',clasesGestionUsuarios.permitirAccesoWeb(['instructor']),  function(req, res, next) {
   juiciosEvaluativos.asignarJuicioEvaluativo(req, res);
 })
 // router.get('/juicios_evaluativos/:id_gestion_ficha_aprendiz',  function(req, res, next) {
@@ -205,17 +205,17 @@ router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_
 // })
 
 // programas_de_formacion
-router.get('/gestion_de_programas_de_formacion/edicion_programas_de_formacion',  function(req, res, next) {
+router.get('/gestion_de_programas_de_formacion/edicion_programas_de_formacion',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('/gestion_de_programas_de_formacion/edicion_programas_de_formacion')
     gestion_programa_de_formacion.edicionProgramaDeFormacion(req, res);
 });
-router.post('/gestion_de_programas_de_formacion',  function(req, res, next) {
+router.post('/gestion_de_programas_de_formacion',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     gestion_programa_de_formacion.ejecutar(req.query,req, res);
 });
-router.get('/gestion_de_programas_de_formacion',  function(req, res, next) {
+router.get('/gestion_de_programas_de_formacion',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     gestion_programa_de_formacion.ejecutaView(req.query,req, res);
 });
-router.get('/gestion_de_programas_de_formacion/consultar_existencia',  function(req, res, next) {
+router.get('/gestion_de_programas_de_formacion/consultar_existencia', function(req, res, next) {
     console.log('consultado')
     gestion_programa_de_formacion.consultarExistenciaProgramaDeFormacion(req, res);
 });
@@ -224,37 +224,37 @@ router.get('/gestion_de_programas_de_formacion/consultar_existencia',  function(
 // router.get('/gestion_de_programas_de_formacion/edicion_programas_de_formacion',  function(req, res, next) {
 //     gestion_programa_de_formacion.edicionProgramaDeFormacion(req, res);
 // });
-router.get('/gestion_de_ruta_de_aprendizaje',  function(req, res, next) {
+router.get('/gestion_de_ruta_de_aprendizaje',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('gestion_de_ruta_de_aprendizaje')
     rutaAprendizaje.menuEdicion(req, res);
 });
-router.post('/gestion_de_ruta_de_aprendizaje',  function(req, res, next) {
+router.post('/gestion_de_ruta_de_aprendizaje',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('gestion_de_ruta_de_aprendizaje')
     rutaAprendizaje.redireccion(req, res);
 });
-router.post('/gestion_de_ruta_de_aprendizaje/edit',  function(req, res, next) {
+router.post('/gestion_de_ruta_de_aprendizaje/edit',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     rutaAprendizaje.ejecutar(req.query,req, res);
 });
-router.get('/gestion_de_ruta_de_aprendizaje/edit',  function(req, res, next) {
+router.get('/gestion_de_ruta_de_aprendizaje/edit',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     rutaAprendizaje.ejecutaView(req.query,req, res);
 });
 // gestion de formacion
-router.get('/gestion_de_la_formacion_instructor_ficha/:Id_GestionDeFichas',  function(req, res, next) {
+router.get('/gestion_de_la_formacion_instructor_ficha/:Id_GestionDeFichas',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('gestion_de_la_foramcion_instrutor_ficha')
     formacionInstructorFicha.menuEdicion(req, res);
 });
-router.get('/gestion_de_la_formacion_instructor_ficha',  function(req, res, next) {
+router.get('/gestion_de_la_formacion_instructor_ficha',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('gestion_de_la_foramcion_instrutor_ficha')
     formacionInstructorFicha.menuEdicion(req, res);
 });
-router.post('/gestion_de_la_formacion_instructor_ficha',  function(req, res, next) {
+router.post('/gestion_de_la_formacion_instructor_ficha',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('gestion_de_la_formacion_instructor_ficha')
     formacionInstructorFicha.edicion(req, res)
 });
-router.post('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',  function(req, res, next) {
+router.post('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     formacionInstructorFicha.ejecutar(req.query,req, res);
 });
-router.get('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',  function(req, res, next) {
+router.get('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     formacionInstructorFicha.ejecutaView(req.query,req, res);
 });
 
