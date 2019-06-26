@@ -5,7 +5,9 @@
  */
 
 var express = require('express');
+let mysql = require ("../dataBase/conexion.js");
 var router = express.Router();
+
 var Ejemplo = require('./ejemploRoutes/Ejemplo.js');
 var Control_de_acceso = require("./control_de_acceso/control_de_acceso.js");
 var GestionUsuarios = require("./gestionUsuarios/cambiarUsuario.js");
@@ -13,7 +15,7 @@ var ejemplo = new Ejemplo();
 var control_de_acceso = new Control_de_acceso();
 var gestionUsuarios = new GestionUsuarios();
 const clasesGestionUsuarios = require('../routes/gestionUsuarios/clasesGestionUsuarios/index');
-
+let gestion_usuarios = require('./routes_Gestion_de_usuarios/index_usuarios')
 
 
 /**
@@ -81,6 +83,7 @@ router.get("/prueba", function (req,res) {
 router.get("/paginaPrincipal", function (req, res) {
 
     control_de_acceso.paginaPrincipal(req, res);
+
 
 });
 router.post("/tipoUsuario",function (req, res) {
@@ -256,6 +259,39 @@ router.post('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas'
 });
 router.get('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     formacionInstructorFicha.ejecutaView(req.query,req, res);
+})
+// logica de negocio gestion de perfiles
+router.get('/gestion_perfiles/usuarios',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
+    gestion_usuarios.ver_usuario(req, res);
+})
+router.post('/gestion_perfiles/usuarios',clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function (req, res) {
+  gestion_usuarios.ver_usuario(req, res);
+});
+
+router.post('/gestion_perfiles/asignar_perfil',clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function (req, res) {
+  gestion_usuarios.asignar_perfiles(req, res);
+});
+router.get('/gestion_perfiles/cambiar_estado_perfil',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
+  gestion_usuarios.ver_estado_perfil(req, res);
+});
+router.post('/gestion_perfiles/cambiar_estado_perfil',clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function (req, res) {
+  gestion_usuarios.cambiar_estado_perfil(req, res);
+});
+router.get('/gestion_perfiles/actualizar_perfil',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
+   gestion_usuarios.vista_actualizar_perfil(req, res);
+});
+router.get('/gestion_perfiles/ver_estado_perfil',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
+  gestion_usuarios.ver_estado_perfil(req, res);
+});
+router.post('/gestion_perfiles/ver_estado_perfil',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
+  gestion_usuarios.cambiar_estado_perfil_un_usuario(req,res);
+});
+router.get('/gestion_perfiles/listar_usuarios_perfil',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
+  gestion_usuarios.listar_usuarios_perfil(req, res);
+});
+
+router.get('/gestion_perfiles/crear_perfil/:id_usuario',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
+  gestion_usuarios.vista_crear_perfil(req, res);
 });
 
 module.exports = router;

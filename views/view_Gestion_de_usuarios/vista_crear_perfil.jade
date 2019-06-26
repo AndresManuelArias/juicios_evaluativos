@@ -1,0 +1,31 @@
+extends ../layout.jade
+block contenido
+    form(action="/gestion_perfiles/crear_perfil/:id_usuario" method="post")
+        label id usuario
+        input(type="text" name="id_usuario" value="#{usuarios.Id_usuario}" readonly) 
+        br
+        label nombre de usuario
+        input(type="text" name="nombre_usuario" value="#{usuarios.nombre_usuario}" readonly)
+        br
+        label correo
+        input(type="email" name="correo_sena" value="#{usuarios.correo_sena}" readonly)
+        br
+        label numero de identificacion
+        input(type="number" name="numero_de_identificacion" value="#{usuarios.numero_de_identificacion}" readonly)
+        br
+        label tipo de identificacion
+        input(type="text" name="tipo_de_identificacion" value="#{usuarios.tipo_de_identificacion}" readonly)
+        br
+        label estado del perfil
+        select(name="id_estado_perfil")
+            each e in estado
+                option(value="#{e.id_estado_perfil}")=e.estado_perfil
+        br
+        label rol
+        select(name="id_usuario")
+            each b in rol
+                option(value="#{b.tipo_rol}")=b.tipo_rol)
+        
+
+    
+      
