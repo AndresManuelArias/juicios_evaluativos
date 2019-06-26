@@ -12,6 +12,7 @@ var GestionUsuarios = require("./gestionUsuarios/cambiarUsuario.js");
 var ejemplo = new Ejemplo();
 var control_de_acceso = new Control_de_acceso();
 var gestionUsuarios = new GestionUsuarios();
+const clasesGestionUsuarios = require('../routes/gestionUsuarios/clasesGestionUsuarios/index');
 
 
 
@@ -86,7 +87,10 @@ router.post("/tipoUsuario",function (req, res) {
     gestionUsuarios.tipoUsuario(req,res);
     console.table({prueba:"esto es una prueba"})
 });
-
+router.get("/prueba_permisos_administrador",clasesGestionUsuarios.permitirAccesoWeb(['administrador']) ,function (req, res) {
+    console.table({prueba:"session"})
+    res.send("puede entrar");
+});
 router.post("/borrarSesion",function(req,res){
     control_de_acceso.inisio_de_secion(req, res)
 });

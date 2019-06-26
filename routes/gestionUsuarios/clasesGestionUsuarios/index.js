@@ -1,3 +1,4 @@
+const mysql = require('../../../dataBase/conexion.js');
 
 function darPermisosAlUsuario(arrayPerfilesEntran, perfilIngresado) {
   // crear el codigo que de verdadero en el test
@@ -16,14 +17,22 @@ function darPermisosAlUsuario(arrayPerfilesEntran, perfilIngresado) {
 
 function permitirAccesoWeb(  arrayPerfilesEntran) {
 
-  return (req, res,next)=>{
-    if (darPermisosAlUsuario(arrayPerfilesEntran, req.session.rol)) {
-      next();
+  return async function (req, res,next){
+    console.log('req.session.rol',req.session.rol)
+    if(req.session.rol){
+      let rol = await mysql.con.query("select*from administrar_perfil where administrar_perfil.id_administrar_perfil = ?",[req.session.rol]);
+      console.log(rol[0])
+      if (darPermisosAlUsuario(arrayPerfilesEntran, rol[0].tipo_rol)) {
+        next();
+      }
+      else {
+        res.send("usted no puede ingresar");
+      }
+    }else{
+      res.send("Realice el registro <a href='/control_de_acceso'> login </a>");
     }
-    else {
-      res.send("usted no puede ingresar abrase");
-    }
+
   }
 
 }
-module.exports = { darPermisosAlUsuario: darPermisosAlUsuario };
+module.exports = { darPermisosAlUsuario,permitirAccesoWeb };
