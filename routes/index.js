@@ -1,43 +1,43 @@
 var express = require('express');
+let mysql = require ("../dataBase/conexion.js");
 var router = express.Router();
-var Ejemplo = require('./ejemploRoutes/Ejemplo.js')
-var ejemplo = new Ejemplo();
-
-
-
-
+let gestion_usuarios = require('./routes_Gestion_de_usuarios/index_usuarios')
 /* GET home page. */
-router.get('/ejemplo',  function(req, res, next) {
-    ejemplo.metodo(req, res);
+router.get('/', function(req, res, next) {// esta es la dirrecion a web a la que el usuario accede desde el navegador
+  res.render('index', { title: 'Express',cuerpo:'Esta es la pagina de ejemplo' });
+});
+router.get('/gestion_perfiles/usuarios', function (req, res) {
+   gestion_usuarios.ver_usuario(req, res);
 });
 
-router.get('/ejemplo1/sesion',  function(req, res, next) {
-    console.log(req.session)
-    if (req.session.usuario) {
-        req.session.views++
-        res.setHeader('Content-Type', 'text/html')
-        res.write('<p>views: ' + req.session.views + '</p>')
-        res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
-        res.write('<p>usser in: ' + req.session.usuario + '</p>')
-        res.end()
-      } else {
-        req.session.views = 1
-        req.session.usuario = req.query.usuario
-
-        res.end('welcome to the session demo. refresh!')
-      }
+router.post('/gestion_perfiles/usuarios',function (req, res) {
+  gestion_usuarios.ver_usuario(req, res);
 });
-router.get('/ejemplo2/sesion',  function(req, res, next) {
-    console.log(req.session)
-    res.setHeader('Content-Type', 'text/html')
-    res.write('<p>usser in: ' + req.session.usuario + '</p>')
-    res.end()
 
-})
+router.post('/gestion_perfiles/asignar_perfil',function (req, res) {
+  gestion_usuarios.asignar_perfiles(req, res);
+});
+router.get('/gestion_perfiles/cambiar_estado_perfil', function (req, res) {
+  gestion_usuarios.ver_estado_perfil(req, res);
+});
+router.post('/gestion_perfiles/cambiar_estado_perfil',function (req, res) {
+  gestion_usuarios.cambiar_estado_perfil(req, res);
+});
+router.get('/gestion_perfiles/actualizar_perfil', function (req, res) {
+   gestion_usuarios.vista_actualizar_perfil(req, res);
+});
+router.get('/gestion_perfiles/ver_estado_perfil', function (req, res) {
+  gestion_usuarios.ver_estado_perfil(req, res);
+});
+router.post('/gestion_perfiles/ver_estado_perfil', function (req, res) {
+  gestion_usuarios.cambiar_estado_perfil_un_usuario(req,res);
+});
+router.get('/gestion_perfiles/listar_usuarios_perfil', function (req, res) {
+  gestion_usuarios.listar_usuarios_perfil(req, res);
+});
 
-
-/* aqui inicia la logica de negocio */
-
-
+router.get('/gestion_perfiles/crear_perfil/:id_usuario', function (req, res) {
+  gestion_usuarios.vista_crear_perfil(req, res);
+});
 
 module.exports = router;

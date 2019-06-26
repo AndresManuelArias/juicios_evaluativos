@@ -1,0 +1,41 @@
+extends ../layout.jade
+block head 
+        link(rel="stylesheet" href="/stylesheets/logic/stylo_checkbox.css")
+
+block contenido
+    
+    form(action="/cambiar_estado_perfil",method="post", name="form_actualiza_perfil")
+        h1 modificar tipo de perfil
+ 
+    
+        table
+        
+            tr
+                th Nombre de usuario
+                th numero de identificacion
+                th Id_usuario
+                th id_administrar_perfil
+                th tipo_rol
+                th estado 
+            each usuario in usuarios
+                tr                
+                    td= usuario.nombre_usuario
+                    td= usuario.numero_de_identificacion
+                    td= usuario.Id_usuario
+                    td= usuario.id_administrar_perfil
+                    td= usuario.tipo_rol
+                    td 
+                        if usuario.estado_perfil
+                            input( type="radio" value="1" name="#{usuario.id_administrar_perfil}" checked) 
+                            p activar
+                            input( type="radio" value="0" name="#{usuario.id_administrar_perfil}" )
+                            p desativar
+                        else 
+                            input( type="radio" value="1" name="#{usuario.id_administrar_perfil}" ) 
+                            p activar
+                            input( type="radio" value="0" name="#{usuario.id_administrar_perfil}" checked)
+                            p desactivar                       
+
+            input(type="submit" value="actualizar")
+
+ 

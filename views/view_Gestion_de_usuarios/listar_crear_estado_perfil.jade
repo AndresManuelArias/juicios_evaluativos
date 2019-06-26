@@ -1,0 +1,21 @@
+extends ../layout.jade
+block contenido
+        h1 lista perfiles para crear 
+        table(border="1" class="table")
+            thead( class="thead-dark")
+                tr 
+                    th id usuarios
+                    th nombre de usuarios
+                    th correro sena 
+                    th numero de identificacion
+                    th tipo de identificacion
+                
+            tbody
+                each usuario in usuarios 
+                    tr 
+                        td=usuario.Id_usuario
+                        td= usuario.nombre_usuario
+                        td= usuario.correo_sena
+                        td= usuario.numero_de_identificacion
+                        td= usuario.tipo_de_identificacion
+                

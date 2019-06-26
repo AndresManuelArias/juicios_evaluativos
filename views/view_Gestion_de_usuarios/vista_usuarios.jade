@@ -1,0 +1,22 @@
+extends ../layout.jade
+block contenido
+        h1 selecion de tipo de perfil
+        table(border="1" class="table")
+            thead( class="thead-dark")
+                tr 
+                    th Nombre usuario
+                    th numero identificacion
+                    th tipo documento 
+                    th estado
+                    th accion
+                
+            tbody
+                each usuario in usuarios 
+                    tr 
+                        td= usuario.nombre_usuario
+                        td= usuario.numero_de_identificacion
+                        td= usuario.tipo_de_identificacion
+                        td= usuario.estado_perfil
+                        td
+                            a(href="/gestion_perfiles/ver_estado_perfil?id_administrar_perfil=#{usuario.id_administrar_perfil}") actualizar
+

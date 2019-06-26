@@ -1,0 +1,30 @@
+extends ../layout.jade
+block contenido
+    form(action="/gestion_perfiles/ver_estado_perfil" method="post")
+
+        div( class="form-group")
+            label <b> nombre de usuario:</b> #{usuarios.nombre_usuario}
+        div( class="form-group")    
+            label <b> El tipo de rol es:</b> #{usuarios.tipo_rol}
+        
+        div( class="form-group")
+            label <b> id_administrar_perfil:</b>
+            
+            input( class="form-control" type="text" name="id_administrar_perfil" value="#{usuarios.id_administrar_perfil}" readonly)
+        div( class="form-group")       
+            label <b> id usuario:</b> #{usuarios.id_usuario}
+        div( class="form-group")    
+            label <b> correo sena:</b> #{usuarios.correo_sena}
+        div( class="form-group")    
+            label <b> numero de identificacion:</b>#{usuarios.numero_de_identificacion}
+        div( class="form-group")    
+            label <b> tipo de identificacion:</b>#{usuarios.tipo_de_identificacion}
+        div( class="form-group")       
+            label <b> estado perfil:</b>
+            select( class="form-control" name="id_estado_perfil")
+                each estado in estado_perfil
+                    option(value="#{estado.id_estado_perfil}" )= estado.estado_perfil
+                 
+        input( class="btn btn-primary btn-lg btn-block" type="submit" value="actualizar")
+        a(  class="badge badge-danger" href="/gestion_perfiles/usuarios") volver a gestion de perfiles
+        
