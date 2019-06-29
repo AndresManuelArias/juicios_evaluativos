@@ -1,0 +1,2 @@
+insert into gestion_programa_formacion (nombre_programa_formacion,duracion_programa_academico) values ('analisis y desarrollo de sistemas de formacion',24);
+insert into gestion_programa_formacion (nombre_programa_formacion,duracion_programa_academico) values ('Diseño web',12)

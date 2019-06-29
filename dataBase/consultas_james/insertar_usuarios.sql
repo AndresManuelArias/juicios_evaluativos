@@ -1,0 +1,2 @@
+insert into gestion_de_usuarios (nombre_usuario,correo_sena,numero_de_identificacion,tipo_de_identificacion) values ('JHON PARDO','jjpardo30@misena.edu.co',1013689306,'CC');
+insert into gestion_de_usuarios (nombre_usuario,correo_sena,numero_de_identificacion,tipo_de_identificacion) values ('IVAN VALVERDE','iavalverde@misena.edu.co',1234567890,'CC');

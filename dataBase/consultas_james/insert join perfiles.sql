@@ -1,0 +1,3 @@
+select * from administrar_perfil
+inner join gestion_de_usuarios
+on gestion_de_usuarios.id_usuario=administrar_perfil.id_usuario

@@ -1,0 +1,1 @@
+update gestion_de_fichas set id_programa_formacion=2 where Numero_de_ficha=1439937

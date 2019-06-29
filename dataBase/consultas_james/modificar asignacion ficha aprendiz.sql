@@ -1,0 +1,1 @@
+update gestion_ficha_aprendiz set id_gestion_fichas=5 where id_gestion_ficha_aprendiz=1

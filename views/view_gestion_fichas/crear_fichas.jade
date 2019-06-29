@@ -1,0 +1,16 @@
+extends ../layout.jade
+block contenido
+    h1 creacion de fichas activo
+    form(action="/crear_fichas", method="post")
+        label numero de ficha
+        h1
+        input(class="form-control",type="number", name="Numero_de_ficha" require)
+        h1
+        label Id programa de formacion
+        h1
+        select(class="form-control form-control-lg",name="id_programa_formacion")
+            each element in programasFormacion
+                option(value="#{element.id_programa_formacion}")= element.nombre_programa_formacion
+        
+        h1
+        input(class="btn btn-success btn-lg btn-block",type="submit", value="crear")
