@@ -106,7 +106,34 @@ class Gestion_de_Competencia extends QueryCrud {
             });// es necesario insertar datos a la tabla de gestion de usuario  
         }   
     }
+        /**  
+     * @async
+     * @method listar
+     *  @param {object} req - 
+     *  @param {object} res - 
+     */
+    async listar(req, res, next){        
 
+        var nombre_competencia_programa =req.query.id_programa_formacion?await modeloRutaAprendizaje.consultarCompetenciasDeProgramaFormacionDeRutaDeAprendizaje(req.query.id_programa_formacion):await modelo_gestion_competencias.consultarCompetencias();
+        console.log(nombre_competencia_programa);
+        let nombreProgramaFormacion = req.query.id_programa_formacion == undefined?"": await modelo_programa_de_formacion.verProgramaDeFormacion(req.query.id_programa_formacion)
+        console.log('nombreProgramaFormacion',nombreProgramaFormacion)
+        if( Array.isArray(nombreProgramaFormacion) && nombreProgramaFormacion.length === 0){
+            res.render('./utilidades_ruta_aprendizaje/respuesta_a_usuario.jade', { 
+                title: 'Gestion de programa de formacion' ,
+                respuestaUsuario:`El programa de formacion identificado con el codigo ${req.query.id_programa_formacion} no existe.`,
+                ir_lugar:'Volver edicion programas de formación',
+                dirreccion:`/gestion_de_programas_de_formacion/edicion_programas_de_formacion` })
+    
+        }else {
+            res.render('./view_gestion_de_Competencia/edicion_competencias.jade', { 
+                nombre_competencia_programa:nombre_competencia_programa,
+                title: 'Gestion de competencia',
+            id_programa_formacion:req.query.id_programa_formacion,
+            nombreProgramaFormacion:req.query.id_programa_formacion== undefined?"":nombreProgramaFormacion[0].nombre_programa_formacion
+            });// es necesario insertar datos a la tabla de gestion de usuario  
+        }   
+    }
     /**  
      * @async
      * @method consultarExistenciaCompetencias

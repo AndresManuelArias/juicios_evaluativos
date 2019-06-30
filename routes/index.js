@@ -53,10 +53,10 @@ router.get('/gestion_de_competencia/edicion_competencias',  function(req, res, n
 });
 
 router.post('/gestion_de_competencia',  function(req, res, next) {
-    gestion_de_Competencia.ejecutar(req.query,req, res);
+    gestion_de_Competencia.ejecutarRest(req, res);
 });
 router.get('/gestion_de_competencia',  function(req, res, next) {
-    gestion_de_Competencia.ejecutaView(req.query,req, res);
+    gestion_de_Competencia.ejecutaRestView(req, res);
 });
 router.get('/gestion_de_competencia/consultar_existencia',  function(req, res, next) {
     console.log('consultado')
@@ -74,23 +74,12 @@ router.get('/gestion_de_resultado_aprendizaje/existencia/:id_gestion_de_competen
 });
 router.get('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia',  function(req, res, next) {
     console.log('get/gestion_de_resultado_aprendizaje')
-    resultadoAprendizaje.ejecutaView(req.query,req, res);
+    resultadoAprendizaje.ejecutaRestView(req, res);
 });
 
 router.post('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia',  function(req, res, next) {
    console.log(req.body)
-   resultadoAprendizaje.ejecutar(req.query,req, res)
-//     switch (req.body.accion) {
-//        case "Eliminar":   
-//             console.log('delete /gestion_de_resultado_aprendizaje',req.query,req.body,req.params)  
-
-//             resultadoAprendizaje.eliminarResultadoAprendizaje(req, res);         
-//            break;
-   
-//        default:
-//            break;
-//    }
-
+   resultadoAprendizaje.ejecutarRest(req, res);
 });
 
 // programas_de_formacion
@@ -100,10 +89,10 @@ router.get('/gestion_de_programas_de_formacion/edicion_programas_de_formacion', 
 });
 
 router.post('/gestion_de_programas_de_formacion',  function(req, res, next) {
-    gestion_programa_de_formacion.ejecutar(req.query,req, res);
+    gestion_programa_de_formacion.ejecutarRest(req, res);
 });
 router.get('/gestion_de_programas_de_formacion',  function(req, res, next) {
-    gestion_programa_de_formacion.ejecutaView(req.query,req, res);
+    gestion_programa_de_formacion.ejecutaRestView(req, res);
 });
 router.get('/gestion_de_programas_de_formacion/consultar_existencia',  function(req, res, next) {
     console.log('consultado')
@@ -122,19 +111,19 @@ router.post('/gestion_de_ruta_de_aprendizaje',  function(req, res, next) {
     console.log('gestion_de_ruta_de_aprendizaje')
     rutaAprendizaje.redireccion(req, res);
 });
-router.post('/gestion_de_ruta_de_aprendizaje/edit',  function(req, res, next) {
-    rutaAprendizaje.ejecutar(req.query,req, res);
+router.post('/gestion_de_ruta_de_aprendizaje/edit/:id_programa_formacion',  function(req, res, next) {
+    rutaAprendizaje.ejecutarRest(req, res);
 });
-router.get('/gestion_de_ruta_de_aprendizaje/edit',  function(req, res, next) {
-    rutaAprendizaje.ejecutaView(req.query,req, res);
+router.get('/gestion_de_ruta_de_aprendizaje/edit/:id_programa_formacion',  function(req, res, next) {
+    rutaAprendizaje.ejecutaRestView(req, res);
 });
 // gestion de formacion
 router.get('/gestion_de_la_formacion_instructor_ficha/:Id_GestionDeFichas',  function(req, res, next) {
-    console.log('gestion_de_la_foramcion_instrutor_ficha')
+    console.log('gestion_de_la_formacion_instrutor_ficha')
     formacionInstructorFicha.menuEdicion(req, res);
 });
 router.get('/gestion_de_la_formacion_instructor_ficha',  function(req, res, next) {
-    console.log('gestion_de_la_foramcion_instrutor_ficha')
+    console.log('gestion_de_la_formacion_instrutor_ficha')
     formacionInstructorFicha.menuEdicion(req, res);
 });
 router.post('/gestion_de_la_formacion_instructor_ficha',  function(req, res, next) {
@@ -142,9 +131,9 @@ router.post('/gestion_de_la_formacion_instructor_ficha',  function(req, res, nex
     formacionInstructorFicha.edicion(req, res)
 });
 router.post('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',  function(req, res, next) {
-    formacionInstructorFicha.ejecutar(req.query,req, res);
+    formacionInstructorFicha.ejecutarRest(req, res);
 });
 router.get('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',  function(req, res, next) {
-    formacionInstructorFicha.ejecutaView(req.query,req, res);
+    formacionInstructorFicha.ejecutaRestView(req, res);
 });
 module.exports = router;

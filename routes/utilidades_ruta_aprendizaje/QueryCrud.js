@@ -125,5 +125,55 @@ class QueryCrud {
     async actualizarView(req,res){
 
     }
+        /**
+     *  *
+     * @async
+     * @method ejecutaRestView - Es la vista que se ejecuta en GET
+    *@param {string} accion -  Peticion que indica que debe accion del crud debe realizar
+    *@param {string} req - Peticion del usuario
+    *@param {string} res - Respuesta al usuario
+     */
+    ejecutaRestView(req,res){  
+        
+        console.log('ejecutarView',req.query)
+        switch (req.query.accion) {
+            case 'Eliminar':
+                this.eliminarView(req,res)
+                break;
+            case 'Actualizar':
+                this.actualizarView(req,res)
+            break;       
+            case 'Crear': 
+                this.crearView(req,res)
+            break;
+            default:
+                this.crearView(req,res)
+            break;
+        }
+    }
+    /**
+     *  *
+        * @async
+        * @method ejecutarRest - Es la accion que se ejecuta en POST
+        *@param {string} accion -  Peticion que indica que debe accion del crud debe realizar
+        *@param {string} req - Peticion del usuario
+        *@param {string} res - Respuesta al usuario
+     */
+    ejecutarRest(req,res){  
+        console.log('ejecutarRest',req.body)
+        switch (req.body.accion) {
+            case 'Eliminar':
+                this.eliminar(req,res)
+                break;
+            case 'Actualizar':
+                this.actualizar(req,res)
+            break;       
+            case 'Crear': 
+                this.crear(req,res)
+            break;
+            default:
+            break;
+        }
+    }
 }
 module.exports = QueryCrud

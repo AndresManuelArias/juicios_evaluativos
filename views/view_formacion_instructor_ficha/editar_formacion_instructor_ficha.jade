@@ -4,6 +4,8 @@
 include ./menu.jade
 
 form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas}?accion=Actualizar" method="POST")
+    input(type="hidden", name="accion" value="Actualizar")    
+    
     div( class="form-group")    
         label Id formacion que da el instructor:
         input( class="form-control"  type="text" name='id_formacion_da_instructor_ficha' value="#{id_formacion_da_instructor_ficha}" readonly )
@@ -30,7 +32,7 @@ form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas
                 each instrutor in instructores
                     option(value=instrutor.id_administrar_perfil)= instrutor.nombre_usuario 
     br
-    input(class="btn btn-warning btn-lg btn-block" type="submit", value="Actualizar", name="accion")
+    input(class="btn btn-warning btn-lg btn-block" type="submit", value="Actualizar")
     p= mensaje
 
 

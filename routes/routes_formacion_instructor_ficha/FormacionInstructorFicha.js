@@ -82,7 +82,7 @@ class FormacionInstrutorFicha extends QueryCrud{
     
         console.log('crear','body',req.body,'params',req.params,'query',req.query)
         let respuesta = ""
-        if(req.body.accion ==='Asignar instructor'){
+        if(req.body.accionBoton ==='Asignar instructor'){
             console.log(req.originalUrl)
             console.log('asignar instrutor')
            res.redirect(`${req.originalUrl}&id_resultado_de_aprendizaje=${req.body.id_resultado_de_aprendizaje}`)

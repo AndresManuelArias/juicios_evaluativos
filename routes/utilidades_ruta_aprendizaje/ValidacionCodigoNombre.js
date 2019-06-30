@@ -10,7 +10,7 @@
 * @return {boolean} - Retorna verdadero si el codigo cumple con el requisito de comenzar en mayuscula y terminar en punto
 */
 function validarNumeroDato(numero){
-    return /^\d{1,15}$/g.test(numero);
+    return /^\d{1,10}$/g.test(numero);
 }
 /** 
 * @function validarTextoDato - inserta datos en la tabla de Datos 

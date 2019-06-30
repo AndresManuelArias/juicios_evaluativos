@@ -3,6 +3,8 @@ include ./menu.jade
 
 form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas}?accion=Crear" method="POST")
     div( class="form-group")    
+        input(type="hidden", name="accion" value="Crear")    
+
         label Resultado de aprendizaje    
         select( class="form-control" name="id_resultado_de_aprendizaje" required)
             if !instructores.length
@@ -12,7 +14,7 @@ form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas
     br
     if !instructores.length
         div( class="form-group") 
-            input(class="btn btn-secondary btn-lg" type="submit", value="Asignar instructor", name="accion")        
+            input(class="btn btn-secondary btn-lg" type="submit", value="Asignar instructor", name="accionBoton")        
     else 
         label(for="") Instructores
         br
@@ -21,7 +23,7 @@ form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas
             each instrutor in instructores
                 option(value=instrutor.id_administrar_perfil)= instrutor.nombre_usuario 
         br
-        input(class="btn btn-primary btn-lg btn-block" type="submit", value="Crear", name="accion")
+        input(class="btn btn-primary btn-lg btn-block" type="submit", value="Crear", name="accionBoton")
     p= mensaje
 
 
