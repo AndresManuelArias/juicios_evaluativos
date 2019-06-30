@@ -50,6 +50,7 @@ function validarNumeroCompetencia(numero){
     }
 }
 function validarNombreCompetencia(nombre){
+  debugger
     console.log( nombre,/^[A-ZÑÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ\s\W .,]{1,300}\.$/g.test(nombre));
 
     if(!/^[A-ZÑÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ\s\W .,]{1,300}\.$/g.test(nombre)){
@@ -59,8 +60,10 @@ function validarNombreCompetencia(nombre){
           <span aria-hidden="true">&times;</span>
         </button>
       </div>`;
+      return false;
     }else{
         document.getElementById('validarNombre').innerHTML = ``;
+        return true;
     }
 }
 
