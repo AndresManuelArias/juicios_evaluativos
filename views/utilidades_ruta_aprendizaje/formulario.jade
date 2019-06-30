@@ -20,7 +20,7 @@ div( class="container")
                     if accion == "Crear"
                         input( pattern='^[A-ZÑÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ\s\W .,]{1,300}\\.$'  class="form-control" type="text" id="nombre_#{nombreDelName}"  name="nombre_#{nombreDelName}" value="#{resultado.nombre}"  onchange="validarNombreCompetencia(this.value)" onkeyup="consultarExistenciaCodigo(codigo_#{nombreDelName}.value,'#{urlExistenciaCodigo}').then((res)=>{ if(!res){activarBoton(codigo_#{nombreDelName}.value,nombre_#{nombreDelName}.value)};})" require readonly=readonlyNombre)         
                     else
-                        input( pattern='^[A-ZÑÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ\s\W .,]{1,300}\\.$'  class="form-control" type="text" id="nombre_#{nombreDelName}"  name="nombre_#{nombreDelName}" value="#{resultado.nombre}"  onchange="validarNombreCompetencia(this.value)"  require readonly=readonlyNombre)         
+                        input( pattern='^[A-ZÑÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ\s\W .,]{1,300}\\.$'  class="form-control" type="text" id="nombre_#{nombreDelName}"  name="nombre_#{nombreDelName}" value="#{resultado.nombre}"  onchange="validarNombreCompetencia(this.value);activarBoton(codigo_#{nombreDelName}.value,nombre_#{nombreDelName}.value)"  require readonly=readonlyNombre)         
                     div(id="validarNombre")
                         if resultado.errorNombre
                             div( class="alert alert-danger alert-dismissible fade show" role="alert") El nombre no tiene un formato valido, este debe comenzar con mayúsculas y terminar con punto. 
