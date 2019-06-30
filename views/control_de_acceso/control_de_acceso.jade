@@ -17,11 +17,11 @@ block contenido
                 form(class="w3-container" action="envio_de_datos", method="post")
                         div(class="w3-section")
                             label()
-                            b tipo identificaion
+                            b tipo identificacion
                             select(class="w3-input w3-border w3-margin-bottom" type="text" placeholder="tipo identificaion" name="tipo_de_identificacion" required)
-                                option(value="") C.C
-                                option(value="") T.I
-                                option(value="") C.E
+                                option(value="C.C") C.C
+                                option(value="T.I") T.I
+                                option(value="C.E") C.E
                             label()
                             b numero de cedula
                             input(class="w3-input w3-border w3-margin-bottom" onchange="comprobar_identificacion(this.value), validardedula(this.value)" type="text"  placeholder="numero de cedula" name="numero_de_identificacion" required)
