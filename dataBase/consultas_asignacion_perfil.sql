@@ -1,3 +1,6 @@
+insert into control_de_acceso(corre_sena, contrasena) values("arias1@misena.edu.co",12345);
+insert into administrar_perfil(id_usuario,tipo_rol,id_estado_perfil)values(1,'instructor',1),(1,'aprendiz',1),(1,'instructor',1);
+
 insert into estado_perfil(estado_perfil) values('activo');
 insert into administrar_perfil(id_usuario,tipo_rol,id_estado_perfil)values(1,'instructor',1),(1,'aprendiz',1),(1,'administrador',1);
 insert into administrar_perfil(id_usuario,tipo_rol,id_estado_perfil)values(3,'instructor',1),(2,'aprendiz',1);
