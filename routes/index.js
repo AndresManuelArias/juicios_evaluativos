@@ -76,6 +76,9 @@ router.post("/tipoUsuario",function (req, res) {
     gestionUsuarios.tipoUsuario(req,res);
     console.table({prueba:"esto es una prueba"})
 });
+router.get("/tipoUsuario",function (req, res) {
+    gestionUsuarios.menuSegunUsuario(req,res);
+});
 router.get("/prueba_permisos_administrador",clasesGestionUsuarios.permitirAccesoWeb(['administrador']) ,function (req, res) {
     console.table({prueba:"session"})
     res.send("puede entrar");
