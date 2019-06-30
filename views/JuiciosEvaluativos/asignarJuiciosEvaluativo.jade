@@ -8,10 +8,10 @@ block contenido
             input(type="hidden" name="id_juicios_evaluativos" value="#{juicioEvaluativoAsignado.id_juicios_evaluativos}")
         div(class="form-group")
             label(for="") formacion #{formacionDA.nombre_resultado_de_aprendizaje}
-            input(class="form-control" type="text" name="id_resultado_de_aprendizaje"  value="#{formacionDA.id_resultado_de_aprendizaje}" readonly  required )
+            input(class="form-control" type="hidden" name="id_resultado_de_aprendizaje"  value="#{formacionDA.id_resultado_de_aprendizaje}" readonly  required )
         div(class = "form-group")
             label(for="") Aprendiz #{aprendizDeficha.nombre_usuario} identificado con el numero #{aprendizDeficha.numero_de_identificacion}
-            input(class="form-control" type="text" name="id_gestion_ficha_aprendiz" value="#{aprendizDeficha.id_gestion_ficha_aprendiz}" readonly required)
+            input(class="form-control" type="hidden" name="id_gestion_ficha_aprendiz" value="#{aprendizDeficha.id_gestion_ficha_aprendiz}" readonly required)
         div(class= "form-roup")    
             label(for="") juicios evaluativo
             select( class= "form-control" name="juicios_evaluativo" required)
