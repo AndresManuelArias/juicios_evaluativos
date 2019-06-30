@@ -22,6 +22,25 @@ class GestionUsuarios {
 
 
   // }
+  async menuSegunUsuario(req, res){
+    if(req.session.id_administrar_perfil){
+      let administrarPerfil=await mysql.con.query('select * from administrar_perfil where  id_administrar_perfil=?',[req.session.id_administrar_perfil]);
+      let { Id_usuario,nombre_usuario,correo_sena,tipo_de_identificacion} = req.session.datos[0];
+      let datos = {
+        idUsuario: Id_usuario,
+        nombreUsuario: nombre_usuario,
+        correoSena: correo_sena,
+        tipoIdentificacion: tipo_de_identificacion,
+        sessionId: req.session.id,
+        tipoUsuario: req.session.rol
+      }
+      renderizarTipoRol(administrarPerfil[0].tipo_rol,datos, res);    }
+    else{
+      res.redirect('/control_de_acceso')
+    }
+
+  }
+
   async tipoUsuario(req, res) {
     // var datosUsuario={
     //   usuario:req.body.datosUsuario
@@ -47,42 +66,46 @@ class GestionUsuarios {
     }
     console.log('req.body.perfil',req.body.perfil,'administrarPerfil[0].id_administrar_perfil',administrarPerfil[0].id_administrar_perfil)
     req.session.id_administrar_perfil = administrarPerfil[0].id_administrar_perfil// esto es para que funcione el modulo de juicios evaluativos
-    if (administrarPerfil[0].tipo_rol == "administrador") {
-      res.render("gestionUsuarios/administrador.jade",
-        {
-          idUsuario: datos.idUsuario,
-          nombreUsuario: datos.nombreUsuario,
-          correoSena: datos.correoSena,
-          tipoIdentificacion: datos.tipoIdentificacion,
-          sessionId: datos.sessionId,
-          tipoUsuario: datos.tipoUsuario
-        });
-    }
-    else if (administrarPerfil[0].tipo_rol == "instructor") {
-      res.render("gestionUsuarios/instructor.jade",
-        {
-          idUsuario: datos.idUsuario,
-          nombreUsuario: datos.nombreUsuario,
-          correoSena: datos.correoSena,
-          tipoIdentificacion: datos.tipoIdentificacion,
-          sessionId: datos.sessionId,
-          tipoUsuario: datos.tipoUsuario
-        });
-    }
-    else if (administrarPerfil[0].tipo_rol == "aprendiz") {
-      res.render("gestionUsuarios/aprendiz.jade",
-        {
-          idUsuario: datos.idUsuario,
-          nombreUsuario: datos.nombreUsuario,
-          correoSena: datos.correoSena,
-          tipoIdentificacion: datos.tipoIdentificacion,
-          sessionId: datos.sessionId,
-          tipoUsuario: datos.tipoUsuario
-        });
-    }
-    else {
-      res.send("error de parametros")
-    }
+    renderizarTipoRol(administrarPerfil[0].tipo_rol,datos, res)
+  }
+}
+
+function renderizarTipoRol(tipo_rol,datos,res){
+  if (tipo_rol == "administrador") {
+    res.render("gestionUsuarios/administrador.jade",
+      {
+        idUsuario: datos.idUsuario,
+        nombreUsuario: datos.nombreUsuario,
+        correoSena: datos.correoSena,
+        tipoIdentificacion: datos.tipoIdentificacion,
+        sessionId: datos.sessionId,
+        tipoUsuario: datos.tipoUsuario
+      });
+  }
+  else if (tipo_rol == "instructor") {
+    res.render("gestionUsuarios/instructor.jade",
+      {
+        idUsuario: datos.idUsuario,
+        nombreUsuario: datos.nombreUsuario,
+        correoSena: datos.correoSena,
+        tipoIdentificacion: datos.tipoIdentificacion,
+        sessionId: datos.sessionId,
+        tipoUsuario: datos.tipoUsuario
+      });
+  }
+  else if (tipo_rol == "aprendiz") {
+    res.render("gestionUsuarios/aprendiz.jade",
+      {
+        idUsuario: datos.idUsuario,
+        nombreUsuario: datos.nombreUsuario,
+        correoSena: datos.correoSena,
+        tipoIdentificacion: datos.tipoIdentificacion,
+        sessionId: datos.sessionId,
+        tipoUsuario: datos.tipoUsuario
+      });
+  }
+  else {
+    res.send("error de parametros")
   }
 }
 
