@@ -21,6 +21,10 @@ insert into gestion_de_fichas(Numero_de_ficha,id_programa_formacion)values(44444
 insert into gestion_de_fichas(Numero_de_ficha,id_programa_formacion)values(5555,12344);
 select*from gestion_de_fichas;
 
+describe gestion_ficha_aprendiz;
+ insert	 into gestion_ficha_aprendiz (id_gestion_fichas,id_administrar_perfil)values(1,2);
+ select*from gestión_de_competencia;
+
 describe `gestión_de_competencia`;
 insert into gestión_de_competencia(id_gestion_de_competencia,nombre_competencia)values(1,'Saltar lazos'),(2,'Hornear');
 select*from gestión_de_competencia;
