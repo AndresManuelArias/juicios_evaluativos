@@ -4,6 +4,9 @@ div( class="container")
         div( class="col-12")
             h1(class="text-center") #{titulo}
             form( method="#{metodo}" class="container-fluid" action="#{action}")
+                if accion
+                    input(type="hidden", name="accion" value="#{accion}")
+
                 div( class="form-group") 
                     label Codigo #{informacionLabel}
                     input( pattern="^[0-9]{1,15}$"  type="text"  class="form-control" id="codigo_#{nombreDelName}" name="codigo_#{nombreDelName}" value="#{resultado.codigo}" readonly=readonlyCodigo   onchange="validarNumeroCompetencia(this.value)" onkeyup="consultarExistenciaCodigo(codigo_#{nombreDelName}.value,'#{urlExistenciaCodigo}').then((res)=>{ if(!res){activarBoton(codigo_#{nombreDelName}.value,nombre_#{nombreDelName}.value)};})" require)                             
@@ -20,7 +23,7 @@ div( class="container")
                             div( class="alert alert-danger alert-dismissible fade show" role="alert") El nombre no tiene un formato valido, este debe comenzar con mayúsculas y terminar con punto. 
                                 button(type="button" class="close" data-dismiss="alert" aria-label="Close")
                                     span( aria-hidden="true") &times;                                                
-                input( class="btn btn-primary  btn-lg btn-block" id="mySubmit" type="submit" name="accion" value="#{nombreAccion}" disabled=disabledSubmit)
+                input( class="btn btn-primary  btn-lg btn-block" id="mySubmit" type="submit"  value="#{nombreAccion}" disabled=disabledSubmit)
                 input(class="btn btn-light  btn-lg btn-block" type="reset")
             if resultado                
                 - var estilo = resultado.estado=='error'?'alert alert-danger':resultado.estado=='success'?'alert alert-primary':""

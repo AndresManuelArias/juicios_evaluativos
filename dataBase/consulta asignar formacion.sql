@@ -1,7 +1,7 @@
 -- estos son los insert para que funciones el aplicativo
 describe gestion_de_usuarios;
 insert into gestion_de_usuarios(nombre_usuario,correo_sena,numero_de_identificacion,tipo_de_identificacion) 
-values('capullo','unhijo@sena.edu.co',13,'cedula'),('pedrito','correo1@sena.edu.co',12,'cedula'),('pedrito 1','correo2@sena.edu.co',13,'cedula');
+values('capullo','unhijo@sena.edu.co',13,'cedula'),('pedrito','correo1@sena.edu.co',12,'cedula'),('pedrito 1','correo2@sena.edu.co',14,'cedula');
 select*from gestion_de_usuarios;
 describe estado_perfil;
 insert into estado_perfil(estado_perfil) values('activo');

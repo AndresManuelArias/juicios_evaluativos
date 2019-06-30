@@ -36,10 +36,10 @@ class RutaAprendizaje extends QueryCrud{
                 res.redirect(`/gestion_de_competencia?accion=Crear&id_programa_formacion=${req.body.id_programa_formacion}`);
             break;
             case 'agregar':
-                res.redirect(`/gestion_de_ruta_de_aprendizaje/edit?accion=Crear&id_programa_formacion=${req.body.id_programa_formacion}`);
+                res.redirect(`/gestion_de_ruta_de_aprendizaje/edit/${req.body.id_programa_formacion}?accion=Crear`);
             break;
             case 'eliminar':
-                res.redirect(`/gestion_de_ruta_de_aprendizaje/edit?accion=Eliminar&id_programa_formacion=${req.body.id_programa_formacion}`);
+                res.redirect(`/gestion_de_ruta_de_aprendizaje/edit/${req.body.id_programa_formacion}?accion=Eliminar`);
             break;            
             
             default:
@@ -58,18 +58,18 @@ class RutaAprendizaje extends QueryCrud{
        }else{
         respuestaUsuario = respuestaEliminarRutaDeAprendizaje.error?respuestaEliminarRutaDeAprendizaje.error:`La accion no se puedo ejecutar devido a que la ruta de aprendizaje numero ${req.body.id_ruta_aprendizaje} no existe`
        }
-        res.render('./view_gestion_ruta_aprendizaje/informarUsuario.jade', { title: 'Edicion ruta de aprendizaje', respuestaUsuario:respuestaUsuario ,accion:req.body.accion,id_programa_formacion:req.body.id_programa_formacion})
+        res.render('./view_gestion_ruta_aprendizaje/informarUsuario.jade', { title: 'Edicion ruta de aprendizaje', respuestaUsuario:respuestaUsuario ,accion:req.body.accion,id_programa_formacion:req.params.id_programa_formacion})
 
     }
     async eliminarView(req, res){
         console.log('eliminar view')
-       let rutaDeAprendizaje= await modeloRutaAprendizaje.consultarCompetenciasDeRutaDeAprendizaje(req.query.id_programa_formacion)
+       let rutaDeAprendizaje= await modeloRutaAprendizaje.consultarCompetenciasDeRutaDeAprendizaje(req.params.id_programa_formacion)
        console.log(rutaDeAprendizaje)
        res.render('./view_gestion_ruta_aprendizaje/eliminarCompetenciaProgramaFormacion.jade', { title: 'Edicion ruta de aprendizaje',rutaDeAprendizaje:rutaDeAprendizaje})
     }
     async crearView(req, res){
-        let programaFormacion = await modelo_programa_de_formacion.verProgramaDeFormacion(req.query.id_programa_formacion) 
-        let competencias= await modeloRutaAprendizaje.consultarCompetenciasQueNoSonProgramaFormacion(req.query.id_programa_formacion)
+        let programaFormacion = await modelo_programa_de_formacion.verProgramaDeFormacion(req.params.id_programa_formacion) 
+        let competencias= await modeloRutaAprendizaje.consultarCompetenciasQueNoSonProgramaFormacion(req.params.id_programa_formacion)
         console.log(req.query.id_programa_formacion,programaFormacion,competencias)
 
 
@@ -77,9 +77,9 @@ class RutaAprendizaje extends QueryCrud{
     }
     async crear(req, res){
         console.log('body',req.body)
-        let respuestaInsertarDatos = await modeloRutaAprendizaje.crearRutaAprendizaje(req.body.id_programa_formacion,req.body.id_gestion_de_competencia)
+        let respuestaInsertarDatos = await modeloRutaAprendizaje.crearRutaAprendizaje(req.params.id_programa_formacion,req.body.id_gestion_de_competencia)
         let respuestaUsuario = ""
-        let programaFormacion = await modelo_programa_de_formacion.verProgramaDeFormacion(req.body.id_programa_formacion) 
+        let programaFormacion = await modelo_programa_de_formacion.verProgramaDeFormacion(req.params.id_programa_formacion) 
         let competencias= await modelo_gestion_competencias.verCompetencia(req.body.id_gestion_de_competencia)    
 
         console.log('respuestaInsertarDatos',respuestaInsertarDatos)
@@ -89,7 +89,7 @@ class RutaAprendizaje extends QueryCrud{
         }else {
             respuestaUsuario =`${respuestaInsertarDatos.text}${programaFormacion.length?'':' - Programa de formacion no existe.'}${competencias.length?'':' - Competencia no existe.'}` ;
         }
-        res.render('./view_gestion_ruta_aprendizaje/informarUsuario.jade', { title: 'Edicion ruta de aprendizaje', respuestaUsuario:respuestaUsuario ,accion:req.body.accion,id_programa_formacion:req.body.id_programa_formacion})
+        res.render('./view_gestion_ruta_aprendizaje/informarUsuario.jade', { title: 'Edicion ruta de aprendizaje', respuestaUsuario:respuestaUsuario ,accion:req.body.accion,id_programa_formacion:req.params.id_programa_formacion})
     }//para eliminar en la vista debe verse es el id de la ruta de aprendizaje
 }
 // set DEBUG=myapp:* & npm start

@@ -28,7 +28,7 @@ function consultarExistenciaCodigo(codigoCompetencia,urlExistenciaCodigo){
 
 function activarBoton(numero,nombre){
     debugger;
-    if(/^\d{1,15}$/g.test(numero) && /^[A-ZÑÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ\s\W .,]{1,300}\.$/g.test(nombre) ){
+    if(/^\d{1,10}$/g.test(numero) && /^[A-ZÑÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ\s\W .,]{1,300}\.$/g.test(nombre) ){
         document.getElementById("mySubmit").disabled = false;
 
     }else{
@@ -37,8 +37,8 @@ function activarBoton(numero,nombre){
 }
 
 function validarNumeroCompetencia(numero){
-    console.log(numero,/^\d{1,15}$/g.test(numero))
-    if(!/^\d{1,15}$/g.test(numero)){
+    console.log(numero,/^\d{1,10}$/g.test(numero))
+    if(!/^\d{1,10}$/g.test(numero)){
         document.getElementById('validarCodigo').innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
         El codigo no tiene un formato valido, este debe ser solo numeros
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

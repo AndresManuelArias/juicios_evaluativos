@@ -4,6 +4,8 @@
 include ./menu.jade
 
 form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas}?accion=Eliminar" method="POST")
+    input(type="hidden", name="accion" value="Eliminar")    
+    
     div( class="form-group")
         label Id formacion que da el instructor:    
         input(  class="form-control" type="text" name='id_formacion_da_instructor_ficha' value="#{id_formacion_da_instructor_ficha}" readonly required)
@@ -15,7 +17,7 @@ form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas
         label(for="") Instructor <B> #{anteriorFormacion.nombre_usuario}</B>:
         input(class="form-control" type="text" name="id_administrar_perfil_instructor" value="#{anteriorFormacion.id_administrar_perfil}" readonly required)
     br
-    input(class="btn btn-danger btn-lg btn-block" type="submit", value="Eliminar", name="accion")
+    input(class="btn btn-danger btn-lg btn-block" type="submit", value="Eliminar")
     p= mensaje
 
 

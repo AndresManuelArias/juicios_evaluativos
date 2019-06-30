@@ -2,20 +2,20 @@ extends ../layout.jade
 block contenido
     h1= title
     a(class="badge badge-secondary" href="/gestion_de_ruta_de_aprendizaje") Volver
-    form(method="POST" class="container-fluid" action="/gestion_de_ruta_de_aprendizaje/edit?accion=Eliminar")
-        div(class="form-row")
-            label() Programa de formacion:#{rutaDeAprendizaje[0].nombre_programa_formacion}
-        div(class="form-row")         
-            label(for="") Codigo del programa del formacion
-            input( class="form-control" name="id_programa_formacion" type="text"  value='#{rutaDeAprendizaje[0].id_programa_formacion}' readonly required)
-        div(class="form-row")       
-            label(for="") Competencia: 
-            select(class="nav-item form-control" , name="id_ruta_aprendizaje" required)
-                option( value="" selected) Selecione una competencia            
-                each competencia in rutaDeAprendizaje
-                    option(value=competencia.id_ruta_aprendizaje)= competencia.nombre_competencia 
+    if rutaDeAprendizaje.length
+        form(method="POST" class="container-fluid" action="/gestion_de_ruta_de_aprendizaje/edit/#{rutaDeAprendizaje[0].id_programa_formacion}?accion=Eliminar")
+            input(type="hidden", name="accion" value="Eliminar")    
+            div(class="form-row")
+                label() Programa de formacion: #{rutaDeAprendizaje[0].id_programa_formacion} #{rutaDeAprendizaje[0].nombre_programa_formacion}
+            div(class="form-row")       
+                label(for="") Competencia: 
+                select(class="nav-item form-control" , name="id_ruta_aprendizaje" required)
+                    option( value="" selected) Selecione una competencia            
+                    each competencia in rutaDeAprendizaje
+                        option(value=competencia.id_ruta_aprendizaje)= competencia.nombre_competencia 
+                    
                 
-            
-        input( class="btn btn-primary  btn-lg btn-block" id="mySubmit" type="submit" name="accion" value="Eliminar" )
-        
+            input( class="btn btn-primary  btn-lg btn-block" id="mySubmit" type="submit" value="Eliminar" )
+    else
+        p El programa de formacion no tiene competencias asociadas      
             

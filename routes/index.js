@@ -125,11 +125,13 @@ router.get('/gestion_de_competencia/edicion_competencias',clasesGestionUsuarios.
     gestion_de_Competencia.edicionCompetencias(req, res);
 });
 
+
 router.post('/gestion_de_competencia',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
-    gestion_de_Competencia.ejecutar(req.query,req, res);
+    gestion_de_Competencia.ejecutarRest(req, res);
 });
 router.get('/gestion_de_competencia',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
-    gestion_de_Competencia.ejecutaView(req.query,req, res);
+    gestion_de_Competencia.ejecutaRestView(req, res);
+
 });
 router.get('/gestion_de_competencia/consultar_existencia',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
     console.log('consultado')
@@ -147,23 +149,12 @@ router.get('/gestion_de_resultado_aprendizaje/existencia/:id_gestion_de_competen
 });
 router.get('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     console.log('get/gestion_de_resultado_aprendizaje')
-    resultadoAprendizaje.ejecutaView(req.query,req, res);
+    resultadoAprendizaje.ejecutaRestView(req, res);
 });
 
 router.post('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
    console.log(req.body)
-   resultadoAprendizaje.ejecutar(req.query,req, res)
-//     switch (req.body.accion) {
-//        case "Eliminar":   
-//             console.log('delete /gestion_de_resultado_aprendizaje',req.query,req.body,req.params)  
-
-//             resultadoAprendizaje.eliminarResultadoAprendizaje(req, res);         
-//            break;
-   
-//        default:
-//            break;
-//    }
-
+   resultadoAprendizaje.ejecutarRest(req, res);
 });
 
 
@@ -212,11 +203,13 @@ router.get('/gestion_de_programas_de_formacion/edicion_programas_de_formacion',c
     console.log('/gestion_de_programas_de_formacion/edicion_programas_de_formacion')
     gestion_programa_de_formacion.edicionProgramaDeFormacion(req, res);
 });
+
 router.post('/gestion_de_programas_de_formacion',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
-    gestion_programa_de_formacion.ejecutar(req.query,req, res);
+    gestion_programa_de_formacion.ejecutarRest(req, res);
 });
 router.get('/gestion_de_programas_de_formacion',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
-    gestion_programa_de_formacion.ejecutaView(req.query,req, res);
+    gestion_programa_de_formacion.ejecutaRestView(req, res);
+
 });
 router.get('/gestion_de_programas_de_formacion/consultar_existencia', function(req, res, next) {
     console.log('consultado')
@@ -236,10 +229,10 @@ router.post('/gestion_de_ruta_de_aprendizaje',clasesGestionUsuarios.permitirAcce
     rutaAprendizaje.redireccion(req, res);
 });
 router.post('/gestion_de_ruta_de_aprendizaje/edit',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
-    rutaAprendizaje.ejecutar(req.query,req, res);
+    rutaAprendizaje.ejecutarRest(req, res);
 });
 router.get('/gestion_de_ruta_de_aprendizaje/edit',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
-    rutaAprendizaje.ejecutaView(req.query,req, res);
+    rutaAprendizaje.ejecutaRestView(req, res);
 });
 // gestion de formacion
 router.get('/gestion_de_la_formacion_instructor_ficha/:Id_GestionDeFichas',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
@@ -254,11 +247,12 @@ router.post('/gestion_de_la_formacion_instructor_ficha',clasesGestionUsuarios.pe
     console.log('gestion_de_la_formacion_instructor_ficha')
     formacionInstructorFicha.edicion(req, res)
 });
+
 router.post('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
-    formacionInstructorFicha.ejecutar(req.query,req, res);
+    formacionInstructorFicha.ejecutarRest(req, res);
 });
 router.get('/gestion_de_la_formacion_instructor_ficha/edit/:Id_GestionDeFichas',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function(req, res, next) {
-    formacionInstructorFicha.ejecutaView(req.query,req, res);
+    formacionInstructorFicha.ejecutaRestView(req, res);
 })
 // logica de negocio gestion de perfiles
 router.get('/gestion_perfiles/usuarios',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
