@@ -86,7 +86,7 @@ class FormacionInstrutorFicha extends QueryCrud{
             console.log(req.originalUrl)
             console.log('asignar instrutor')
            res.redirect(`${req.originalUrl}&id_resultado_de_aprendizaje=${req.body.id_resultado_de_aprendizaje}`)
-        }else{
+        }else if(req.body.accionBoton ==='Asignar formacion'){
             let resultado = await modelo_FormacionInstructorFicha.asignarFormacionInstructorFicha(req.body.id_resultado_de_aprendizaje,req.body.id_administrar_perfil_instructor,req.params.Id_GestionDeFichas)
             console.log('resultado',resultado)
             if(resultado.affectedRows){
@@ -99,6 +99,8 @@ class FormacionInstrutorFicha extends QueryCrud{
                 respuestaUsuario:respuesta,
                 ir_lugar:'Seleccionar nueva ficha',
                 dirreccion:`/gestion_de_la_formacion_instructor_ficha/${req.params.Id_GestionDeFichas}` })  
+        }else{
+            res.redirect(`${req.originalUrl}`);
         }
     }
     async actualizarView(req, res){
