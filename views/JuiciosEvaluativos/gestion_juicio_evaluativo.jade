@@ -1,9 +1,9 @@
 extends ../layout.jade
 block contenido
     if formacionDa.length
-        a(href="/juicios_evaluativos/")    Regresar 
+        a(href="/juicios_evaluativos/asignar_notas")    Regresar 
 
-        form(action="/juicios_evaluativos/#{id_formacion_da_instructor_ficha}", method="post")
+        form(action="/juicios_evaluativos/asignar_notas/#{id_formacion_da_instructor_ficha}", method="post")
             div(class="form-group")
                 label() Seleccione la ficha 
                 select(class="form-control" name="id_formacion_da_instructor_ficha") 

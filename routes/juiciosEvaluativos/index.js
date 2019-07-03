@@ -26,7 +26,7 @@ class JuiciosEvaluativos {
         console.log(req.body)
         req.session.id_administrar_perfil = req.body.id_administrar_perfil
         console.log( req.session)        
-        res.render('./JuiciosEvaluativos/respuesta_usuario.jade', { title: 'Instructor Aprendiz seleccionado',respuestaUsuario:'ahora puede navegar como un aprendiz id aprendiz:'+req.session.id_administrar_perfil, dirreccion:'/juicios_evaluativos',ir_lugar:'asignar notas'  });
+        res.render('./JuiciosEvaluativos/respuesta_usuario.jade', { title: 'Instructor Aprendiz seleccionado',respuestaUsuario:'ahora puede navegar como un aprendiz id aprendiz:'+req.session.id_administrar_perfil, dirreccion:'/juicios_evaluativos/ver_mis_notas',ir_lugar:'ver notas'  });
     }
     // Termina metodo provisional
 
@@ -46,11 +46,11 @@ class JuiciosEvaluativos {
     }
     rediredPrendicesDentroFicha(req, res){
         console.log(req.body)
-        res.redirect(`/juicios_evaluativos/${req.body.id_formacion_da_instructor_ficha}`)
+        res.redirect(`/juicios_evaluativos/asignar_notas/${req.body.id_formacion_da_instructor_ficha}`)
     }
     rediredAsignarJuicio(req, res){
         console.log(req.body)
-        res.redirect(`/juicios_evaluativos/${req.body.id_formacion_da_instructor_ficha}/${req.body.id_gestion_ficha_aprendiz}`)
+        res.redirect(`/juicios_evaluativos/asignar_notas/${req.body.id_formacion_da_instructor_ficha}/${req.body.id_gestion_ficha_aprendiz}`)
     }
     async verAprendicesDeFichaInstructor(req, res, next){
         console.log('verAprendicesDeFichaInstructor')
@@ -163,6 +163,34 @@ class JuiciosEvaluativos {
             }
         }
         
+    }
+    async viewFichasAprendiz(req, res){
+        console.log('id_administrar_perfil',req.session.id_administrar_perfil)
+       let fichas = await modeloJuiciosEvaluativos.consultarFichasAprendiz(req.session.id_administrar_perfil)
+       console.log('fichas')
+       console.table(fichas);
+       
+       res.render('./JuiciosEvaluativos/ver_fichas_aprendiz.jade', { title: 'Juicios evaluativos', fichas });
+
+    }
+    rediredJuiciosDeAprendiz(req, res){
+        res.redirect(`/juicios_evaluativos/ver_mis_notas/${req.body.id_gestion_ficha_aprendiz}`)
+    }
+    async viewJuiciosDeAprendiz(req, res){
+       let juicios =  await modeloJuiciosEvaluativos.consultarJuiciosFichasAprendiz(req.params.id_gestion_ficha_aprendiz)
+       let fichaAprendiz =   await modeloJuiciosEvaluativos.consultarFichasAprendiz(req.session.id_administrar_perfil);
+       let ficha= fichaAprendiz.filter((columna)=> columna.id_gestion_ficha_aprendiz == req.params.id_gestion_ficha_aprendiz);
+       console.log('ficha',ficha);
+       if(ficha.length){
+
+            let aprendiz = await modeloJuiciosEvaluativos.verAprendiz(req.session.id_administrar_perfil)
+            console.log('aprendiz',aprendiz)
+            let fichaProgramaFormacion  = await modeloJuiciosEvaluativos.consultaFichaProgramaFormacion( ficha[0].id_gestion_fichas)
+            console.log('fichaProgramaFormacion',fichaProgramaFormacion)
+            res.render('./JuiciosEvaluativos/ver_juicios_evaluativos.jade', { title: 'Juicios evaluativos', juicios,aprendiz:aprendiz,fichaProgramaFormacion });
+       }else{
+            res.render('./JuiciosEvaluativos/respuesta_usuario.jade', { title: 'Error',respuestaUsuario:'Usted no puede ver estas notas',ir_lugar:'ver notas',dirreccion:'/juicios_evaluativos/ver_mis_notas' });
+       }
     }
 }
 async function verificaPermisoAgregarNota(id_formacion_da_instructor_ficha,id_administrar_perfil){ 

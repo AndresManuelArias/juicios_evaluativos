@@ -18,7 +18,15 @@ class ModeloJuiciosEvaluativos {
         console.log(aprendices)
         return  aprendices
     }
-
+    async verAprendiz(id_administrar_perfil) {
+        var aprendices = await mysql.con.query(`
+        select*from administrar_perfil 
+        join gestion_de_usuarios
+       on gestion_de_usuarios.Id_usuario = administrar_perfil.id_usuario
+       where administrar_perfil.tipo_rol = 'aprendiz' and id_administrar_perfil = ? ;`,[id_administrar_perfil]);
+        console.log(aprendices)
+        return  aprendices[0]
+    }
     async formacionDaInstructorAfichas(id_administrar_perfil){
         console.log('id_administrar_perfil',id_administrar_perfil)
         var formacion = await mysql.con.query(`select *
@@ -139,6 +147,45 @@ class ModeloJuiciosEvaluativos {
             ;`,[id_juicios_evaluativos]);
             console.log(juicioAsignado)
             return juicioAsignado;
+    }
+    async consultarFichasAprendiz(id_administrar_perfil){
+        let fichasAsignada  = await mysql.con.query(
+            ` 
+             select *from gestion_ficha_aprendiz
+                join gestion_de_fichas
+                on gestion_de_fichas.Id_GestionDeFichas = gestion_ficha_aprendiz.id_gestion_fichas
+             where id_administrar_perfil = ?;
+            `,[id_administrar_perfil]);
+            console.log(fichasAsignada)
+            return fichasAsignada;
+    }
+    async consultarJuiciosFichasAprendiz(id_gestion_ficha_aprendiz){
+        let juiciosEvaluativos  = await mysql.con.query(
+            ` 
+            select 
+                gestión_de_competencia.nombre_competencia, gestión_de_resultado_de_aprendizaje.nombre_resultado_de_aprendizaje,  gestionar_juicios_evaluativos.juicios_evaluativo
+            from gestionar_juicios_evaluativos
+                join gestión_de_resultado_de_aprendizaje 
+                on gestionar_juicios_evaluativos.id_resultado_de_aprendizaje = gestionar_juicios_evaluativos.id_resultado_de_aprendizaje
+                join  gestión_de_competencia
+                on gestión_de_competencia.id_gestion_de_competencia = gestión_de_resultado_de_aprendizaje.id_gestion_de_competencia
+            where gestionar_juicios_evaluativos.id_gestion_ficha_aprendiz = ?
+       ;
+            `,[id_gestion_ficha_aprendiz]);
+            console.log(juiciosEvaluativos)
+            return juiciosEvaluativos;
+    }
+    async consultaFichaProgramaFormacion(id_gestion_fichas){
+        let ficha  = await mysql.con.query(
+            ` 
+            select*from gestion_de_fichas
+                join gestion_programa_formacion
+                on gestion_de_fichas.id_programa_formacion= gestion_programa_formacion.id_programa_formacion 
+            where gestion_de_fichas.Id_GestionDeFichas=?;  
+       ;
+            `,[id_gestion_fichas]);
+            console.log(ficha)
+            return ficha[0]; 
     }
 }
 

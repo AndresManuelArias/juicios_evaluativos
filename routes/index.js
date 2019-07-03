@@ -61,17 +61,26 @@ router.get('/juicios_evaluativos',  function(req, res, next) {
 router.post('/juicios_evaluativos',  function(req, res, next) {
   juiciosEvaluativos.rediredPrendicesDentroFicha(req, res);
 })
-router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha',  function(req, res, next) {
+router.get('/juicios_evaluativos/asignar_notas/:id_formacion_da_instructor_ficha',  function(req, res, next) {
   juiciosEvaluativos.verAprendicesDeFichaInstructor(req, res);
 })
-router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha',  function(req, res, next) {
+router.post('/juicios_evaluativos/asignar_notas/:id_formacion_da_instructor_ficha',  function(req, res, next) {
   juiciosEvaluativos.rediredAsignarJuicio(req, res);
 })
-router.get('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+router.get('/juicios_evaluativos/asignar_notas/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
   juiciosEvaluativos.viewAsignarJuicioEvaluativo(req, res);
 })
-router.post('/juicios_evaluativos/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+router.post('/juicios_evaluativos/asignar_notas/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',  function(req, res, next) {
   juiciosEvaluativos.asignarJuicioEvaluativo(req, res);
+})
+router.get('/juicios_evaluativos/ver_mis_notas',  function(req, res, next) {
+  juiciosEvaluativos.viewFichasAprendiz(req, res);
+})
+router.post('/juicios_evaluativos/ver_mis_notas',  function(req, res, next) {
+  juiciosEvaluativos.rediredJuiciosDeAprendiz(req, res);
+})
+router.get('/juicios_evaluativos/ver_mis_notas/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+  juiciosEvaluativos.viewJuiciosDeAprendiz(req, res);
 })
 // router.get('/juicios_evaluativos/:id_gestion_ficha_aprendiz',  function(req, res, next) {
 //   juiciosEvaluativos.viewAsignar(req, res);

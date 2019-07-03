@@ -1,0 +1,16 @@
+extends ../layout.jade
+block contenido
+    h1 ver calificaciones 
+    if fichas.length
+        form(action="/juicios_evaluativos/ver_mis_notas", method="post")
+            div(class= "form-roup")    
+                label(for="") Seleccione la una ficha
+                select( class= "form-control" name="id_gestion_ficha_aprendiz" required)
+                    option( value="" disabled ) seleccione una ficha
+                    each ficha in fichas
+                        option(value="#{ficha.id_gestion_ficha_aprendiz}" )=  ficha.Numero_de_ficha
+
+            input( class="btn btn-primary  btn-lg btn-block active" type="submit", value="Ver juicios")        
+    else 
+        div(class= "form-roup")    
+            label(class="alert alert-danger") Usted no se encuentra en una ficha
