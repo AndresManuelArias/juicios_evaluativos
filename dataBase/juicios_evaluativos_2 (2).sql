@@ -98,6 +98,7 @@ CREATE TABLE gestion_ficha_aprendiz (
     id_gestion_ficha_aprendiz int NOT null UNIQUE AUTO_INCREMENT,
     id_gestion_fichas int,
     id_administrar_perfil int,
+    UNIQUE(id_gestion_fichas,id_administrar_perfil),  
     PRIMARY KEY(id_gestion_ficha_aprendiz),
     FOREIGN key(id_administrar_perfil) REFERENCES administrar_perfil(id_administrar_perfil) on DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
