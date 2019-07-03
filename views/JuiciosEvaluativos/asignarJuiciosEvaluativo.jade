@@ -1,8 +1,8 @@
 extends ../layout.jade
 block contenido
-    a(href="/juicios_evaluativos/#{params.id_formacion_da_instructor_ficha}") Regresar..
+    a(href="/juicios_evaluativos/asignar_notas/#{params.id_formacion_da_instructor_ficha}") Regresar..
     h1 asignar juicios 
-    form(action="/juicios_evaluativos/#{params.id_formacion_da_instructor_ficha}/#{params.id_gestion_ficha_aprendiz}", method="post")
+    form(action="/juicios_evaluativos/asignar_notas/#{params.id_formacion_da_instructor_ficha}/#{params.id_gestion_ficha_aprendiz}", method="post")
         input(type="hidden" name="accion" value="#{accion}")
         if juicioEvaluativoAsignado
             input(type="hidden" name="id_juicios_evaluativos" value="#{juicioEvaluativoAsignado.id_juicios_evaluativos}")
