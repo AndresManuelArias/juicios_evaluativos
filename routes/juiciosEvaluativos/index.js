@@ -45,6 +45,7 @@ class JuiciosEvaluativos {
             }); 
     }
     rediredPrendicesDentroFicha(req, res){
+        console.log('rediredPrendicesDentroFicha')
         console.log(req.body)
         res.redirect(`/juicios_evaluativos/asignar_notas/${req.body.id_formacion_da_instructor_ficha}`)
     }
