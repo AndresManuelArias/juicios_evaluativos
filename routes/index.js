@@ -43,6 +43,7 @@ router.post('/asignar_aprendices_fichas',  function(req, res, next) {
     gestion_fichas.asignar_fichas_aprendiz(req, res);
 });
 router.get('/asignar_aprendices_fichas',  function(req, res, next) {
+    console.log("............")
     gestion_fichas.view_asignar_aprendiz_ficha(req, res);
 });
 router.get('/modificar_aprendices_fichas/:id_gestion_ficha_aprendiz',  function(req, res, next) {

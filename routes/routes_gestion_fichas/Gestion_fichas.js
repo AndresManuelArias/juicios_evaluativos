@@ -212,7 +212,9 @@ class Gestion_fichas {
         res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'asignar_aprendiz_fichas' ,respuesta:respuesta,direccion:"/"});
     }
     async view_asignar_aprendiz_ficha(req,res){
-        console.log('view_asignar_aprendiz_ficha')
+        console.log('....................')
+        console.log('.........estevab...........')
+        console.log('....................')
         let fichas=await mysql.con.query(`select * from gestion_de_fichas`)
         console.log('fichas',fichas)
         let perfiles=await mysql.con.query(`select * from administrar_perfil
