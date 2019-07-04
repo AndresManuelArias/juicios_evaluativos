@@ -1,6 +1,6 @@
 extends ../layout.jade
 block contenido
-    form(action="/gestion_perfiles/crear_perfil/:id_usuario" method="post")
+    form(action="/gestion_perfiles/crear_perfil/#{usuarios.Id_usuario}" method="post")
         label id usuario
         input(type="text" name="id_usuario" value="#{usuarios.Id_usuario}" readonly) 
         br
@@ -16,16 +16,13 @@ block contenido
         label tipo de identificacion
         input(type="text" name="tipo_de_identificacion" value="#{usuarios.tipo_de_identificacion}" readonly)
         br
-        label estado del perfil
-        select(name="id_estado_perfil")
-            each e in estado
-                option(value="#{e.id_estado_perfil}")=e.estado_perfil
-        br
-        label rol
-        select(name="id_usuario")
-            each b in rol
-                option(value="#{b.tipo_rol}")=b.tipo_rol)
-        
+        label tipo de perfil
+        select(name="tipo_rol" required)
+                option(value="")
+                option(value="aprendiz") Aprendiz
+                option(value="instructor") Instructor
+        input(type="submit" value="crear")
 
-    
+
+
       

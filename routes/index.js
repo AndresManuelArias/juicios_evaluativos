@@ -39,5 +39,9 @@ router.get('/gestion_perfiles/listar_usuarios_perfil', function (req, res) {
 router.get('/gestion_perfiles/crear_perfil/:id_usuario', function (req, res) {
   gestion_usuarios.vista_crear_perfil(req, res);
 });
+router.post('/gestion_perfiles/crear_perfil/:id_usuario', function (req, res) {
+  gestion_usuarios.crear_perfiles(req, res);
+});
+
 
 module.exports = router;

@@ -19,4 +19,6 @@ block contenido
                         td= usuario.estado_perfil
                         td
                             a(href="/gestion_perfiles/ver_estado_perfil?id_administrar_perfil=#{usuario.id_administrar_perfil}") actualizar
+                            br
+                            a(href="/gestion_perfiles/crear_perfil/#{usuario.id_administrar_perfil}") crear
 
