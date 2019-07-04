@@ -128,7 +128,7 @@ class usuarios{
     }
     async crear_perfiles(req,res){
         console.log(req.body);
-          let resultado=await mysql.con.query('INSERT INTO administrar_perfil  (id_usuario,tipo_rol) VALUES(?,?);',[req.params.Id_usuario,req.body.tipo_rol])
+          let resultado=await mysql.con.query('insert into administrar_perfil (id_usuario,tipo_rol, id_estado_perfil)values(?,?,?);',[req.params.id_usuario,req.body.tipo_rol,1])
         
         console.log(resultado)
         if(resultado.affectedRows){
