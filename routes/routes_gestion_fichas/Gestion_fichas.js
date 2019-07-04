@@ -246,6 +246,17 @@ class Gestion_fichas {
 
         res.render("./view_gestion_aprendiz_ficha/modificar_asignacion_ficha.jade",{ title: 'modificar_aprendiz_fichas' ,fichas,perfiles}); 
     }
+    async listar_aprendices_ficha(req, res, next){
+        let resulTable =  await mysql.con.query(`SELECT * FROM gestion_ficha_aprendiz 
+        LEFT JOIN administrar_perfil ON gestion_ficha_aprendiz.id_administrar_perfil=administrar_perfil.id_administrar_perfil 
+        LEFT JOIN gestion_de_fichas ON 
+        gestion_ficha_aprendiz.id_gestion_fichas=gestion_de_fichas.Id_GestionDeFichas
+         JOIN gestion_de_usuarios ON
+         administrar_perfil.id_usuario=gestion_de_usuarios.Id_usuario`)
+         console.log(resulTable);  
+         res.render("./view_gestion_aprendiz_ficha/listar_asignacion.jade",{ title: 'Listar Usuarios',aprendices:resulTable }) ;
+
+    }     
 }
     
 module.exports = Gestion_fichas;

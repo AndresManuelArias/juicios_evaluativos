@@ -51,5 +51,8 @@ router.get('/modificar_aprendices_fichas/:id_gestion_ficha_aprendiz',  function(
 router.post('/modificar_aprendices_fichas/:id_gestion_ficha_aprendiz',  function(req, res, next) {
     gestion_fichas.modificar_fichas_aprendiz(req, res);
 });
+router.get('/listar_aprendices_ficha',  function(req, res, next) {
+    gestion_fichas.listar_aprendices_ficha(req, res);
+});
 /* aqui inicia la logica de negocio */
 module.exports = router;
