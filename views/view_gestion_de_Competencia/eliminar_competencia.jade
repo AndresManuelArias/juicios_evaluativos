@@ -1,0 +1,16 @@
+- var menu="", crear="",edicion="active";
+
+- var edicionAction = id_programa_formacion !== undefined?"&id_programa_formacion="+id_programa_formacion:""
+
+
+include ./menu.jade
+    - var readonlyCodigo = true
+    - var readonlyNombre = true
+   - var disabledSubmit = false
+   - var titulo ="Eliminar competencia"
+   - var accion = "Eliminar" 
+   - var action = "/gestion_de_competencia?accion=Eliminar"+edicionAction
+   - var nombreAccion = "Eliminar"
+   - var metodo = "POST"
+
+include ./formulario_competencia.jade

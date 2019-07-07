@@ -1,0 +1,83 @@
+extends ../layout.jade
+block contenido
+    table(class="table table-dark")
+        tr
+            td 
+                div(class="w3-container")  
+    
+    button(onclick="document.getElementById('id01').style.display='block'" class="btn btn-info btn-block") crear una cuenta
+    
+    
+    div(id="id01" class="w3-modal")
+        div(class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px")
+        
+            div(class="w3-center") 
+                br
+                span(onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal") x
+                form(class="w3-container" action="envio_de_datos", method="post")
+                        div(class="w3-section")
+                            label()
+                            b tipo identificacion
+                            select(class="w3-input w3-border w3-margin-bottom" type="text" placeholder="tipo identificaion" name="tipo_de_identificacion" required)
+                                option(value="C.C") C.C
+                                option(value="T.I") T.I
+                                option(value="C.E") C.E
+                            label()
+                            b numero de cedula
+                            input(class="w3-input w3-border w3-margin-bottom" onchange="comprobar_identificacion(this.value), validardedula(this.value)" type="text"  placeholder="numero de cedula" name="numero_de_identificacion" required)
+                            p(id="respuesta_identificacion")
+                            p(id='cedula_correcta')       
+                            label()
+                            b nombre 
+                                input(class="w3-input w3-border w3-margin-bottom" type="text" placeholder="nombre " name="nombre_usuario" required)
+                            label()
+                            b correo  sena   
+                                input(class="w3-input w3-border" type="text" placeholder="correo sena"  name="correo_sena"   onchange="comprobar_correo();validarEmail(this.value)" required)
+                            p(id='respuesta_correo')
+                            p(id='correo_correcto')
+                            button(class="btn btn-primary btn-block" type="submit" disabled="true" id="registrarse" ) ingresar
+                div(class="w3-container w3-border-top w3-padding-16 w3-light-grey")                          
+                button(onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red") cancelar
+                span(class="w3-right w3-padding w3-hide-small">Forgot <a href="#")
+
+        tr
+            td 
+            div(class="w3-container")  
+    
+    button(onclick="document.getElementById('id02').style.display='block'" class="btn btn-info btn-block") loguearse
+    
+    
+    div(id="id02" class="w3-modal")
+        div(class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px")
+        
+            div(class="w3-center") 
+                br
+                span(onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal") x
+                form(class="w3-container" action="/buscar_datos", method="post")
+                        div(class="w3-section")
+                            label()
+                            b correo_sena
+                                input(class="w3-input w3-border w3-margin-bottom" onchange="comprobar_correo_de_logueo(),validarEmail1(this.value)" type="text" placeholder="Enter Username" name="correo_sena"  required)
+                                p(id='respuesta_de_correo_de_logueo')
+                                p(id='correo_correcto1')
+
+                            label()
+                            b contraseña     
+                            input(class="w3-input w3-border" type="password" onchange="validardedula1(this.value)" placeholder="Enter Password" name="contrasena"  required)
+                            p(id='cedula_correcta1')
+                            a(href="/recupera_contrasena") olvidaste tu contraseña
+                            button(class="btn btn-primary btn-block" type="submit") ingresar
+                button(onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-button w3-red") cancelar
+                span(class="w3-right w3-padding w3-hide-small">Forgot <a href="#")
+        script(src="/javascripts/logica_de_control_de_acceso/control_de_acceso.js")   
+                      
+
+//-     :script(type="text/javascript")
+                        
+    
+//-     fetch ('/comprobar_correo?correo=j') .then(function(response) {
+//-     return response.json();
+//-   })
+//-   .then(function(myJson) {
+//-     console.log(myJson);
+//-   });

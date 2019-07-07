@@ -1,0 +1,15 @@
+- var menu="", crear="active",edicion=""
+//- include ../menu.jade
+
+form(action="/gestion_de_la_formacion_instructor_ficha/edit" method="POST")
+    div( class="form-group")
+        label(for="") id de gestion de fichas
+    
+    div( class="form-group")
+        input(type="text" name="Id_GestionDeFichas" value="#{gestion_de_fichas.Id_GestionDeFichas}" readonly)
+    
+    div( class="form-group")
+        label ficha 
+    
+    input(type="text" name="Numero_de_ficha" value="#{gestion_de_fichas.Numero_de_ficha}" readonly)
+

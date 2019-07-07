@@ -1,0 +1,17 @@
+
+extends ../layout.jade
+block contenido
+    center
+         div(class="col-xs-4 col-md-4")
+             form.form-signin(action="/enviar_contrasena", method="post")
+                img.mb-4(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKInnO4j96VGh6bqTy6NgaZbdfkTAHhDsQ5jlUYlugPe9o3K0b4w", alt='150', width='200', height='200')
+                h1.h3.mb-3.font-weight-normal correo misena
+                input#inputEmail.form-control(name="correo_de_recuperacion" , type='email', onchange="recuperar_contrasena(this.value)" , placeholder='correo misena', required='', autofocus='')
+                p(id="correo_correcto1")
+                a(href="/contrasena_enviada")
+                    button.btn.btn-lg.btn-primary.btn-block(type='submit') recuperar contraseña
+            
+                
+                h1 https://st.depositphotos.com/1734074/4662/v/950/depositphotos_46622619-stock-illustration-user-man-with-glasses-icon.jpg1
+    script(src="/javascripts/logica_de_control_de_acceso/control_de_acceso.js")
+

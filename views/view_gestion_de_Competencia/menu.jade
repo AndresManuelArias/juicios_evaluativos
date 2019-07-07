@@ -1,0 +1,12 @@
+
+- var direccionProgramaFormacion = id_programa_formacion !== undefined?"id_programa_formacion="+id_programa_formacion:""
+
+- var tituloMenu = "Gestion de Competencia"
+
+- var dirreccionEdicion= "/gestion_de_competencia/edicion_competencias?"+direccionProgramaFormacion
+
+- var dirreccionCrear= "/gestion_de_competencia?accion=Crear&"+ direccionProgramaFormacion
+include ../utilidades_ruta_aprendizaje/menu.jade
+a(href="/gestion_de_programas_de_formacion/edicion_programas_de_formacion"  class="btn btn-outline-secondary")  < Editar programas de formación
+- var agregarATitulo=nombreProgramaFormacion== ""?"":'Programa de formación '+nombreProgramaFormacion;
+p=agregarATitulo

@@ -1,0 +1,16 @@
+- var crear="active",edicion="";
+- var direccionProgramaFormacion =  id_programa_formacion?"id_programa_formacion="+id_programa_formacion:""
+
+include ./menu.jade
+    - var readonlyCodigo = false
+    - var readonlyNombre = false
+   - var disabledSubmit = true
+   - var titulo ="Insertar Resultado de aprendizaje"
+   - var accion = "Crear" 
+   - var action = `/gestion_de_resultado_aprendizaje/${id_gestion_de_competencia}?accion=Crear&${direccionProgramaFormacion}`
+   - var nombreAccion = "registrar resultado de aprendizaje"
+   - var metodo = "POST"
+include ./formulario_resultado_aprendizaje.jade
+//- p El codigo de la competencia es #{id_gestion_de_competencia}
+//- p El codigo del resultado de aprendizaje quedara de la siguiente manera
+//-     p(id="codigoResultado")

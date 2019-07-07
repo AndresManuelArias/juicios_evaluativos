@@ -1,0 +1,39 @@
+- var tituloMenu = "formacion que recibe ficha"
+
+- var menu="active", crear="",edicion=""
+include ./menu.jade
+
+form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas}?accion=Actualizar" method="POST")
+    input(type="hidden", name="accion" value="Actualizar")    
+    
+    div( class="form-group")    
+        label Id formacion que da el instructor:
+        input( class="form-control"  type="text" name='id_formacion_da_instructor_ficha' value="#{id_formacion_da_instructor_ficha}" readonly )
+    div( class="form-group")    
+    
+        label Resultado de aprendizaje <B> #{anteriorFormacion.nombre_resultado_de_aprendizaje} </B> cambiado por:
+        
+        select(class="form-control"  name="id_resultado_de_aprendizaje" required)
+            if cambiar == "instructor"
+                option( value="#{anteriorFormacion.id_resultado_de_aprendizaje}" selected) #{anteriorFormacion.nombre_resultado_de_aprendizaje }           
+            else
+                option( value="" selected) Selecione un resultado de aprendizaje            
+                each resultadoAprendizaje in resultadosAprendizajes
+                    option(value=resultadoAprendizaje.id_resultado_de_aprendizaje)= resultadoAprendizaje.nombre_resultado_de_aprendizaje                
+    div( class="form-group")    
+
+        label(for="") Instructor <B> #{anteriorFormacion.nombre_usuario}</B> cambiado por:
+        br
+        select(class="form-control" name="id_administrar_perfil_instructor" required)
+            if cambiar == "resultado_de_aprendizaje"
+                option( value="#{anteriorFormacion.id_administrar_perfil}" selected) #{anteriorFormacion.nombre_usuario}           
+            else
+                option( value="" selected) Selecione un instructor            
+                each instrutor in instructores
+                    option(value=instrutor.id_administrar_perfil)= instrutor.nombre_usuario 
+    br
+    input(class="btn btn-warning btn-lg btn-block" type="submit", value="Actualizar")
+    p= mensaje
+
+
+

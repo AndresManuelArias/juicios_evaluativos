@@ -1,0 +1,35 @@
+- var menu="", crear="",edicion="active";
+
+include ./menu.jade
+
+input(class="form-control" id="myInput" type="text" placeholder="Search..")
+
+ 
+table(class="table" )
+    thead
+        tr
+            th(scope="col") Instructor 
+            th(scope="col") Resultado de aprendizaje
+            th(scope="col") Numero de ficha
+            th(scope="col") Accion
+    tbody(id="myTable")
+        each formacion in formacionesAsignadas          
+            tr
+                td=formacion.nombre_usuario
+                td=formacion.nombre_resultado_de_aprendizaje
+                td=formacion.Numero_de_ficha
+                td                          
+                    a( class="btn btn-outline-danger" href=`/gestion_de_la_formacion_instructor_ficha/edit/${Id_GestionDeFichas}?accion=Eliminar&id_formacion_da_instructor_ficha=${formacion.id_formacion_da_instructor_ficha}`) Eliminar
+                    div( class="dropdown")
+                        button( class="btn btn-outline-warning dropdown-toggle" type="button" data-toggle="dropdown") Actualizar
+                         span(class="caret")
+                        ul(class="dropdown-menu")
+                            li()
+                                a( class="btn btn-outline-warning" href= `/gestion_de_la_formacion_instructor_ficha/edit/${Id_GestionDeFichas}?accion=Actualizar&id_formacion_da_instructor_ficha=${formacion.id_formacion_da_instructor_ficha}&cambiar=resultado_de_aprendizaje`) Cambiar resultado de aprendizaje
+                            li()                            
+                                a( class="btn btn-outline-warning" href= `/gestion_de_la_formacion_instructor_ficha/edit/${Id_GestionDeFichas}?accion=Actualizar&id_formacion_da_instructor_ficha=${formacion.id_formacion_da_instructor_ficha}&cambiar=instructor`) Cambiar instructor
+                    
+                    //- SE podria hacer dos actualizar uno que permita solo cambiar la formacion y otro que solo permita cambiar el resultado de aprendizaje
+
+
+

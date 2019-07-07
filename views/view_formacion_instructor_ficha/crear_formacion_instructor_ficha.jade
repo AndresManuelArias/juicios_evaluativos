@@ -1,0 +1,33 @@
+- var menu="", crear="active",edicion=""
+include ./menu.jade
+
+form(action="/gestion_de_la_formacion_instructor_ficha/edit/#{Id_GestionDeFichas}?accion=Crear" method="POST")
+    div( class="form-group")    
+        input(type="hidden", name="accion" value="Crear")    
+
+        label Resultado de aprendizaje    
+        select( class="form-control" name="id_resultado_de_aprendizaje" required)
+            if !instructores.length
+                option( value="" selected) Selecione un resultado de aprendizaje            
+            each resultadoAprendizaje in resultadosAprendizajes
+                option(value=resultadoAprendizaje.id_resultado_de_aprendizaje)= resultadoAprendizaje.nombre_resultado_de_aprendizaje                
+    br
+    if !instructores.length
+        div( class="form-group") 
+            input(class="btn btn-secondary btn-lg" type="hidden", value="Asignar instructor", name="accionBoton")        
+            input(class="btn btn-secondary btn-lg" type="submit", value="Asignar instructor")        
+    else 
+        label(for="") Instructores
+        br
+        select(class="form-control" name="id_administrar_perfil_instructor" required)
+            option( value="" selected) Selecione un instructor            
+            each instrutor in instructores
+                option(value=instrutor.id_administrar_perfil)= instrutor.nombre_usuario 
+        br
+        input(class="btn btn-secondary btn-lg" type="hidden", value="Asignar formacion", name="accionBoton")        
+
+        input(class="btn btn-primary btn-lg btn-block" type="submit", value="Asignar formacion", )
+    p= mensaje
+
+
+
