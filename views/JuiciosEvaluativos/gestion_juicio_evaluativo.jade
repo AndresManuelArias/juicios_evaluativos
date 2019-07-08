@@ -1,0 +1,23 @@
+extends ../layout.jade
+block contenido
+    if formacionDa.length
+        a(href="/juicios_evaluativos")    Regresar 
+
+        form(action="/juicios_evaluativos#{id_formacion_da_instructor_ficha?'/asignar_notas/'+id_formacion_da_instructor_ficha:''}", method="post")
+            div(class="form-group")
+                label() Seleccione la ficha 
+                select(class="form-control" name="id_formacion_da_instructor_ficha") 
+                    each da in formacionDa  
+                        option(value="#{da.id_formacion_da_instructor_ficha}") ficha #{da.Numero_de_ficha}  resultado  #{da.nombre_resultado_de_aprendizaje}              
+            if aprendicesDentroFicha.length
+                div(class="form-group")
+                    label() Seleccione el aprendiz
+                    select(name="id_gestion_ficha_aprendiz" class="form-control")    
+                        each aprendiz in aprendicesDentroFicha 
+                            option(value="#{aprendiz.id_gestion_ficha_aprendiz}") #{aprendiz.numero_de_identificacion} #{aprendiz.nombre_usuario} 
+                input(class="btn btn-primary  btn-lg btn-block active" type="submit", value="Asignar juicio evaluativo")
+            else 
+                input(class="btn btn-secondary btn-lg active" type="submit", value="Ver aprendices")
+
+    else    
+        p No tiene fichas asignadas como instructor

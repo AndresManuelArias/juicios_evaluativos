@@ -1,0 +1,38 @@
+extends ../layout.jade
+block contenido
+    a(href="/juicios_evaluativos/asignar_notas/#{params.id_formacion_da_instructor_ficha}") Regresar..
+    h1 asignar juicios 
+    form(action="/juicios_evaluativos/asignar_notas/#{params.id_formacion_da_instructor_ficha}/#{params.id_gestion_ficha_aprendiz}", method="post")
+        input(type="hidden" name="accion" value="#{accion}")
+        if juicioEvaluativoAsignado
+            input(type="hidden" name="id_juicios_evaluativos" value="#{juicioEvaluativoAsignado.id_juicios_evaluativos}")
+        div(class="form-group")
+            label(for="") formacion #{formacionDA.nombre_resultado_de_aprendizaje}
+            input(class="form-control" type="hidden" name="id_resultado_de_aprendizaje"  value="#{formacionDA.id_resultado_de_aprendizaje}" readonly  required )
+        div(class = "form-group")
+            label(for="") Aprendiz #{aprendizDeficha.nombre_usuario} identificado con el numero #{aprendizDeficha.numero_de_identificacion}
+            input(class="form-control" type="hidden" name="id_gestion_ficha_aprendiz" value="#{aprendizDeficha.id_gestion_ficha_aprendiz}" readonly required)
+        div(class= "form-roup")    
+            label(for="") juicios evaluativo
+            select( class= "form-control" name="juicios_evaluativo" required)
+                if juicioEvaluativoAsignado
+                    
+                    if juicioEvaluativoAsignado.juicios_evaluativo ==   "A"          
+                        option(value="A" selected="true" ) Aprobado
+                        option(value="D") Desaprobado       
+                                        
+                    else if juicioEvaluativoAsignado.juicios_evaluativo ==   "D" 
+                        option(value="D" selected="true") Desaprobado   
+                        option(value="A"  ) Aprobado 
+                    else 
+                        option( selected="true" value="" disabled="disabled" ) seleccione un juicio evaluativo 
+                        option(value="A") Aprobado
+                        option(value="D") Desaprobado
+                    
+                else 
+                    option( selected="true" value="" disabled="disabled" ) seleccione un juicio evaluativo 
+                    option(value="A") Aprobado
+                    option(value="D") Desaprobado
+                
+                
+        input( class="btn btn-primary  btn-lg btn-block active" type="submit", value="Asignar juicio evaluativo")

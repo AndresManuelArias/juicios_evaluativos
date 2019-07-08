@@ -1,0 +1,40 @@
+extends ../layout.jade
+block contenido
+    h1 ver calificaciones <br>
+    p El <b>#{aprendiz.tipo_rol}</b> #{aprendiz.nombre_usuario}, de la ficha <b>#{fichaProgramaFormacion.Numero_de_ficha}</b>
+    
+    table(class="table" )
+        thead
+            tr
+                th(scope="col") Resultados de aprendizaje
+                th(scope="col") Cantidad
+        tbody(id="myTable")
+            each juicio,index in resumenJuicios          
+
+                tr
+                    td=index
+                    td=juicio
+
+    p Sus resultados de aprendizaje del programa de formacion #{fichaProgramaFormacion.nombre_programa_formacion} Son: 
+
+    table(class="table" )
+        thead
+            tr
+                th(scope="col") Competencia
+                th(scope="col") Resultado de aprendizaje
+                th(scope="col") juicio
+        tbody(id="myTable")
+            each juicio in juicios          
+                tr
+                    td=juicio.nombre_competencia
+                    td=juicio.nombre_resultado_de_aprendizaje
+                    td
+                        if juicio.juicios_evaluativo == 'A'
+                            div(class="alert alert-success" )=juicio.juicios_evaluativo
+                        else if juicio.juicios_evaluativo  == 'D'
+                            div(class="alert alert-danger" )=juicio.juicios_evaluativo
+                        else    
+                            div(class="alert alert-warning" )=juicio.juicios_evaluativo
+
+              
+
