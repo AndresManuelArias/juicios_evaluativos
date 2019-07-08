@@ -98,6 +98,15 @@ class ModeloJuiciosEvaluativos {
             console.log(juicioAsignado)
             return juicioAsignado;        
       }
+      async verJuiciosEvaluativos(id_resultado_de_aprendizaje){
+        let juicioAsignado  = await mysql.con.query(
+            `  select * from  gestionar_juicios_evaluativos
+            where 
+                gestionar_juicios_evaluativos.id_resultado_de_aprendizaje = ?
+            ;`,[id_resultado_de_aprendizaje]);
+            console.log(juicioAsignado)
+            return juicioAsignado;        
+      }
      async crearJuicioEvaluativo(id_gestion_ficha_aprendiz,
         id_resultado_de_aprendizaje,
         juicios_evaluativo){
@@ -163,10 +172,11 @@ class ModeloJuiciosEvaluativos {
         let juiciosEvaluativos  = await mysql.con.query(
             ` 
             select 
+                gestionar_juicios_evaluativos.id_resultado_de_aprendizaje,
                 gestión_de_competencia.nombre_competencia, gestión_de_resultado_de_aprendizaje.nombre_resultado_de_aprendizaje,  gestionar_juicios_evaluativos.juicios_evaluativo
             from gestionar_juicios_evaluativos
                 join gestión_de_resultado_de_aprendizaje 
-                on gestionar_juicios_evaluativos.id_resultado_de_aprendizaje = gestionar_juicios_evaluativos.id_resultado_de_aprendizaje
+                on gestionar_juicios_evaluativos.id_resultado_de_aprendizaje = gestión_de_resultado_de_aprendizaje.id_resultado_de_aprendizaje
                 join  gestión_de_competencia
                 on gestión_de_competencia.id_gestion_de_competencia = gestión_de_resultado_de_aprendizaje.id_gestion_de_competencia
             where gestionar_juicios_evaluativos.id_gestion_ficha_aprendiz = ?
@@ -187,6 +197,67 @@ class ModeloJuiciosEvaluativos {
             console.log(ficha)
             return ficha[0]; 
     }
+    async consultarRutaAprendizajeDeProgramaFormacion(id_programa_formacion){
+        let ruta  = await mysql.con.query(
+            `select* from gestión_de_resultado_de_aprendizaje
+            join gestión_de_competencia
+            on 
+            gestión_de_competencia.id_gestion_de_competencia = gestión_de_resultado_de_aprendizaje.id_gestion_de_competencia
+            join gestión_de_ruta_de_aprendizaje
+            on
+            gestión_de_ruta_de_aprendizaje.id_gestion_de_competencia = gestión_de_competencia.id_gestion_de_competencia
+            where gestión_de_ruta_de_aprendizaje.id_programa_formacion = ?;`
+        ,[id_programa_formacion]);
+        console.log(ruta)
+        return ruta; 
+    }
+    async verEstadosDeJuiciosEvaluativos(id_gestion_ficha_aprendiz,id_programa_formacion){
+        console.log('verEstadosDeJuiciosEvaluativos(id_gestion_ficha_aprendiz,id_programa_formacion)',id_gestion_ficha_aprendiz,id_programa_formacion)
+        let juiciosVistos =  await this.consultarJuiciosFichasAprendiz(id_gestion_ficha_aprendiz)
+        let ruta =await this.consultarRutaAprendizajeDeProgramaFormacion(id_programa_formacion)
+        return ruta.map((filaRuta)=>{
+            console.log('filaRuta',filaRuta)
+            let juicio =  juiciosVistos.find((filaJuicios)=> filaJuicios.id_resultado_de_aprendizaje == filaRuta.id_resultado_de_aprendizaje)
+            if(juicio == undefined){
+                let { 
+                    id_resultado_de_aprendizaje,
+                    nombre_competencia,
+                    nombre_resultado_de_aprendizaje } = filaRuta
+                juicio = { 
+                    id_resultado_de_aprendizaje,
+                    nombre_competencia,
+                    nombre_resultado_de_aprendizaje,
+                    juicios_evaluativo : 'P' }
+                    
+            }
+            return juicio;
+        })
+    }
+    async verJuiciosVariosAprendices(aprendicesDentroFicha,id_resultado_de_aprendizaje){
+        let juiciosEvaluativos = await this.verJuiciosEvaluativos(id_resultado_de_aprendizaje)
+        return aprendicesDentroFicha.map(( aprendiz)=>{
+            let juicioEvaluativo = juiciosEvaluativos.find(juicio=> juicio.id_gestion_ficha_aprendiz == aprendiz.id_gestion_ficha_aprendiz)
+            console.log('juicioEvaluativo',juicioEvaluativo)
+            if(juicioEvaluativo){
+                aprendiz['juicios_evaluativo'] = juicioEvaluativo['juicios_evaluativo']
+            }else{
+                aprendiz['juicios_evaluativo'] = 'P'
+            }
+            return aprendiz
+        })
+    }
+    verResumenJuicios(juiciosEvaluativos){
+       return verResumenJuicios(juiciosEvaluativos)
+    }
 }
-
+function verResumenJuicios(juiciosEvaluativos){
+    let aprobados = juiciosEvaluativos.filter((fila)=> fila.juicios_evaluativo == "A").length
+    let desaprobados = juiciosEvaluativos.filter((fila)=> fila.juicios_evaluativo == "D").length
+    let pendientes = juiciosEvaluativos.filter((fila)=> fila.juicios_evaluativo == "P").length
+    let total =   juiciosEvaluativos.length;
+    return {aprobados,
+        desaprobados,
+        pendientes,
+        total}
+}
 module.exports = ModeloJuiciosEvaluativos;

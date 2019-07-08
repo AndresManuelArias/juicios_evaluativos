@@ -1,0 +1,32 @@
+extends ../layout.jade
+block contenido
+    if formacionDa.length
+        a(href="/juicios_evaluativos")    Regresar 
+
+
+        div(class="form-group")
+            label() La ficha: <b> #{formacionDa[0].Numero_de_ficha}</b>, con resultado de aprendizaje: <b>  #{formacionDa[0].nombre_resultado_de_aprendizaje}  </b>            
+                       
+        table(class="table" )
+            thead
+                tr
+                    th(scope="col") Numero de identidad
+                    th(scope="col") Aprendiz
+                    th(scope="col") Juicio
+                    th(scope="col") Accion                    
+
+            tbody(id="myTable")
+                each aprendiz in aprendicesDentroFicha   
+                    tr
+                        td #{aprendiz.numero_de_identificacion}
+                        td #{aprendiz.nombre_usuario}  
+                        if aprendiz.juicios_evaluativo == 'A'
+                            td(class="alert alert-success" role="alert") Aprobado
+                        else if aprendiz.juicios_evaluativo == 'D'
+                            td(class="alert alert-danger" role="alert") Desaprobado
+                        else if aprendiz.juicios_evaluativo == 'P'
+                            td(class="alert alert-warning" role="alert") Pendiente
+                        td 
+                            a(href="/juicios_evaluativos/asignar_notas/#{formacionDa[0].id_formacion_da_instructor_ficha}/#{aprendiz.id_gestion_ficha_aprendiz}") Asignar juicio
+    else    
+        p No tiene fichas asignadas como instructor
