@@ -93,6 +93,7 @@ CREATE TABLE administrar_perfil (
   id_usuario int DEFAULT NULL,
   tipo_rol varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   id_estado_perfil int,
+	UNIQUE(tipo_rol,id_usuario),
     PRIMARY KEY( id_administrar_perfil),
 	FOREIGN key (id_estado_perfil) REFERENCES estado_perfil(id_estado_perfil) on DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN key (id_usuario) REFERENCES gestion_de_usuarios(id_usuario) on DELETE CASCADE ON UPDATE CASCADE
