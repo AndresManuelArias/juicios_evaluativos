@@ -233,7 +233,6 @@ class ModeloJuiciosEvaluativos {
             return juicio;
         })
     }
-<<<<<<< HEAD
     async verJuiciosVariosAprendices(aprendicesDentroFicha,id_resultado_de_aprendizaje){
         let juiciosEvaluativos = await this.verJuiciosEvaluativos(id_resultado_de_aprendizaje)
         return aprendicesDentroFicha.map(( aprendiz)=>{
@@ -247,8 +246,6 @@ class ModeloJuiciosEvaluativos {
             return aprendiz
         })
     }
-=======
->>>>>>> 35d75b26d3d86279222b25e140ef812c6385e40d
     verResumenJuicios(juiciosEvaluativos){
        return verResumenJuicios(juiciosEvaluativos)
     }
