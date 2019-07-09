@@ -300,5 +300,9 @@ router.get('/gestion_perfiles/listar_usuarios_perfil',clasesGestionUsuarios.perm
 router.get('/gestion_perfiles/crear_perfil/:id_usuario',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
   gestion_usuarios.vista_crear_perfil(req, res);
 });
+router.post('/gestion_perfiles/crear_perfil/:id_usuario', function (req, res) {
+  gestion_usuarios.crear_perfiles(req, res);
+});
+
 
 module.exports = router;

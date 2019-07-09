@@ -9,6 +9,7 @@ block contenido
                     th correro sena 
                     th numero de identificacion
                     th tipo de identificacion
+                    th crear perfil
                 
             tbody
                 each usuario in usuarios 
@@ -18,4 +19,5 @@ block contenido
                         td= usuario.correo_sena
                         td= usuario.numero_de_identificacion
                         td= usuario.tipo_de_identificacion
-                
+                        td
+                            a(href="/gestion_perfiles/crear_perfil/#{usuario.Id_usuario}") crear

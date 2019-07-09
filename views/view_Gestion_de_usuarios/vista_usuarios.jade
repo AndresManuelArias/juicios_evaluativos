@@ -8,6 +8,7 @@ block contenido
                     th numero identificacion
                     th tipo documento 
                     th estado
+                    th rol
                     th accion
                 
             tbody
@@ -17,6 +18,9 @@ block contenido
                         td= usuario.numero_de_identificacion
                         td= usuario.tipo_de_identificacion
                         td= usuario.estado_perfil
+                        td= usuario.tipo_rol
                         td
                             a(href="/gestion_perfiles/ver_estado_perfil?id_administrar_perfil=#{usuario.id_administrar_perfil}") actualizar
+                            br
+                            a(href="/gestion_perfiles/crear_perfil/#{usuario.id_usuario}") crear
 

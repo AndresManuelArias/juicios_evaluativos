@@ -119,11 +119,25 @@ class usuarios{
 
     async vista_crear_perfil(req,res){
         console.log(req.query)
+        console.log(" Esta es la lista para crear el perfil")
         let usuarios=await mysql.con.query("select*from gestion_de_usuarios where id_usuario=?;",[req.params.id_usuario]);
         let estado=await mysql.con.query("select *from estado_perfil",[req.params.id_usuario]);
         let rol=await mysql.con.query("select tipo_rol,id_usuario from administrar_perfil where id_administrar_perfil=?",[req.params.id_usuario]);
         console.log(usuarios,estado,rol);
         res.render('view_Gestion_de_usuarios/vista_crear_perfil.jade', { title: 'perfiles' ,usuarios:usuarios[0],estado:estado});
+    }
+    async crear_perfiles(req,res){
+        console.log(req.body);
+          let resultado=await mysql.con.query('insert into administrar_perfil (id_usuario,tipo_rol, id_estado_perfil)values(?,?,?);',[req.params.id_usuario,req.body.tipo_rol,1])
+        
+        console.log(resultado)
+        if(resultado.affectedRows){
+            res.render('view_Gestion_de_usuarios/vista_alert.jade', { title: 'perfiles' , respuestaUsuario:'perfil asignado correctamente'});
+
+        }else {
+            res.render('view_Gestion_de_usuarios/vista_alert.jade', { title: 'perfiles' , respuestaUsuario:' arror al asignar el perfil'});
+
+        }
     }
 } 
 
