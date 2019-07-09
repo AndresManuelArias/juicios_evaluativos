@@ -1,0 +1,21 @@
+
+extends ../layout.jade
+block contenido
+ body()
+   
+    table(class='table table-dark table-hover' )
+        tr 
+            th ID
+            th NOMBRE
+            th ROL
+            th FICHA
+
+            each element in aprendices
+                tr
+                    th= element.id_usuario
+                    th= element.nombre_usuario
+                    th=element.tipo_rol
+                    th=element.Numero_de_ficha
+                    th
+                       a( class="badge badge-info" href="modificar_aprendices_fichas/#{element.id_usuario}") Modificar 
+                       a(class="badge badge-success" href="asignar_aprendices_fichas") Crear

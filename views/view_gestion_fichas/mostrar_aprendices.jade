@@ -1,0 +1,27 @@
+
+extends ../layout.jade
+block contenido
+ body()
+    h1 hola
+   
+    table(class='table table-dark table-hover' )
+        tr 
+            th ID
+            th NOMBRE
+            th DOCUMENTO
+            th CORREO_ELECTRONICO d
+            th TIPO DE DOCUMENTO
+            th ROL
+            th FICHA
+            th PROGRAMA
+
+            each element in aprendices
+                tr
+                    th= element.id_usuario
+                    th= element.nombre_usuario
+                    th= element.numero_de_identificacion
+                    th= element.correo_sena
+                    th=element.tipo_de_identificacion
+                    th=element.tipo_rol
+                    th=element.Numero_de_ficha
+                    th=element.Sigla_progr_Acade

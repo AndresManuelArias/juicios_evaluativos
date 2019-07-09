@@ -1,4 +1,6 @@
 var mysql = require('../../dataBase/conexion.js');
+//https://expressjs.com/es/starter/generator.html
+//set DEBUG=myapp:* & npm start
 class Ejemplo {
     async metodo(req, res, next) {
         var usuarios = await mysql.con.query("SELECT * FROM gestion_de_usuarios");

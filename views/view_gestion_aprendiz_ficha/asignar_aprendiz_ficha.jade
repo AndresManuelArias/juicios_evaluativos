@@ -1,0 +1,22 @@
+extends ../layout.jade
+block contenido
+ body()
+    form(action="/asignar_aprendices_fichas" method="post")
+        h1 ASIGNAR APRENDIZ A UNA FICHA
+        
+        label numero de ficha
+        
+        div(class="form-group")
+            label fichas
+            select(name="Id_GestionDeFichas")
+                each ficha in fichas
+                    option(value="#{ficha.Id_GestionDeFichas}")= ficha.Numero_de_ficha
+
+        div(class="form-group")
+            label aprendiz
+            select(name="id_administrar_perfil")
+                each perfil in perfiles
+                    option(value="#{perfil.id_administrar_perfil}")= perfil.nombre_usuario +' ' +perfil.numero_de_identificacion
+
+
+        input(class="btn btn-success btn-lg btn-block",type="submit", value="enviar")

@@ -1,0 +1,23 @@
+
+extends ../layout.jade
+block contenido
+
+    h1 LISTADO DE USUARIOS
+    table(border="2")
+        tr  
+            th ID
+            th NOMBRE
+            th DOCUMENTO
+            th CORREO_ELECTRONICO
+            th TIPO DE DOCUMENTO
+            th ROL
+        each usuario in usuarios
+            tr 
+                td= usuario.id_usuario
+                td= usuario.nombre_usuario
+                td= usuario.numero_de_identificacion 
+                td= usuario.correo_sena
+                td= usuario.tipo_de_identificacion
+                td= usuario.tipo_rol
+
+    
