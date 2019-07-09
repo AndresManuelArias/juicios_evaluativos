@@ -12,7 +12,7 @@ block contenido
                 center
                     a(class="dropdown-item a" href="#" ) #{correoSena}    
     form(action="/borrarSesion"  method="post")                        
-        button( class="cerrar btn btn-danger cerrar" title="cerrar sesion"  style="border-radius:100px; font.size:25px;" type="submit" onclick='if (! confirm("esta seguro de cerrar la cesion")) return false;' ) 
+        button( class="cerrar btn btn-danger cerrar" title="Cerrar sesión"  style="border-radius:100px; font.size:25px;" type="submit" onclick='if (! confirm("esta seguro de Cerrar sesión")) return false;' ) 
                 ion-icon(name="logo-xbox")        
     //- center
     //-     div(style="color:green;pading:100px;; "  )
@@ -45,7 +45,13 @@ block contenido
             a(href="/gestion_de_competencia/edicion_competencias" class="btn btn-primary") Edicion de competencias
             a(href="/gestion_de_ruta_de_aprendizaje" class="btn btn-primary") Edicion de ruta de aprendizaje
             a(href="/gestion_de_la_formacion_instructor_ficha" class="btn btn-primary") Asignar formacion a ficha
-            a(href="/gestion_perfiles/usuarios" class="btn btn-primary") Gestionar perfiles
-    
+            
+            div( class="dropdown")
+                button( class="btn btn-primary" type="button" data-toggle="dropdown") Gestionar perfiles
+                    span(class="caret")
+                ul(class="dropdown-menu")
+                    li()
+                        a(  class="btn btn-outline-warning"  href="/gestion_perfiles/listar_usuarios_perfil" class="btn btn-primary") Crear un perfil al usuario
+                        a( class="btn btn-outline-warning" href="/gestion_perfiles/usuarios" class="btn btn-primary") Gestionar perfiles
     
 scribrpt(src="/javascripts/logica_de_control_de_acceso/gestionUsuarios.js")
