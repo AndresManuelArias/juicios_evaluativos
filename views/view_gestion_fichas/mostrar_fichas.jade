@@ -1,0 +1,19 @@
+extends ../layout.jade
+block contenido
+
+    h1 LISTADO DE FICHAS
+    table(border="1" class="table")
+        thead( class="thead-dark")
+            tr 
+                th ID
+                th NUMERO
+                th PROGRAMA
+                th accion
+        tbody
+            each element in fichas
+                tr
+                    td= element.Id_GestionDeFichas
+                    td= element.Numero_de_ficha
+                    td= element.nombre_programa_formacion
+                    td 
+                        a( class="badge badge-info" href="modificar_fichas/#{element.Numero_de_ficha}") modificar       

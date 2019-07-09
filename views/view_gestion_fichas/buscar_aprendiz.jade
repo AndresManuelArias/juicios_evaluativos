@@ -1,0 +1,15 @@
+
+extends ../layout.jade
+block contenido
+
+    h1 hola
+   
+    form(action="/mostrar_aprendices_ficha" method="GET")
+        h1 BUSQUEDA DE APRENDICES
+        select( name="numero_de_ficha")
+            option( value="seleccionar ficha")
+                each fichas in buscar
+                    option= fichas.Numero_de_ficha
+
+        input(type="search" name="nombre_de_usuario" placeholder="Nombre Aprendiz..." value="")
+        input( type="submit" value="BUSCAR")

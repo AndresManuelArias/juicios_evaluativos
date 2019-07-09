@@ -1,0 +1,19 @@
+extends ../layout.jade
+block contenido
+ body()
+    form(action="/modificar_fichas/#{modificar_fichas.Numero_de_ficha}" method="post")
+        h1 MODIFICAR FICHAS
+        
+        label numero de ficha #{modificar_fichas.Numero_de_ficha}
+        
+        div(class="form-group")
+            label id gestion de ficha 
+            
+            input(class="form-control" ,type="text", name="id_GestionDeFichas" value="#{modificar_fichas.id_GestionDeFichas}" readonly)
+
+        select(class="form-control form-control-lg",name="id_programa_formacion")
+            each programas in programaFormacion
+                option(value="#{programas.id_programa_formacion}")= programas.nombre_programa_formacion
+
+
+        input(class="btn btn-success btn-lg btn-block",type="submit", value="enviar")
