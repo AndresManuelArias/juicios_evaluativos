@@ -74,6 +74,17 @@ router.get("/contrasena_enviada", function (req, res) {
 
     console.log("sale")
 });
+router.get('/ejemplo',  (req,res,next)=>{
+    res.locals.options = {
+        chGlobal : {// this is the object i want to be a global
+            "perfil" : "invitado"
+        }
+    };
+    next();
+}, function(req, res, next) {
+    ejemplo.metodo(req, res);
+});
+
 
 router.get("/prueba", function (req,res) {
 
