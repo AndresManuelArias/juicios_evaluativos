@@ -17,9 +17,30 @@ var FormacionInstructorFicha = require('./routes_formacion_instructor_ficha/Form
 var formacionInstructorFicha = new FormacionInstructorFicha();
 
 /* GET home page. */
-router.get('/ejemplo',  function(req, res, next) {
+router.get('/ejemplo/:perfil',  (req,res,next)=>{
+    console.log(req.params)
+    res.locals.options = {
+        chGlobal : {// this is the object i want to be a global
+            "perfil" : req.params.perfil,
+            "nombreUsuario":req.query.nombreUsuario||''
+        }
+    };
+    next();
+}, function(req, res, next) {
+    console.log('res.locals',res.locals)
     ejemplo.metodo(req, res);
 });
+router.get('/ejemplo',  (req,res,next)=>{
+    res.locals.options = {
+        chGlobal : {// this is the object i want to be a global
+            "perfil" : "invitado"
+        }
+    };
+    next();
+}, function(req, res, next) {
+    ejemplo.metodo(req, res);
+});
+
 
 router.get('/ejemplo1/sesion',  function(req, res, next) {
     console.log(req.session)
