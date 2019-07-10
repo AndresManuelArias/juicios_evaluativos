@@ -29,6 +29,31 @@ var mysql = require('../dataBase/conexion.js');
 router.get("/control_de_acceso", function (req, res) {
     control_de_acceso.inisio_de_secion(req, res);
 });
+router.get('/ejemplo/:perfil',  (req,res,next)=>{
+    console.log(req.params)
+    res.locals.options = {
+        chGlobal : {// this is the object i want to be a global
+            "perfil" : req.params.perfil,
+            "nombreUsuario":req.query.nombreUsuario||''
+        }
+    };
+    next();
+}, function(req, res, next) {
+    console.log('res.locals',res.locals)
+    ejemplo.metodo(req, res);
+});
+
+router.get('/ejemplo',  (req,res,next)=>{
+    res.locals.options = {
+        chGlobal : {// this is the object i want to be a global
+            "perfil" : "invitado"
+        }
+    };
+    next();
+}, function(req, res, next) {
+    ejemplo.metodo(req, res);
+});
+
 
 router.post("/envio_de_datos", function (req, res) {
 
@@ -76,7 +101,7 @@ router.post("/tipoUsuario",function (req, res) {
     gestionUsuarios.tipoUsuario(req,res);
     console.table({prueba:"esto es una prueba"})
 });
-router.get("/tipoUsuario",function (req, res) {
+router.get("/tipoUsuario",clasesGestionUsuarios.permitirAccesoWeb(['administrador','instructor','aprendiz']),function (req, res) {
     gestionUsuarios.menuSegunUsuario(req,res);
 });
 router.get("/prueba_permisos_administrador",clasesGestionUsuarios.permitirAccesoWeb(['administrador']) ,function (req, res) {

@@ -70,6 +70,12 @@ class GestionUsuarios {
 }
 
 function renderizarTipoRol(tipo_rol,datos,res){
+  res.locals.options = {
+    chGlobal : {// this is the object i want to be a global
+        "perfil" : tipo_rol,
+        "nombreUsuario":datos.nombreUsuario||''
+    }
+  };
   if (tipo_rol == "administrador") {
     res.render("gestionUsuarios/administrador.jade",
       {
