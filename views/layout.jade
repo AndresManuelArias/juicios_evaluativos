@@ -14,7 +14,7 @@ html(lang="en")
         title= title                              
     body(onload=onload ? "myFunction()":"" )
         if locals.options
-            if locals.options.chGlobal.perfil == 'admistrador'
+            if locals.options.chGlobal.perfil == 'administrador'
                 nav(class="navbar navbar-expand-sm bg-dark navbar-dark") 
                     div( class="container-fluid")
                         div(div class="navbar-header") 
@@ -93,12 +93,24 @@ html(lang="en")
                                     button(  title="cerrar sesion"  style="border-radius:100px; font.size:25px;" type="submit" onclick='if (! confirm("esta seguro de cerrar la sesion")) return false;' ) 
                                         ion-icon(name="log-out")
             else 
-                nav(class="navbar navbar-light bg-secondary")   
-                     div( class="container-fluid")
+                nav(class="navbar navbar-expand-sm navbar-dark  bg-secondary")   
+                    div( class="container-fluid")
                         div(div class="navbar-header") 
                             p(class="navbar-brand" )  
-                                ion-icon(size="large" name="walk" width="30" height="30")
-                                | Visitante
+                                ion-icon(size="large" name="people" width="30" height="30")
+                                | Seleccionar perfil
+
+                        ul( class="navbar-nav")
+                        
+                        ul( class="nav navbar-nav navbar-right ")
+                            li
+                                p( class="navbar-brand")
+                                  ion-icon( name="person")
+                                  | #{locals.options.chGlobal.nombreUsuario}
+                            li
+                                form(action="/borrarSesion"  method="post")                        
+                                    button(  title="cerrar sesion"  style="border-radius:100px; font.size:25px;" type="submit" onclick='if (! confirm("esta seguro de cerrar la sesion")) return false;' ) 
+                                        ion-icon(name="log-out")
         else
             nav(class="navbar navbar-light bg-secondary")   
                div( class="container-fluid")
