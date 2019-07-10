@@ -174,22 +174,22 @@ router.post('/gestion_de_resultado_aprendizaje/:id_gestion_de_competencia', clas
 
 // juicios evaluativos
 // provisional
-router.get('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
-    juiciosEvaluativos.vistaSeleccionarInstructor(req, res);
-  })
-  router.post('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
-    juiciosEvaluativos.seleccionarInstructor(req, res);
-  })
+// router.get('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
+//     juiciosEvaluativos.vistaSeleccionarInstructor(req, res);
+//   })
+//   router.post('/juicios_evaluativos/seleccionar_instructor',  function(req, res, next) {
+//     juiciosEvaluativos.seleccionarInstructor(req, res);
+//   })
   
-  router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
-    juiciosEvaluativos.seleccionarAprendiz(req, res);
-  })
-  router.get('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
-    juiciosEvaluativos.vistaSeleccionarAprendiz(req, res);
-  })
-  router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
-    juiciosEvaluativos.seleccionarAprendiz(req, res);
-  })
+//   router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+//     juiciosEvaluativos.seleccionarAprendiz(req, res);
+//   })
+//   router.get('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+//     juiciosEvaluativos.vistaSeleccionarAprendiz(req, res);
+//   })
+//   router.post('/juicios_evaluativos/seleccionar_aprendiz',  function(req, res, next) {
+//     juiciosEvaluativos.seleccionarAprendiz(req, res);
+//   })
 router.get('/juicios_evaluativos',clasesGestionUsuarios.permitirAccesoWeb(['instructor']),  function(req, res, next) {
   juiciosEvaluativos.viewfichasDeInstructor(req, res);
 })
@@ -209,13 +209,13 @@ router.get('/juicios_evaluativos/asignar_notas/:id_formacion_da_instructor_ficha
 router.post('/juicios_evaluativos/asignar_notas/:id_formacion_da_instructor_ficha/:id_gestion_ficha_aprendiz',clasesGestionUsuarios.permitirAccesoWeb(['instructor']),  function(req, res, next) {
   juiciosEvaluativos.asignarJuicioEvaluativo(req, res);
 })
-router.get('/juicios_evaluativos/ver_mis_notas',  function(req, res, next) {
+router.get('/juicios_evaluativos/ver_mis_notas',clasesGestionUsuarios.permitirAccesoWeb(['aprendiz']),  function(req, res, next) {
   juiciosEvaluativos.viewFichasAprendiz(req, res);
 })
-router.post('/juicios_evaluativos/ver_mis_notas',  function(req, res, next) {
+router.post('/juicios_evaluativos/ver_mis_notas',clasesGestionUsuarios.permitirAccesoWeb(['aprendiz']),  function(req, res, next) {
   juiciosEvaluativos.rediredJuiciosDeAprendiz(req, res);
 })
-router.get('/juicios_evaluativos/ver_mis_notas/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+router.get('/juicios_evaluativos/ver_mis_notas/:id_gestion_ficha_aprendiz', clasesGestionUsuarios.permitirAccesoWeb(['aprendiz']), function(req, res, next) {
   juiciosEvaluativos.viewJuiciosDeAprendiz(req, res);
 })
 // router.get('/juicios_evaluativos/:id_gestion_ficha_aprendiz',  function(req, res, next) {
@@ -311,57 +311,57 @@ router.get('/gestion_perfiles/listar_usuarios_perfil',clasesGestionUsuarios.perm
 router.get('/gestion_perfiles/crear_perfil/:id_usuario',clasesGestionUsuarios.permitirAccesoWeb(['administrador']),  function (req, res) {
   gestion_usuarios.vista_crear_perfil(req, res);
 });
-router.post('/gestion_perfiles/crear_perfil/:id_usuario', function (req, res) {
+router.post('/gestion_perfiles/crear_perfil/:id_usuario',clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function (req, res) {
   gestion_usuarios.crear_perfiles(req, res);
 });
 
 
 /* gestion de fichas */
 
-router.get('/mostrar_usuario',  function(req, res, next) {
+router.get('/mostrar_usuario', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.mostar_usuarios(req, res);
 });
-router.get('/mostrar_aprendices_ficha',  function(req, res, next) {
+router.get('/mostrar_aprendices_ficha', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.mostrar_aprendices_ficha(req, res);
 });
-router.get('/asignar_aprendices',  function(req, res, next) {
+router.get('/asignar_aprendices', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.asignar_aprendices(req, res);
 });
-router.get('/post_asignar_aprendices',  function(req, res, next) {
+router.get('/post_asignar_aprendices', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.post_asignar_aprendices(req, res);
 });
-router.get('/buscar_aprendiz',  function(req, res, next) {
+router.get('/buscar_aprendiz', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.buscar_aprendiz(req, res);
 });
-router.get('/mostrar_fichas',  function(req, res, next) {
+router.get('/mostrar_fichas', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.mostrar_fichas(req, res);
 });
-router.get('/modificar_fichas/:Numero_de_ficha',  function(req, res, next) {
+router.get('/modificar_fichas/:Numero_de_ficha', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.vista_modificar_fichas(req, res);
 });
-router.get('/crear_fichas',  function(req, res, next) {
+router.get('/crear_fichas', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.vista_crear_fichas(req, res);
 });
-router.post('/crear_fichas',  function(req, res, next) {
+router.post('/crear_fichas', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.crear_fichas(req, res);
 });
-router.post('/modificar_fichas/:Numero_de_ficha',  function(req, res, next) {
+router.post('/modificar_fichas/:Numero_de_ficha', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.modificar_fichas(req, res);
 });
-router.post('/asignar_aprendices_fichas',  function(req, res, next) {
+router.post('/asignar_aprendices_fichas', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.asignar_fichas_aprendiz(req, res);
 });
-router.get('/asignar_aprendices_fichas',  function(req, res, next) {
+router.get('/asignar_aprendices_fichas', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     console.log("............")
     gestion_fichas.view_asignar_aprendiz_ficha(req, res);
 });
-router.get('/modificar_aprendices_fichas/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+router.get('/modificar_aprendices_fichas/:id_gestion_ficha_aprendiz', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.view_modificar_aprendiz_ficha(req, res);
 });
-router.post('/modificar_aprendices_fichas/:id_gestion_ficha_aprendiz',  function(req, res, next) {
+router.post('/modificar_aprendices_fichas/:id_gestion_ficha_aprendiz', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.modificar_fichas_aprendiz(req, res);
 });
-router.get('/listar_aprendices_ficha',  function(req, res, next) {
+router.get('/listar_aprendices_ficha', clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function(req, res, next) {
     gestion_fichas.listar_aprendices_ficha(req, res);
 });
 /* aqui inicia la logica de negocio */
