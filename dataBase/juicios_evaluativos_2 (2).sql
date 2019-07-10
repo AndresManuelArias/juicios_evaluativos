@@ -33,7 +33,7 @@ CREATE TABLE control_de_acceso (
  
 CREATE TABLE gestion_programa_formacion (
     id_programa_formacion INT not null AUTO_INCREMENT,
-    nombre_programa_formacion VARCHAR(250),
+    nombre_programa_formacion VARCHAR(250) NOT NULL,
     duracion_programa_academico   int,
     versión_programa_formacion int,
     UNIQUE(nombre_programa_formacion,versión_programa_formacion),
@@ -49,7 +49,7 @@ CREATE TABLE gestión_de_competencia (
  
 CREATE TABLE gestión_de_resultado_de_aprendizaje (
     id_resultado_de_aprendizaje BIGINT  not null,
-    id_gestion_de_competencia          BIGINT,
+    id_gestion_de_competencia          BIGINT NOT NULL,
     nombre_resultado_de_aprendizaje TEXT not null,
     PRIMARY key(id_resultado_de_aprendizaje),
     FOREIGN key(id_gestion_de_competencia) REFERENCES gestión_de_competencia(id_gestion_de_competencia) on DELETE CASCADE ON UPDATE CASCADE   
@@ -58,8 +58,8 @@ CREATE TABLE gestión_de_resultado_de_aprendizaje (
 
 CREATE TABLE gestión_de_ruta_de_aprendizaje (
     id_ruta_aprendizaje    INT  not null AUTO_INCREMENT,
-    id_programa_formacion    INT,
-    id_gestion_de_competencia         BIGINT,
+    id_programa_formacion    INT NOT NULL,
+    id_gestion_de_competencia         BIGINT NOT NULL,
     UNIQUE(id_programa_formacion,id_gestion_de_competencia),
 
     PRIMARY key(id_ruta_aprendizaje),
@@ -73,7 +73,7 @@ CREATE TABLE gestión_de_ruta_de_aprendizaje (
 CREATE TABLE gestion_de_fichas (
   Id_GestionDeFichas int AUTO_INCREMENT,
   Numero_de_ficha int NOT NULL,
-  id_programa_formacion INT ,
+  id_programa_formacion INT NOT NULL ,
   fecha_inicio DATE,
   fecha_final DATE,
   UNIQUE(Numero_de_ficha),
@@ -90,8 +90,8 @@ CREATE TABLE gestion_de_fichas (
 -- JAMES---
 CREATE TABLE administrar_perfil (
   id_administrar_perfil int NOT NULL AUTO_INCREMENT,
-  id_usuario int DEFAULT NULL,
-  tipo_rol varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  id_usuario int  NOT NULL,
+  tipo_rol varchar(20)  COLLATE utf8_unicode_ci DEFAULT NULL,
   id_estado_perfil int,
 	UNIQUE(tipo_rol,id_usuario),
     PRIMARY KEY( id_administrar_perfil),
@@ -102,8 +102,8 @@ CREATE TABLE administrar_perfil (
  
 CREATE TABLE gestion_ficha_aprendiz (
     id_gestion_ficha_aprendiz int NOT null UNIQUE AUTO_INCREMENT,
-    id_gestion_fichas int,
-    id_administrar_perfil int,
+    id_gestion_fichas int NOT NULL,
+    id_administrar_perfil int NOT NULL,
     UNIQUE(id_gestion_fichas,id_administrar_perfil),
     PRIMARY KEY(id_gestion_ficha_aprendiz),
     FOREIGN key(id_administrar_perfil) REFERENCES administrar_perfil(id_administrar_perfil) on DELETE CASCADE ON UPDATE CASCADE,
@@ -125,9 +125,9 @@ CREATE TABLE formacion_da_instructor_ficha (
 -- Andres Arias
 CREATE TABLE gestionar_juicios_evaluativos ( 
     id_juicios_evaluativos int NOT NULL AUTO_INCREMENT,
-    id_gestion_ficha_aprendiz int,
-    id_resultado_de_aprendizaje BIGINT,
-    juicios_evaluativo CHAR(1),
+    id_gestion_ficha_aprendiz int NOT NULL,
+    id_resultado_de_aprendizaje BIGINT NOT NULL,
+    juicios_evaluativo CHAR(1) NOT NULL,
 	UNIQUE(id_gestion_ficha_aprendiz,id_resultado_de_aprendizaje),
     PRIMARY KEY( id_juicios_evaluativos),
     FOREIGN key (id_gestion_ficha_aprendiz) REFERENCES gestion_ficha_aprendiz(id_gestion_ficha_aprendiz) on DELETE CASCADE ON UPDATE CASCADE,
