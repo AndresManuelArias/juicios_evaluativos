@@ -6,14 +6,7 @@ block contenido
         label
             a(href="/paginaPrincipal") inicio/ 
             label instructor 
-        button(class="button btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{nombreUsuario}
-            div(class="dropdown-menu col-lg-12 bg-dark"  aria-labelledby="dropdownMenuButton") 
-                center
-                    a(class="dropdown-item a" href="#" ) #{correoSena}   
-                    
-    form(action="/borrarSesion"  method="post")                        
-        button( class="cerrar btn btn-danger cerrar" title="cerrar sesion"  style="border-radius:100px; font.size:25px;" type="submit" onclick='if (! confirm("esta seguro de cerrar la cesion")) return false;' ) 
-                ion-icon(name="logo-xbox")        
+    
     //- center
     //-     div(style="color:green;pading:100px;; "  )
     //-           p     Hola creo que asi 

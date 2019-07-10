@@ -20,8 +20,19 @@ function permitirAccesoWeb(  arrayPerfilesEntran) {
   return async function (req, res,next){
     console.log('req.session.rol',req.session.rol)
     if(req.session.rol){
-      let rol = await mysql.con.query("select*from administrar_perfil where administrar_perfil.id_administrar_perfil = ?",[req.session.rol]);
+      let rol = await mysql.con.query(`
+        select*from administrar_perfil
+          join gestion_de_usuarios
+            on gestion_de_usuarios.Id_usuario = administrar_perfil.id_usuario     
+        where administrar_perfil.id_administrar_perfil = ?
+      `,[req.session.rol]);
       console.log(rol[0])
+      res.locals.options = {
+        chGlobal : {// this is the object i want to be a global
+            "perfil" : rol[0].tipo_rol,
+            "nombreUsuario":rol[0].nombre_usuario||''
+        }
+      };
       if (darPermisosAlUsuario(arrayPerfilesEntran, rol[0].tipo_rol)) {
         next();
       }

@@ -70,6 +70,12 @@ class Control_de_acceso {
             // console.log(req.cookie.expires);
             // console.log( req.session.expires);
             // console.log("+++++++++++++++++++++++");
+            res.locals.options = {
+                chGlobal : {// this is the object i want to be a global
+                    "perfil" : '',
+                    "nombreUsuario":conGestionUsuarios[0].nombre_usuario||''
+                }
+              };
             res.redirect("/paginaPrincipal");
 
         }
@@ -169,6 +175,12 @@ console.log(req.session.datos[0].Id_usuario)
             correo: req.session.datos[0].correo_sena
         }
         console.log(req.session.datos[0].nombre_usuario + ` + ` + req.session.datos[0].Id_usuario)
+        res.locals.options = {
+            chGlobal : {// this is the object i want to be a global
+                "perfil" : '',
+                "nombreUsuario":datosUsuario.nombre||''
+            }
+          };
         res.render("gestionUsuarios/gestionUsuarios.jade", {
             nombre: datosUsuario.nombre,
             id: datosUsuario.id,
