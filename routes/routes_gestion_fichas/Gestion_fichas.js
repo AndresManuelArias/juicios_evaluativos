@@ -219,7 +219,7 @@ class Gestion_fichas {
         console.log('fichas',fichas)
         let perfiles=await mysql.con.query(`select * from administrar_perfil
         inner join gestion_de_usuarios
-        on gestion_de_usuarios.id_usuario=administrar_perfil.id_usuario`)
+        on gestion_de_usuarios.id_usuario=administrar_perfil.id_usuario where tipo_rol = 'aprendiz'`)
         console.log('perfiles',perfiles)
 
         res.render("./view_gestion_aprendiz_ficha/asignar_aprendiz_ficha.jade",{ title: 'asignar_aprendiz_fichas' ,fichas,perfiles}); 
