@@ -73,6 +73,7 @@ class Modelo_FormacionInstrutorFicha {
     } 
     async resultadosAprendizajeProgramaFormacionNoVistos(id_programa_formacion,Id_GestionDeFichas){
         return await  mysql.con.query(`
+
         select
         gestión_de_ruta_de_aprendizaje.id_ruta_aprendizaje,
         gestión_de_ruta_de_aprendizaje.id_programa_formacion,
@@ -80,13 +81,14 @@ class Modelo_FormacionInstrutorFicha {
         gestión_de_competencia.nombre_competencia,
         gestión_de_resultado_de_aprendizaje.id_resultado_de_aprendizaje,
         gestión_de_resultado_de_aprendizaje.nombre_resultado_de_aprendizaje
-        from gestión_de_ruta_de_aprendizaje
+        from gestión_de_resultado_de_aprendizaje 
         JOIN gestión_de_competencia
         ON
-        gestión_de_competencia.id_gestion_de_competencia = gestión_de_ruta_de_aprendizaje.id_gestion_de_competencia
-        JOIN gestión_de_resultado_de_aprendizaje
+         gestión_de_resultado_de_aprendizaje.id_gestion_de_competencia = gestión_de_competencia.id_gestion_de_competencia
+	   JOIN gestión_de_ruta_de_aprendizaje
         ON
-        gestión_de_resultado_de_aprendizaje.id_gestion_de_competencia = gestión_de_competencia.id_gestion_de_competencia
+        gestión_de_competencia.id_gestion_de_competencia = gestión_de_ruta_de_aprendizaje.id_gestion_de_competencia
+ 
          WHERE gestión_de_ruta_de_aprendizaje.id_programa_formacion = ?  and
 			gestión_de_resultado_de_aprendizaje.id_resultado_de_aprendizaje 
 			not  in ( select formacion_da_instructor_ficha.id_resultado_de_aprendizaje from formacion_da_instructor_ficha where formacion_da_instructor_ficha.Id_GestionDeFichas = ?);
