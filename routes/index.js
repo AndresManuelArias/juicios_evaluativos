@@ -29,34 +29,36 @@ var mysql = require('../dataBase/conexion.js');
 router.get("/control_de_acceso", function (req, res) {
     control_de_acceso.inisio_de_secion(req, res);
 });
-router.get('/ejemplo/:perfil',  (req,res,next)=>{
+router.get('/ejemplo/:perfil', (req, res, next) => {
     console.log(req.params)
     res.locals.options = {
-        chGlobal : {// this is the object i want to be a global
-            "perfil" : req.params.perfil,
-            "nombreUsuario":req.query.nombreUsuario||''
+        chGlobal: {// this is the object i want to be a global
+            "perfil": req.params.perfil,
+            "nombreUsuario": req.query.nombreUsuario || ''
         }
     };
     next();
-}, function(req, res, next) {
-    console.log('res.locals',res.locals)
+}, function (req, res, next) {
+    console.log('res.locals', res.locals)
     ejemplo.metodo(req, res);
 });
 
-router.get('/ejemplo',  (req,res,next)=>{
+router.get('/ejemplo', (req, res, next) => {
     res.locals.options = {
-        chGlobal : {// this is the object i want to be a global
-            "perfil" : "invitado"
+        chGlobal: {// this is the object i want to be a global
+            "perfil": "invitado"
         }
     };
     next();
-}, function(req, res, next) {
+}, function (req, res, next) {
     ejemplo.metodo(req, res);
 });
 
 
 router.post("/envio_de_datos", function (req, res) {
-
+    console.log("-----------------------")
+    console.log("fase uno")
+    console.log("-----------------------")
     control_de_acceso.guardar_datos(req, res);
 });
 router.post("/buscar_datos", function (req, res) {
@@ -87,7 +89,7 @@ router.get("/contrasena_enviada", function (req, res) {
     console.log("sale")
 });
 
-router.get("/prueba", function (req,res) {
+router.get("/prueba", function (req, res) {
 
     res.send(req.session.id + `  ${req.session.id_usuario}`);
 })
@@ -97,22 +99,22 @@ router.get("/paginaPrincipal", function (req, res) {
     control_de_acceso.paginaPrincipal(req, res);
 
 });
-router.post("/tipoUsuario",function (req, res) {
-    gestionUsuarios.tipoUsuario(req,res);
-    console.table({prueba:"esto es una prueba"})
+router.post("/tipoUsuario", function (req, res) {
+    gestionUsuarios.tipoUsuario(req, res);
+    console.table({ prueba: "esto es una prueba" })
 });
-router.get("/tipoUsuario",clasesGestionUsuarios.permitirAccesoWeb(['administrador','instructor','aprendiz']),function (req, res) {
-    gestionUsuarios.menuSegunUsuario(req,res);
+router.get("/tipoUsuario", clasesGestionUsuarios.permitirAccesoWeb(['administrador', 'instructor', 'aprendiz']), function (req, res) {
+    gestionUsuarios.menuSegunUsuario(req, res);
 });
-router.get("/prueba_permisos_administrador",clasesGestionUsuarios.permitirAccesoWeb(['administrador']) ,function (req, res) {
-    console.table({prueba:"session"})
+router.get("/prueba_permisos_administrador", clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function (req, res) {
+    console.table({ prueba: "session" })
     res.send("puede entrar");
 });
-router.post("/borrarSesion",function(req,res){
+router.post("/borrarSesion", function (req, res) {
     control_de_acceso.inisio_de_secion(req, res)
 });
-router.post("/pureba1",function(req,res){
-   let texto= req.body.titre
+router.post("/pureba1", function (req, res) {
+    let texto = req.body.titre
     document.write(texto)
 })
 
