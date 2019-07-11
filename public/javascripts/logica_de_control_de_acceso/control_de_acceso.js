@@ -169,7 +169,7 @@ function validarEmail1(correo) {
 
 function validarcedula(cedula) {
   console.log('cedula', cedula);
-  if (/^\d{8,12}$/g.test(cedula)) {
+  if (/^\d{8,10}$/g.test(cedula)) {
     document.getElementById('registrarse').disabled = false;
   } else {
    document.getElementById('numCedula').value="";
@@ -196,7 +196,7 @@ function validarcedula(cedula) {
 
 function validarcedula1(cedula) {
   console.log('cedula', cedula);
-  if (/^\d{8,12}$/g.test(cedula)) {
+  if (/^\d{8,10}$/g.test(cedula)) {
     document.getElementById('ingresarb').disabled = false;
   } else {
     document.getElementById('contraseña').value=""

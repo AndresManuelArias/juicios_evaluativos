@@ -28,7 +28,8 @@ html(lang="en")
                                 | Inicio
                         ul( class="navbar-nav")
                             li( class="nav-item dropdown")
-                                - active = locals.options.chGlobal.direccion.split('/')[1] == 'gestion_perfiles'?'active':''                   
+                                
+                                - if(locals.options.chGlobal.direccion !== undefined){ active = locals.options.chGlobal.direccion.split('/')[1] == 'gestion_perfiles'?'active':''       }            
                                 a(class="nav-link dropdown-toggle #{active}" href="#" id="navbardrop" data-toggle="dropdown") Gestionar perfiles     
                                 div(class="dropdown-menu ")
                                     - active = locals.options.chGlobal.direccion == '/gestion_perfiles/listar_usuarios_perfil'?'active':''                   
