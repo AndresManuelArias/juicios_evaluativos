@@ -32,8 +32,8 @@ block contenido
     br
 
     center #{tipoUsuario}
-        div(class="col-lg-12 col-sm-12 col-xl-12 col-xm-12")
-
+        div(class="row")
+            
             div( class="dropdown")
                 button( class="btn btn-primary" type="button" data-toggle="dropdown") Gestionar perfiles
                     span(class="caret")
@@ -51,7 +51,7 @@ block contenido
                         a(href="/gestion_de_ruta_de_aprendizaje" class="btn btn-primary") Edicion de ruta de aprendizaje           
                         a(href="/gestion_de_competencia/edicion_competencias" class="btn btn-primary") Edicion de competencias
             div()
-                img( src="https://img.icons8.com/ios-filled/50/000000/classroom.png")
+                //- img( src="https://img.icons8.com/ios-filled/50/000000/classroom.png")
                 a(href="/crear_fichas" class="btn btn-primary") Crear fichas
             div()
                 a(href="/asignar_aprendices_fichas" class="btn btn-primary") Asignar aprendices a fichas

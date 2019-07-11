@@ -18,6 +18,7 @@ function darPermisosAlUsuario(arrayPerfilesEntran, perfilIngresado) {
 function permitirAccesoWeb(  arrayPerfilesEntran) {
 
   return async function (req, res,next){
+    console.log('req.route.path',req.route.path)
     console.log('req.session.rol',req.session.rol)
     if(req.session.rol){
       let rol = await mysql.con.query(`
@@ -30,7 +31,8 @@ function permitirAccesoWeb(  arrayPerfilesEntran) {
       res.locals.options = {
         chGlobal : {// this is the object i want to be a global
             "perfil" : rol[0].tipo_rol,
-            "nombreUsuario":rol[0].nombre_usuario||''
+            "nombreUsuario":rol[0].nombre_usuario||'',
+            'direccion':req.route.path
         }
       };
       if (darPermisosAlUsuario(arrayPerfilesEntran, rol[0].tipo_rol)) {
