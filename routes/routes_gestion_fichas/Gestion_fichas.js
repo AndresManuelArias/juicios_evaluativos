@@ -174,13 +174,18 @@ class Gestion_fichas {
     async crear_fichas(req, res, next){
         console.log('crear fichas')
         console.log (req.body)
-        let result =  await mysql.con.query(`insert into gestion_de_fichas (Numero_de_ficha,id_programa_formacion) values (?,?);`,[req.body.Numero_de_ficha,req.body.id_programa_formacion]);
-        console.log(result);
-        let respuesta = ""
-        if(result.affectedRows){
-            respuesta = "Se creo una ficha nueva con el numero "+req.body.Numero_de_ficha;
-        }
-        res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'crear_fichas' ,respuesta:respuesta,direccion:"/mostrar_fichas"}) ;
+        try{
+            let result =  await mysql.con.query(`insert into gestion_de_fichas (Numero_de_ficha,id_programa_formacion) values (?,?);`,[req.body.Numero_de_ficha,req.body.id_programa_formacion]);
+            console.log(result);
+            let respuesta = ""
+            if(result.affectedRows){
+                respuesta = "Se creo una ficha nueva con el numero "+req.body.Numero_de_ficha;
+            }
+            res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'crear_fichas' ,respuesta:respuesta,direccion:"/mostrar_fichas"}) ;
+            
+        }catch(error){
+            res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'asignar_aprendiz_fichas' ,respuesta:error.sqlMessage,direccion:"/mostrar_fichas"});
+        }  
     }  
     async buscarPrograma(req,res){
         let programaFormacion= await mysql.con.query('SELECT * From gestion_de_fichas')
@@ -192,13 +197,17 @@ class Gestion_fichas {
         req.body.id_GestionDeFichas
         req.body.id_programa_formacion
         console.log(req.body,req.params)
-        let actualizar= await mysql.con.query('update gestion_de_fichas set id_programa_formacion=? where Numero_de_ficha=?',[req.body.id_programa_formacion, req.params.Numero_de_ficha])
-        console.log(actualizar)
-        let respuesta = ""
-        if(actualizar.affectedRows){
-            respuesta = "Se ha cambia el programa de formacion CORRECTAMENTE a la ficha  "+req.params.Numero_de_ficha;
-        }
-        res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'actualizar_fichas' ,respuesta:respuesta,direccion:"/mostrar_fichas"}) ;
+        try{
+            let actualizar= await mysql.con.query('update gestion_de_fichas set id_programa_formacion=? where Numero_de_ficha=?',[req.body.id_programa_formacion, req.params.Numero_de_ficha])
+            console.log(actualizar)
+            let respuesta = ""
+            if(actualizar.affectedRows){
+                respuesta = "Se ha cambia el programa de formacion CORRECTAMENTE a la ficha  "+req.params.Numero_de_ficha;
+            }
+            res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'actualizar_fichas' ,respuesta:respuesta,direccion:"/mostrar_fichas"}) ;
+        }catch(error){
+            res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'asignar_aprendiz_fichas' ,respuesta:error.sqlMessage,direccion:"/mostrar_fichas"});
+        }  
     }
     async asignar_fichas_aprendiz(req,res){
    
@@ -230,13 +239,17 @@ class Gestion_fichas {
     }
     async modificar_fichas_aprendiz(req,res){
         console.log(req.body,req.params)
-        let modificar=await mysql.con.query('update gestion_ficha_aprendiz set id_gestion_fichas=? where id_gestion_ficha_aprendiz=?',[req.body.Id_GestionDeFichas, req.params.id_gestion_ficha_aprendiz])
-        console.log(modificar)
-        let respuesta = ""
-        if(modificar.affectedRows){
-            respuesta = "el aprendiz fue asignado CORRECTAMENTE  ";
-        }
-        res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'modificar_aprendiz_fichas' ,respuesta:respuesta,direccion:"/"});
+        try{
+            let modificar=await mysql.con.query('update gestion_ficha_aprendiz set id_gestion_fichas=? where id_gestion_ficha_aprendiz=?',[req.body.Id_GestionDeFichas, req.params.id_gestion_ficha_aprendiz])
+            console.log(modificar)
+            let respuesta = ""
+            if(modificar.affectedRows){
+                respuesta = "el aprendiz fue asignado CORRECTAMENTE  ";
+            }
+            res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'modificar_aprendiz_fichas' ,respuesta:respuesta,direccion:"/"});
+        }catch(error){
+            res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'asignar_aprendiz_fichas' ,respuesta:error.sqlMessage,direccion:"/mostrar_fichas"});
+        }  
     }
     async view_modificar_aprendiz_ficha(req,res){
         console.log('view_modificar_aprendiz_ficha')
