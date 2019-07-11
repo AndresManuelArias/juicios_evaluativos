@@ -45,7 +45,9 @@ router.get("/control_de_acceso", function (req, res) {
 
 
 router.post("/envio_de_datos", function (req, res) {
-
+    console.log("-----------------------")
+    console.log("fase uno")
+    console.log("-----------------------")
     control_de_acceso.guardar_datos(req, res);
 });
 router.post("/buscar_datos", function (req, res) {
@@ -86,7 +88,7 @@ router.get('/ejemplo',  (req,res,next)=>{
 });
 
 
-router.get("/prueba", function (req,res) {
+router.get("/prueba", function (req, res) {
 
     res.send(req.session.id + `  ${req.session.id_usuario}`);
 })
@@ -97,22 +99,22 @@ router.get("/paginaPrincipal", function (req, res) {
 
 
 });
-router.post("/tipoUsuario",function (req, res) {
-    gestionUsuarios.tipoUsuario(req,res);
-    console.table({prueba:"esto es una prueba"})
+router.post("/tipoUsuario", function (req, res) {
+    gestionUsuarios.tipoUsuario(req, res);
+    console.table({ prueba: "esto es una prueba" })
 });
-router.get("/tipoUsuario",clasesGestionUsuarios.permitirAccesoWeb(['administrador','instructor','aprendiz']),function (req, res) {
-    gestionUsuarios.menuSegunUsuario(req,res);
+router.get("/tipoUsuario", clasesGestionUsuarios.permitirAccesoWeb(['administrador', 'instructor', 'aprendiz']), function (req, res) {
+    gestionUsuarios.menuSegunUsuario(req, res);
 });
-router.get("/prueba_permisos_administrador",clasesGestionUsuarios.permitirAccesoWeb(['administrador']) ,function (req, res) {
-    console.table({prueba:"session"})
+router.get("/prueba_permisos_administrador", clasesGestionUsuarios.permitirAccesoWeb(['administrador']), function (req, res) {
+    console.table({ prueba: "session" })
     res.send("puede entrar");
 });
-router.post("/borrarSesion",function(req,res){
+router.post("/borrarSesion", function (req, res) {
     control_de_acceso.inisio_de_secion(req, res)
 });
-router.post("/pureba1",function(req,res){
-   let texto= req.body.titre
+router.post("/pureba1", function (req, res) {
+    let texto = req.body.titre
     document.write(texto)
 })
 

@@ -29,7 +29,7 @@ class Control_de_acceso {
             req.body.tipo_de_identificacion,
 
         )
-
+console.log("esta es la respuesta 1"+ respuesta)
 
         if (respuesta == "Error de parametros") {
 
@@ -38,11 +38,32 @@ class Control_de_acceso {
             console.log("datos aslkfjsalkj")
 
         } else {
-            res.writeHead(200, { "Content-Type": "text/html" });
-
-            console.log('respuesta', respuesta);
-            res.write(respuesta)
-            res.end();
+            console.log("verdadero")
+            //res.writeHead(200, { "Content-Type": "text/html" });
+             //res.send(req.session)
+             let sql = await mysql.con.query("SELECT correo_sena,contrasena FROM control_de_acceso WHERE correo_sena=? and contrasena=? ;", [req.body.correo_sena,req.body.numero_de_identificacion]);
+             let conGestionUsuarios = await mysql.con.query(`select * from  gestion_de_usuarios where correo_sena=?`, [req.body.correo_sena])
+             req.session.id_usuario = conGestionUsuarios[0].Id_usuario;
+             req.session.datos = conGestionUsuarios;
+             
+             console.log(req.session.datos)
+             
+             res.redirect("/paginaPrincipal")
+            //console.log('respuesta', respuesta);
+            //let datos = await clasesControlDeAcceso.buscar_datos(req.body.correo_sena, req.body.numero_de_identificacion)
+            // let conGestionUsuarios = await mysql.con.query(`select * from  gestion_de_usuarios where correo_sena=?`, [req.body.correo_sena])
+            // req.session.id_usuario = conGestionUsuarios[0].Id_usuario;
+            // req.session.datos = conGestionUsuarios;
+            // console.log("-----------------------")
+            // console.log(" estee  "+datos+" estee  ");
+            // console.log("-----------------------")
+            // res.locals.options = {
+            //     chGlobal: {// this is the object i want to be a global
+            //         "perfil": '',
+            //         "nombreUsuario": conGestionUsuarios[0].nombre_usuario || ''
+            //     }
+            // };
+            //console("error")
 
         }
     }
@@ -55,7 +76,7 @@ class Control_de_acceso {
         datos = await clasesControlDeAcceso.buscar_datos(req.body.correo_sena, req.body.contrasena)
         if (datos == "Error de parametros") {
 
-            // hacer un join 
+            // hacer un join
             this.inisio_de_secion(req, res);
             console.log("    ESTOS DATOS ESTAN MAL   ")
 
@@ -71,11 +92,11 @@ class Control_de_acceso {
             // console.log( req.session.expires);
             // console.log("+++++++++++++++++++++++");
             res.locals.options = {
-                chGlobal : {// this is the object i want to be a global
-                    "perfil" : '',
-                    "nombreUsuario":conGestionUsuarios[0].nombre_usuario||''
+                chGlobal: {// this is the object i want to be a global
+                    "perfil": '',
+                    "nombreUsuario": conGestionUsuarios[0].nombre_usuario || ''
                 }
-              };
+            };
             res.redirect("/paginaPrincipal");
 
         }
@@ -91,10 +112,10 @@ class Control_de_acceso {
      * @name verificar_documento
     * @method verificar_documento
      *@param r/*eq-resive la peticion
-     * @param res-envia respuesta 
+     * @param res-envia respuesta
      * @description esta es una pequeña api para enviar los datos del formularios por medio de
      * @description peticiones ajax para verificar que el documento no este en la base de datos
-     * 
+     *
      */
 
 
@@ -114,9 +135,9 @@ class Control_de_acceso {
      * @param req-resive la peticion
      * @param res-envia respuesta
      * @description esta es una pequeña api para enviar los datos del formularios por medio de
-     * @description  peticiones ajax para verificar que el correo esta en la base de datos y de esta 
-     * @description manera no ingresar con usuarios que no existen 
-     * 
+     * @description  peticiones ajax para verificar que el correo esta en la base de datos y de esta
+     * @description manera no ingresar con usuarios que no existen
+     *
      */
 
     async verificar_correo_de_logueo(req, res) {
@@ -147,9 +168,9 @@ class Control_de_acceso {
         res.render("control_de_acceso/contraseña_enviada.jade");
     }
     async paginaPrincipal(req, res) {
-console.log(req.session.datos[0].Id_usuario)
-        let perfilesUsuario=await mysql.con.query('SELECT * FROM administrar_perfil WHERE id_usuario=?',[req.session.datos[0].Id_usuario]);
-         
+        console.log(req.session.datos[0].Id_usuario)
+        let perfilesUsuario = await mysql.con.query('SELECT * FROM administrar_perfil WHERE id_usuario=?', [req.session.datos[0].Id_usuario]);
+
         // let entrada= await mysql.con.query('SELECT nombre_usuario from gestion_de_usuarios WHERE correo_sena="emeza06@misena.edu.co"');
         // console.log(entrada)
         // let datos=JSON.stringify(entrada);
@@ -164,7 +185,7 @@ console.log(req.session.datos[0].Id_usuario)
         // primero: id administrar perfil : primary key
         // id usuario llave foranea de la tabla usuarios
         // tipo roll tipo de rol que tiene el usuario
-        //estado del perfil: activo inactivo 
+        //estado del perfil: activo inactivo
 
         console.log(req.session.datos)
         let datosUsuario = {
@@ -176,11 +197,11 @@ console.log(req.session.datos[0].Id_usuario)
         }
         console.log(req.session.datos[0].nombre_usuario + ` + ` + req.session.datos[0].Id_usuario)
         res.locals.options = {
-            chGlobal : {// this is the object i want to be a global
-                "perfil" : '',
-                "nombreUsuario":datosUsuario.nombre||''
+            chGlobal: {// this is the object i want to be a global
+                "perfil": '',
+                "nombreUsuario": datosUsuario.nombre || ''
             }
-          };
+        };
         res.render("gestionUsuarios/gestionUsuarios.jade", {
             nombre: datosUsuario.nombre,
             id: datosUsuario.id,
@@ -198,7 +219,7 @@ console.log(req.session.datos[0].Id_usuario)
 /**
  * @name exportar
  *  @method exports
- * @description exportar la clase  
+ * @description exportar la clase
  */
 
 
