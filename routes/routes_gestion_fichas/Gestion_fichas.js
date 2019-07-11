@@ -203,14 +203,18 @@ class Gestion_fichas {
     async asignar_fichas_aprendiz(req,res){
    
         console.log(req.body,req.params)
-        let asignar=await mysql.con.query('insert into gestion_ficha_aprendiz(id_gestion_fichas,id_administrar_perfil)values (?,?)',[req.body.Id_GestionDeFichas, req.body.id_administrar_perfil])
-        console.log(asignar)
-        let respuesta = ""
-        if(asignar.affectedRows){
-            respuesta = "el aprendiz fue asignado CORRECTAMENTE  ";
-        }
-        res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'asignar_aprendiz_fichas' ,respuesta:respuesta,direccion:"/"});
-    }
+        try{
+            let asignar=await mysql.con.query('insert into gestion_ficha_aprendiz(id_gestion_fichas,id_administrar_perfil)values (?,?)',[req.body.Id_GestionDeFichas, req.body.id_administrar_perfil])
+            console.log(asignar)
+            let respuesta = ""
+            if(asignar.affectedRows){
+                respuesta = "el aprendiz fue asignado CORRECTAMENTE  ";
+            }
+            res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'asignar_aprendiz_fichas' ,respuesta:respuesta,direccion:"/mostrar_fichas"});
+        }catch(error){
+            res.render("./view_gestion_fichas/respuesta_usuario.jade",{ title: 'asignar_aprendiz_fichas' ,respuesta:error.sqlMessage,direccion:"/mostrar_fichas"});
+        }   
+   }
     async view_asignar_aprendiz_ficha(req,res){
         console.log('....................')
         console.log('.........estevab...........')
@@ -219,7 +223,7 @@ class Gestion_fichas {
         console.log('fichas',fichas)
         let perfiles=await mysql.con.query(`select * from administrar_perfil
         inner join gestion_de_usuarios
-        on gestion_de_usuarios.id_usuario=administrar_perfil.id_usuario`)
+        on gestion_de_usuarios.id_usuario=administrar_perfil.id_usuario where tipo_rol = 'aprendiz'`)
         console.log('perfiles',perfiles)
 
         res.render("./view_gestion_aprendiz_ficha/asignar_aprendiz_ficha.jade",{ title: 'asignar_aprendiz_fichas' ,fichas,perfiles}); 
