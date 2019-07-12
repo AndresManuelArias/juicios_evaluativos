@@ -1,27 +1,42 @@
 extends ../layout.jade
 block contenido
-    form(action="/gestion_perfiles/crear_perfil/#{usuarios.Id_usuario}" method="post")
-        label id usuario
-        input(type="text" name="id_usuario" value="#{usuarios.Id_usuario}" readonly) 
-        br
-        label nombre de usuario
-        input(type="text" name="nombre_usuario" value="#{usuarios.nombre_usuario}" readonly)
-        br
-        label correo
-        input(type="email" name="correo_sena" value="#{usuarios.correo_sena}" readonly)
-        br
-        label numero de identificacion
-        input(type="number" name="numero_de_identificacion" value="#{usuarios.numero_de_identificacion}" readonly)
-        br
-        label tipo de identificacion
-        input(type="text" name="tipo_de_identificacion" value="#{usuarios.tipo_de_identificacion}" readonly)
-        br
-        label tipo de perfil
-        select(name="tipo_rol" required)
-                option(value="")
-                option(value="aprendiz") Aprendiz
-                option(value="instructor") Instructor
-        input(type="submit" value="crear")
+    center
+    
+      form(action="/gestion_perfiles/crear_perfil/#{usuarios.Id_usuario}" method="post")
+    
+        div( class="form-group")
+        
+            label(class="font-weight-bold") id usuario
+            input( class="form-control" type="text" name="id_usuario" value="#{usuarios.Id_usuario}" readonly) 
+        
+        div( class="form-group")
+        
+            label(class="font-weight-bold") nombre de usuario
+            input( class="form-control" type="text" name="nombre_usuario" value="#{usuarios.nombre_usuario}" readonly)
+        
+        div( class="form-group")
+        
+            label(class="font-weight-bold") correo
+            input( class="form-control" type="email" name="correo_sena" value="#{usuarios.correo_sena}" readonly)
+        
+        div( class="form-group")
+        
+            label(class="font-weight-bold") numero de identificacion
+            input( class="form-control" type="number" name="numero_de_identificacion" value="#{usuarios.numero_de_identificacion}" readonly)
+        
+        div( class="form-group")
+        
+            label(class="font-weight-bold") tipo de identificacion
+            input( class="form-control" type="text" name="tipo_de_identificacion" value="#{usuarios.tipo_de_identificacion}" readonly)
+        
+        div( class="form-group")
+        
+            label(class="font-weight-bold ") tipo de perfil
+            select(class="form-control" name="tipo_rol" required)
+                    option(value="") selecione perfil
+                    option(value="aprendiz") Aprendiz
+                    option(value="instructor") Instructor
+        input(class="form-control btn-primary" type="submit" value="crear")
 
 
 
