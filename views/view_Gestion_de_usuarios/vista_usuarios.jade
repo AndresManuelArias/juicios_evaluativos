@@ -20,7 +20,7 @@ block contenido
                         td= usuario.estado_perfil
                         td= usuario.tipo_rol
                         td
-                            a(href="/gestion_perfiles/ver_estado_perfil?id_administrar_perfil=#{usuario.id_administrar_perfil}") actualizar
+                            a(href="/gestion_perfiles/ver_estado_perfil?id_administrar_perfil=#{usuario.id_administrar_perfil}" class="btn btn-primary") actualizar
                             br
-                            a(href="/gestion_perfiles/crear_perfil/#{usuario.id_usuario}") crear
+                            a(href="/gestion_perfiles/crear_perfil/#{usuario.id_usuario}" class="btn btn-warning") crear
 
