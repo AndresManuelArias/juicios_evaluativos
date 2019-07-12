@@ -1,5 +1,8 @@
 extends ../layout.jade
 block contenido
-    h1 respuesta de fichas activo
-    p= respuesta 
-    a( class="badge badge-info" href="#{direccion}") volver
+    center 
+        
+        br
+        h1(style= "font-size:5vw") Respuesta de fichas activo
+            p(style="color:blue;font-size:3vw")= respuesta 
+        a( class="btn-info" style=" border-radius:60px " href="#{direccion}") volver
