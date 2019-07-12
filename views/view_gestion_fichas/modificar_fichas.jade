@@ -1,17 +1,18 @@
 extends ../layout.jade
 block contenido
  body()
+ center
     form(action="/modificar_fichas/#{modificar_fichas.Numero_de_ficha}" method="post")
-        h1 MODIFICAR FICHAS
+        h1(style="color:green") MODIFICAR FICHAS
         
-        label numero de ficha #{modificar_fichas.Numero_de_ficha}
+        label(style="font-size:2vw") Numero de Ficha #{modificar_fichas.Numero_de_ficha}
         
         div(class="form-group")
-            label id gestion de ficha 
+            label(style="font-size:2vw") Id Gestion de ficha 
             
-            input(class="form-control" ,type="text", name="id_GestionDeFichas" value="#{modificar_fichas.id_GestionDeFichas}" readonly)
+            input(class="form-control col-sm-3 col-ls-3 col-lg-3 col-xl-3" ,type="text", name="id_GestionDeFichas" value="#{modificar_fichas.id_GestionDeFichas}" readonly)
 
-        select(class="form-control form-control-lg",name="id_programa_formacion")
+        select(class="form-control col-sm-3 col-ls-3 col-lg-3 col-xl-3",name="id_programa_formacion")
             each programas in programaFormacion
                 option(value="#{programas.id_programa_formacion}")= programas.nombre_programa_formacion
 

@@ -4,11 +4,11 @@ block contenido
     form(action="/crear_fichas", method="post")
         label numero de ficha
         h1
-        input(class="form-control",type="number", name="Numero_de_ficha" require)
+        input(class="form-control col-sm-3 col-ls-3 col-lg-3 col-xl-3",type="number", name="Numero_de_ficha" require)
         h1
         label Id programa de formacion
         h1
-        select(class="form-control form-control-lg",name="id_programa_formacion")
+        select(class="form-control col-sm-3 col-ls-3 col-lg-3 col-xl-3",name="id_programa_formacion")
             each element in programasFormacion
                 option(value="#{element.id_programa_formacion}")= element.nombre_programa_formacion
         
