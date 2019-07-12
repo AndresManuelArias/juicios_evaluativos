@@ -2,5 +2,6 @@ extends ../layout.jade
 block contenido
 
     h1 hola
+    p el valor es: #{locals.options.chGlobal.perfil}
     each usuario in usuarios
         li=usuario.nombre_usuario+' '+usuario.correo_sena

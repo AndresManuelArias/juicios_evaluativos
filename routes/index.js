@@ -6,7 +6,17 @@ var Gestion_fichas = require('./routes_gestion_fichas/Gestion_fichas.js')
 var gestion_fichas = new Gestion_fichas();
 var mysql = require('../dataBase/conexion.js');
 /* GET home page. */
-router.get('/ejemplo',  function(req, res, next) {
+router.get('/ejemplo/:perfil',  (req,res,next)=>{
+    console.log(req.params)
+    res.locals.options = {
+        chGlobal : {// this is the object i want to be a global
+            "perfil" : req.params.perfil,
+            "nombreUsuario":req.query.nombreUsuario||''
+        }
+    };
+    next();
+}, function(req, res, next) {
+    console.log('res.locals',res.locals)
     ejemplo.metodo(req, res);
 });
 router.get('/mostrar_usuario',  function(req, res, next) {
