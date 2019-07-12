@@ -203,7 +203,7 @@ class Gestion_fichas {
     async asignar_fichas_aprendiz(req,res){
    
         console.log(req.body,req.params)
-        let asignar=await mysql.con.query('insert into gestion_ficha_aprendiz(id_gestion_fichas,id_administrar_perfil)values (?,?)',[req.body.Id_GestionDeFichas, req.body.id_administrar_perfil])
+        let asignar=await mysql.con.query('insert into gestion_ficha_aprendiz(id_gestion_fichas,id_administrar_perfil )values (?,?)',[req.body.Id_GestionDeFichas, req.body.id_administrar_perfil])
         console.log(asignar)
         let respuesta = ""
         if(asignar.affectedRows){
