@@ -46,6 +46,7 @@ function comprobar_correo_de_logueo() {
     })
     .then(function (myJson) {
       console.log(myJson);
+      
       if (myJson.length == 0) {
         document.getElementsByName('correo_sena').value = "";
         document.getElementById('ingresarb').disabled = true;
